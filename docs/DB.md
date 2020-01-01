@@ -25,3 +25,13 @@ url : 사이트 url
 reg_dtime : 등록날짜
 upd_dtime : 수정날짜
 ```
+
+<br>
+
+### 키워드 테이블 **(TC_KEYWORD)**
+```
+keyword : 키워드
+count : 중복 카운트
+reg_dtime : 등록날짜
+upd_dtime : 수정날짜
+```
