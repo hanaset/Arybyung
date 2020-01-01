@@ -10,6 +10,7 @@ price : 제품 가격
 url : 게시글 주소
 site : 사이트 코드 (TC_SITE)
 image : 게시글 이미지 (가능하다면)
+content : 게시글 내용
 posting_dtime : 게시글 작성날짜
 reg_dtime : 등록날짜
 upd_dtime : 수정날짜
