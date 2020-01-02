@@ -1,9 +1,17 @@
 dependencies {
 
     compile project(":arybyung-common")
-    
-    implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+    compile('org.springframework.boot:spring-boot-starter-web')
+
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.12.1' // Jsoup Parser
+    compileOnly('org.projectlombok:lombok')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '3.141.59'
+
+}
+
+configurations {
+    archivesBaseName = 'arybyung-observer-staging'
 }
