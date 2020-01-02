@@ -1,39 +1,45 @@
-plugins {
-    id 'org.springframework.boot' version '2.2.2.RELEASE'
-    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
-    id 'java'
-}
-
-group = 'com.hanaset'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '1.8'
-
-configurations {
-    developmentOnly
-    runtimeClasspath {
-        extendsFrom developmentOnly
+buildscript {
+    ext {
+        springBootVersion = '2.2.2.RELEASE'
+        APACHE_COMMONS_LANG = 3.7
     }
-    compileOnly {
-        extendsFrom annotationProcessor
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.8.RELEASE"
     }
 }
 
-repositories {
-    mavenCentral()
-}
+subprojects {
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    runtimeOnly 'mysql:mysql-connector-java'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation('org.springframework.boot:spring-boot-starter-test') {
-        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'eclipse'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
     }
-}
 
-test {
-    useJUnitPlatform()
+    jar {
+        manifest.attributes provider: 'gradle'
+    }
+
+    dependencies {
+        compile group: 'com.google.guava', name: 'guava', version: '25.0-jre'
+        compile group: 'org.apache.commons', name: 'commons-math3', version: '3.0'
+
+        implementation "org.apache.commons:commons-lang3:${APACHE_COMMONS_LANG}"
+
+        compileOnly('org.projectlombok:lombok')
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+    }
+
 }

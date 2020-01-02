@@ -1,1 +1,3 @@
 rootProject.name = 'arybyung'
+include 'arybyung-common'
+include 'arybyung-observer'
