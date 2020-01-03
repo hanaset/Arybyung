@@ -2304,3 +2304,85 @@ java.awt.HeadlessException: null
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
 	at java.lang.Thread.run(Thread.java:748)
+2020-01-03 23:25:52.122 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke.local with PID 23934 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 23:25:52.123 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 23:25:52.621 INFO [           main] [o.s.d.r.c.RepositoryConfigurationDelegate] registerRepositoriesIn (127): Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-01-03 23:25:52.640 INFO [           main] [o.s.d.r.c.RepositoryConfigurationDelegate] registerRepositoriesIn (187): Finished Spring Data repository scanning in 4ms. Found 0 JPA repository interfaces.
+2020-01-03 23:25:52.867 INFO [           main] [c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor] postProcessBeanFactory (50): Post-processing PropertySource instances
+2020-01-03 23:25:52.927 INFO [           main] [c.u.j.EncryptablePropertySourceConverter] makeEncryptable (38): Converting PropertySource configurationProperties [org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource] to AOP Proxy
+2020-01-03 23:25:52.927 INFO [           main] [c.u.j.EncryptablePropertySourceConverter] makeEncryptable (38): Converting PropertySource Inlined Test Properties [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-01-03 23:25:52.927 INFO [           main] [c.u.j.EncryptablePropertySourceConverter] makeEncryptable (38): Converting PropertySource test [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-01-03 23:25:52.928 INFO [           main] [c.u.j.EncryptablePropertySourceConverter] makeEncryptable (38): Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+2020-01-03 23:25:52.928 INFO [           main] [c.u.j.EncryptablePropertySourceConverter] makeEncryptable (38): Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableMapPropertySourceWrapper
+2020-01-03 23:25:52.928 INFO [           main] [c.u.j.EncryptablePropertySourceConverter] makeEncryptable (38): Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+2020-01-03 23:25:52.929 INFO [           main] [c.u.j.EncryptablePropertySourceConverter] makeEncryptable (38): Converting PropertySource applicationConfig: [classpath:/application-local.yml] [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-01-03 23:25:52.929 INFO [           main] [c.u.j.EncryptablePropertySourceConverter] makeEncryptable (38): Converting PropertySource applicationConfig: [classpath:/application.yml] [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-01-03 23:25:52.988 INFO [           main] [c.u.j.f.DefaultLazyPropertyFilter] lambda$null$2 (31): Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+2020-01-03 23:25:53.049 INFO [           main] [o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker] postProcessAfterInitialization (330): Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-03 23:25:53.111 INFO [           main] [c.u.j.r.DefaultLazyPropertyResolver] lambda$null$2 (31): Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+2020-01-03 23:25:53.114 INFO [           main] [c.u.j.d.DefaultLazyPropertyDetector] lambda$null$2 (30): Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+2020-01-03 23:25:53.279 INFO [           main] [c.z.h.HikariDataSource] getConnection (110): HikariPool-1 - Starting...
+2020-01-03 23:25:53.565 INFO [           main] [c.z.h.HikariDataSource] getConnection (123): HikariPool-1 - Start completed.
+2020-01-03 23:25:53.688 INFO [           main] [o.h.Version] logVersion (46): HHH000412: Hibernate Core {5.4.9.Final}
+2020-01-03 23:25:53.801 INFO [           main] [o.h.a.c.Version] <clinit> (49): HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-01-03 23:25:53.930 INFO [           main] [o.h.d.Dialect] <init> (172): HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2020-01-03 23:25:54.137 INFO [           main] [o.h.e.t.j.p.i.JtaPlatformInitiator] initiateService (52): HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-01-03 23:25:54.146 INFO [           main] [o.s.o.j.LocalContainerEntityManagerFactoryBean] buildNativeEntityManagerFactory (416): Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-01-03 23:25:54.437 WARN [           main] [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] openEntityManagerInViewInterceptor (220): spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-01-03 23:25:54.651 INFO [           main] [o.s.s.c.ThreadPoolTaskExecutor] initialize (171): Initializing ExecutorService 'applicationTaskExecutor'
+2020-01-03 23:25:55.004 INFO [           main] [o.s.s.c.ThreadPoolTaskScheduler] initialize (171): Initializing ExecutorService 'taskScheduler'
+2020-01-03 23:25:55.063 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.558 seconds (JVM running for 4.446)
+2020-01-03 23:25:55.858 INFO [ null to remote] [o.o.s.r.ProtocolHandshake] createSession (78): Detected dialect: W3C
+2020-01-03 23:40:54.429 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke.local with PID 26881 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 23:40:54.430 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 23:40:54.951 INFO [           main] [o.s.d.r.c.RepositoryConfigurationDelegate] registerRepositoriesIn (127): Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2020-01-03 23:40:54.971 INFO [           main] [o.s.d.r.c.RepositoryConfigurationDelegate] registerRepositoriesIn (187): Finished Spring Data repository scanning in 4ms. Found 0 JPA repository interfaces.
+2020-01-03 23:40:55.199 INFO [           main] [c.u.j.c.EnableEncryptablePropertiesBeanFactoryPostProcessor] postProcessBeanFactory (50): Post-processing PropertySource instances
+2020-01-03 23:40:55.258 INFO [           main] [c.u.j.EncryptablePropertySourceConverter] makeEncryptable (38): Converting PropertySource configurationProperties [org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource] to AOP Proxy
+2020-01-03 23:40:55.258 INFO [           main] [c.u.j.EncryptablePropertySourceConverter] makeEncryptable (38): Converting PropertySource Inlined Test Properties [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-01-03 23:40:55.259 INFO [           main] [c.u.j.EncryptablePropertySourceConverter] makeEncryptable (38): Converting PropertySource test [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-01-03 23:40:55.259 INFO [           main] [c.u.j.EncryptablePropertySourceConverter] makeEncryptable (38): Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+2020-01-03 23:40:55.259 INFO [           main] [c.u.j.EncryptablePropertySourceConverter] makeEncryptable (38): Converting PropertySource systemEnvironment [org.springframework.boot.env.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableMapPropertySourceWrapper
+2020-01-03 23:40:55.260 INFO [           main] [c.u.j.EncryptablePropertySourceConverter] makeEncryptable (38): Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+2020-01-03 23:40:55.260 INFO [           main] [c.u.j.EncryptablePropertySourceConverter] makeEncryptable (38): Converting PropertySource applicationConfig: [classpath:/application-local.yml] [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-01-03 23:40:55.260 INFO [           main] [c.u.j.EncryptablePropertySourceConverter] makeEncryptable (38): Converting PropertySource applicationConfig: [classpath:/application.yml] [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+2020-01-03 23:40:55.316 INFO [           main] [c.u.j.f.DefaultLazyPropertyFilter] lambda$null$2 (31): Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+2020-01-03 23:40:55.376 INFO [           main] [o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker] postProcessAfterInitialization (330): Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-01-03 23:40:55.436 INFO [           main] [c.u.j.r.DefaultLazyPropertyResolver] lambda$null$2 (31): Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+2020-01-03 23:40:55.439 INFO [           main] [c.u.j.d.DefaultLazyPropertyDetector] lambda$null$2 (30): Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+2020-01-03 23:40:55.604 INFO [           main] [c.z.h.HikariDataSource] getConnection (110): HikariPool-1 - Starting...
+2020-01-03 23:40:55.872 INFO [           main] [c.z.h.HikariDataSource] getConnection (123): HikariPool-1 - Start completed.
+2020-01-03 23:40:56.002 INFO [           main] [o.h.Version] logVersion (46): HHH000412: Hibernate Core {5.4.9.Final}
+2020-01-03 23:40:56.129 INFO [           main] [o.h.a.c.Version] <clinit> (49): HCANN000001: Hibernate Commons Annotations {5.1.0.Final}
+2020-01-03 23:40:56.271 INFO [           main] [o.h.d.Dialect] <init> (172): HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2020-01-03 23:40:56.482 INFO [           main] [o.h.e.t.j.p.i.JtaPlatformInitiator] initiateService (52): HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2020-01-03 23:40:56.492 INFO [           main] [o.s.o.j.LocalContainerEntityManagerFactoryBean] buildNativeEntityManagerFactory (416): Initialized JPA EntityManagerFactory for persistence unit 'default'
+2020-01-03 23:40:56.772 WARN [           main] [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration] openEntityManagerInViewInterceptor (220): spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-01-03 23:40:57.011 INFO [           main] [o.s.s.c.ThreadPoolTaskExecutor] initialize (171): Initializing ExecutorService 'applicationTaskExecutor'
+2020-01-03 23:40:57.397 INFO [           main] [o.s.s.c.ThreadPoolTaskScheduler] initialize (171): Initializing ExecutorService 'taskScheduler'
+2020-01-03 23:40:57.459 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.623 seconds (JVM running for 4.531)
+2020-01-03 23:40:57.496 ERROR [   scheduling-1] [o.s.s.s.TaskUtils$LoggingErrorHandler] handleError (95): Unexpected error occurred in scheduled task
+java.lang.IllegalStateException: The driver executable does not exist: /Users/luke/workplace/Arybyung/arybyung-observer/arybyung-observer/src/main/resources/webDriver/chromedriver
+	at com.google.common.base.Preconditions.checkState(Preconditions.java:585)
+	at org.openqa.selenium.remote.service.DriverService.checkExecutable(DriverService.java:146)
+	at org.openqa.selenium.remote.service.DriverService.findExecutable(DriverService.java:141)
+	at org.openqa.selenium.chrome.ChromeDriverService.access$000(ChromeDriverService.java:35)
+	at org.openqa.selenium.chrome.ChromeDriverService$Builder.findDefaultExecutable(ChromeDriverService.java:159)
+	at org.openqa.selenium.remote.service.DriverService$Builder.build(DriverService.java:355)
+	at org.openqa.selenium.chrome.ChromeDriverService.createDefaultService(ChromeDriverService.java:94)
+	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:123)
+	at com.hanaset.arybyungobserver.component.JoonggonaraParser.naverLogin(JoonggonaraParser.java:72)
+	at com.hanaset.arybyungobserver.scheduler.JoonggonaraScheduler.test(JoonggonaraScheduler.java:20)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84)
+	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180)
+	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)

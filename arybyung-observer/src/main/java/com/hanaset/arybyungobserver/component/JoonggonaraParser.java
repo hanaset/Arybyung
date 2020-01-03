@@ -6,14 +6,24 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.springframework.stereotype.Component;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -59,26 +69,24 @@ public class JoonggonaraParser {
 
     }
 
-    public void naverLogin() throws Exception {
+    public Map<String, String> naverLogin() throws Exception {
 
-//        System.setProperty("webdriver.chrome.driver", "arybyung-observer/src/main/resources/webDriver/chromedriver");
-        System.setProperty("webdriver.chrome.driver", "./src/main/resources/webDriver/chromedriver");
-//        System.setProperty("java.awt.headless", "true");
+        System.setProperty("webdriver.gecko.driver", "arybyung-observer/src/main/resources/webDriver/geckodriver");
+//        System.setProperty("webdriver.chrome.driver", "./src/main/resources/webDriver/chromedriver"); 테스트코드
+        System.setProperty("java.awt.headless", "false");
 
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--no-sandbox");
-        chromeOptions.addArguments("--headless");
-
-        WebDriver driver = new ChromeDriver(chromeOptions);
+        WebDriver driver = new FirefoxDriver();
         driver.get("https://nid.naver.com/nidlogin.login?mode=form&url=https%3A%2F%2Fwww.naver.com");
-
-//        driver.findElement(By.xpath("//*[@id=\"id\"]")).sendKeys("b183523");
-//        driver.findElement(By.xpath("//*[@id=\"pw\"]")).sendKeys("thswjdqls56@!");
 
         DriverUtil.clipboardCopy("b183523", "//*[@id=\"id\"]", driver);
         DriverUtil.clipboardCopy("thswjdqls56@!", "//*[@id=\"pw\"]", driver);
 
         driver.findElement(By.xpath("//*[@id=\"frmNIDLogin\"]/fieldset/input")).click();
+
+        Set<Cookie> cookies = driver.manage().getCookies();
+        Map<String, String> cookieMaps = cookies.stream().collect(Collectors.toMap(Cookie::getName, Cookie::getValue));
+
+        return cookieMaps;
 
     }
 }

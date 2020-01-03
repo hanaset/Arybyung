@@ -3,6 +3,7 @@ package com.hanaset.arybyungobserver.utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
 import java.awt.*;
@@ -21,6 +22,8 @@ public class DriverUtil {
 
         Thread.sleep(1000);
 
-        action.keyDown(Keys.COMMAND).sendKeys("v").keyUp(Keys.COMMAND).build().perform();
+        action.keyDown(Keys.COMMAND).sendKeys("v").perform();
+
+        Thread.sleep(1000);
     }
 }
