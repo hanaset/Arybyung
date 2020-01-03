@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 public class JoonggonaraParser {
 
-    public void postParsing() throws IOException {
+    public void getRecentArticleId() throws IOException {
         Document document = Jsoup.connect("https://cafe.naver.com/ArticleList.nhn?search.clubid=10050146&search.boardtype=L")
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .header("Accept-Encoding", "gzip, deflate, br")
@@ -24,10 +24,12 @@ public class JoonggonaraParser {
                 .get();
 
         List<Element> elements = document.select("[class=article]");
-        elements.stream().map(element -> {
-            Long articleId =  Arrays.asList(element.attr("href").split(";")).stream().filter(s -> s.contains("articleid")).map(s -> s.replaceAll());
-        })
+        String maxArticleId = elements.stream().map(element -> {
+            String articleId = Arrays.asList(element.attr("href").split("&")).stream().filter(s -> s.contains("articleid")).map(s -> s.replaceAll("[^0-9]", "")).findFirst().get();
 
-        System.out.println(elements);
+            return articleId;
+        }).max(String::compareToIgnoreCase).get();
+
+        System.out.println(maxArticleId);
     }
 }

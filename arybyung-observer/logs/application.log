@@ -97,3 +97,102 @@
 2020-01-03 01:14:36.747 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke.local with PID 80561 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
 2020-01-03 01:14:36.749 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
 2020-01-03 01:14:40.010 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.837 seconds (JVM running for 4.866)
+2020-01-03 10:10:19.786 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke.local with PID 77592 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 10:10:19.787 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 10:10:23.349 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 4.024 seconds (JVM running for 5.248)
+2020-01-03 10:12:26.276 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke.local with PID 78002 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 10:12:26.278 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 10:12:29.410 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.699 seconds (JVM running for 4.771)
+2020-01-03 10:13:10.596 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke.local with PID 78154 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 10:13:10.597 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 10:13:13.766 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.629 seconds (JVM running for 4.69)
+2020-01-03 10:13:28.250 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke.local with PID 78214 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 10:13:28.250 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 10:13:31.351 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.546 seconds (JVM running for 4.568)
+2020-01-03 10:14:04.474 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke.local with PID 78334 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 10:14:04.475 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 10:14:07.580 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.553 seconds (JVM running for 4.614)
+2020-01-03 10:14:56.538 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke.local with PID 78496 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 10:14:56.539 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 10:14:59.694 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.617 seconds (JVM running for 4.71)
+2020-01-03 10:15:00.190 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 688500064
+2020-01-03 10:15:00.190 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 688504815
+2020-01-03 10:15:00.190 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 623920274
+2020-01-03 10:15:00.191 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 681874784
+2020-01-03 10:15:00.191 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 626766171
+2020-01-03 10:15:00.191 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 447726993
+2020-01-03 10:15:00.191 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 660397577
+2020-01-03 10:15:00.191 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 641208546
+2020-01-03 10:15:00.192 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 336815259
+2020-01-03 10:15:00.192 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249165
+2020-01-03 10:15:00.192 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249164
+2020-01-03 10:15:00.192 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249163
+2020-01-03 10:15:00.192 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249162
+2020-01-03 10:15:00.193 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249161
+2020-01-03 10:15:00.193 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249160
+2020-01-03 10:15:00.193 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249159
+2020-01-03 10:15:00.193 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249158
+2020-01-03 10:15:00.193 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249157
+2020-01-03 10:15:00.194 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249156
+2020-01-03 10:15:00.194 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249155
+2020-01-03 10:15:00.194 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249154
+2020-01-03 10:15:00.194 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249153
+2020-01-03 10:15:00.194 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249152
+2020-01-03 10:15:00.195 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249151
+2020-01-03 10:15:52.915 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke.local with PID 78680 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 10:15:52.916 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 10:15:56.091 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.68 seconds (JVM running for 4.683)
+2020-01-03 10:15:56.578 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 688500064
+2020-01-03 10:15:56.579 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 688504815
+2020-01-03 10:15:56.579 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 623920274
+2020-01-03 10:15:56.579 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 681874784
+2020-01-03 10:15:56.579 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 626766171
+2020-01-03 10:15:56.579 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 447726993
+2020-01-03 10:15:56.580 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 660397577
+2020-01-03 10:15:56.580 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 641208546
+2020-01-03 10:15:56.580 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 336815259
+2020-01-03 10:15:56.580 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249619
+2020-01-03 10:15:56.580 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249618
+2020-01-03 10:15:56.581 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249617
+2020-01-03 10:15:56.581 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249616
+2020-01-03 10:15:56.581 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249615
+2020-01-03 10:15:56.581 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249614
+2020-01-03 10:15:56.582 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249613
+2020-01-03 10:15:56.582 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249612
+2020-01-03 10:15:56.582 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249611
+2020-01-03 10:15:56.582 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249610
+2020-01-03 10:15:56.582 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249609
+2020-01-03 10:15:56.583 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249608
+2020-01-03 10:15:56.583 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249607
+2020-01-03 10:15:56.583 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249606
+2020-01-03 10:15:56.583 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249605
+2020-01-03 10:16:22.944 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke.local with PID 78786 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 10:16:22.945 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 10:16:28.045 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 5.541 seconds (JVM running for 6.602)
+2020-01-03 10:16:28.795 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 688500064
+2020-01-03 10:16:28.797 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 688504815
+2020-01-03 10:16:28.798 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 623920274
+2020-01-03 10:16:28.799 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 681874784
+2020-01-03 10:16:28.799 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 626766171
+2020-01-03 10:16:28.800 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 447726993
+2020-01-03 10:16:28.800 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 660397577
+2020-01-03 10:16:28.800 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 641208546
+2020-01-03 10:16:28.801 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 336815259
+2020-01-03 10:16:28.801 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249878
+2020-01-03 10:16:28.801 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249877
+2020-01-03 10:16:28.802 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249876
+2020-01-03 10:16:28.802 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249875
+2020-01-03 10:16:28.802 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249874
+2020-01-03 10:16:28.802 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249873
+2020-01-03 10:16:28.803 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249872
+2020-01-03 10:16:28.803 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249871
+2020-01-03 10:16:28.803 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249870
+2020-01-03 10:16:28.804 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249869
+2020-01-03 10:16:28.804 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249868
+2020-01-03 10:16:28.804 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249867
+2020-01-03 10:16:28.805 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249866
+2020-01-03 10:16:28.805 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249865
+2020-01-03 10:16:28.805 INFO [           main] [c.h.a.c.JoonggonaraParser] lambda$postParsing$2 (30): 690249864
+2020-01-03 10:21:09.793 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke.local with PID 79730 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 10:21:09.795 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 10:21:13.073 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.765 seconds (JVM running for 4.885)

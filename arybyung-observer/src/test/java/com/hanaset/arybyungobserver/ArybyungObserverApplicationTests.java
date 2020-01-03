@@ -23,8 +23,8 @@ class ArybyungObserverApplicationTests {
     private JoonggonaraParser joonggonaraParser;
 
     @Test
-    void 중고나라_네이버게시글파싱_테스트() throws IOException {
-        joonggonaraParser.postParsing();
+    void 중고나라_최근글번호_테스트() throws IOException {
+        joonggonaraParser.getRecentArticleId();
     }
 
 }
