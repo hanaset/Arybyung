@@ -196,3 +196,92 @@
 2020-01-03 10:21:09.793 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke.local with PID 79730 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
 2020-01-03 10:21:09.795 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
 2020-01-03 10:21:13.073 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.765 seconds (JVM running for 4.885)
+2020-01-03 12:06:26.071 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 2275 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 12:06:26.072 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 12:06:29.315 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.711 seconds (JVM running for 4.847)
+2020-01-03 12:15:28.503 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 4015 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 12:15:28.504 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 12:15:32.322 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 4.352 seconds (JVM running for 5.218)
+2020-01-03 12:16:20.535 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 4186 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 12:16:20.536 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 12:16:25.397 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 5.425 seconds (JVM running for 6.336)
+2020-01-03 12:19:19.277 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 4754 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 12:19:19.278 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 12:19:22.366 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.552 seconds (JVM running for 4.434)
+2020-01-03 12:20:58.236 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 5067 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 12:20:58.237 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 12:21:02.161 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 4.354 seconds (JVM running for 5.22)
+2020-01-03 12:21:48.273 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 5228 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 12:21:48.274 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 12:21:51.260 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.416 seconds (JVM running for 4.281)
+2020-01-03 12:22:14.406 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 5313 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 12:22:14.407 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 12:22:17.356 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.419 seconds (JVM running for 4.305)
+2020-01-03 12:25:02.364 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 5846 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 12:25:02.365 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 12:25:05.341 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.448 seconds (JVM running for 4.369)
+2020-01-03 12:27:49.256 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 6377 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 12:27:49.257 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 12:27:52.286 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.461 seconds (JVM running for 4.319)
+2020-01-03 13:18:43.414 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 15819 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 13:18:43.416 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 13:18:46.400 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.439 seconds (JVM running for 4.339)
+2020-01-03 13:20:57.660 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 16258 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 13:20:57.661 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 13:21:00.531 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.279 seconds (JVM running for 4.141)
+2020-01-03 13:30:52.459 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 18198 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 13:30:52.460 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 13:30:55.474 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.472 seconds (JVM running for 4.361)
+2020-01-03 13:31:38.473 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 18372 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 13:31:38.474 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 13:31:41.390 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.371 seconds (JVM running for 4.268)
+2020-01-03 13:33:10.221 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 18694 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 13:33:10.222 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 13:33:13.287 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.561 seconds (JVM running for 4.465)
+2020-01-03 13:33:27.523 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 18766 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 13:33:27.524 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 13:33:30.638 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.547 seconds (JVM running for 4.444)
+2020-01-03 13:34:10.344 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 18923 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 13:34:10.345 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 13:34:13.405 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.538 seconds (JVM running for 4.427)
+2020-01-03 13:34:44.024 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 19070 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 13:34:44.025 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 13:34:47.032 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.423 seconds (JVM running for 4.332)
+2020-01-03 19:10:02.240 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 86582 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 19:10:02.242 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 19:10:05.344 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.611 seconds (JVM running for 4.608)
+2020-01-03 19:14:56.408 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 87548 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 19:14:56.409 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 19:14:59.235 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.248 seconds (JVM running for 4.109)
+2020-01-03 19:18:00.323 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 88161 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 19:18:00.324 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 19:18:03.376 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.508 seconds (JVM running for 4.4)
+2020-01-03 19:20:08.103 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 88595 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 19:20:08.104 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 19:20:10.996 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.323 seconds (JVM running for 4.227)
+2020-01-03 19:25:15.991 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 89647 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 19:25:15.992 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 19:30:07.530 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 90584 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 19:30:07.532 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 19:30:10.562 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.498 seconds (JVM running for 4.428)
+2020-01-03 19:35:02.307 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 91570 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 19:35:02.307 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 19:35:05.232 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.352 seconds (JVM running for 4.33)
+2020-01-03 19:37:01.177 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 91975 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 19:37:01.178 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 19:37:04.045 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.291 seconds (JVM running for 4.177)
+2020-01-03 19:40:23.814 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 92641 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 19:40:23.815 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 19:40:26.825 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.472 seconds (JVM running for 4.432)
+2020-01-03 19:51:29.712 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke with PID 94794 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 19:51:29.714 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 19:51:32.701 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.425 seconds (JVM running for 4.336)
+2020-01-03 22:56:46.161 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke.local with PID 16560 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 22:56:46.163 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 22:56:49.102 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.463 seconds (JVM running for 4.394)
+2020-01-03 22:57:20.699 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke.local with PID 16678 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 22:57:20.700 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 22:57:23.610 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.295 seconds (JVM running for 4.184)
+2020-01-03 23:00:59.128 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarting (55): Starting ArybyungObserverApplicationTests on luke.local with PID 17408 (started by luke in /Users/luke/workplace/Arybyung/arybyung-observer)
+2020-01-03 23:00:59.129 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStartupProfileInfo (655): The following profiles are active: local
+2020-01-03 23:01:02.019 INFO [           main] [c.h.a.ArybyungObserverApplicationTests] logStarted (61): Started ArybyungObserverApplicationTests in 3.489 seconds (JVM running for 4.403)

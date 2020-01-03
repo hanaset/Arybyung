@@ -27,4 +27,13 @@ class ArybyungObserverApplicationTests {
         joonggonaraParser.getRecentArticleId();
     }
 
+    @Test
+    void 중고나라_최근글데이터_테스트() throws IOException {
+        joonggonaraParser.getArticle("690308688");
+    }
+
+    @Test
+    void 네이버로그인_테스트() throws Exception{
+        joonggonaraParser.naverLogin();
+    }
 }
