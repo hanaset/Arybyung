@@ -1,11 +1,9 @@
 package com.hanaset.arybyungobserver;
 
-import com.hanaset.arybyungobserver.component.JoonggonaraParser;
+import com.hanaset.arybyungobserver.client.JoonggonaraParser;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -28,12 +26,19 @@ class ArybyungObserverApplicationTests {
     }
 
     @Test
-    void 중고나라_최근글데이터_테스트() throws IOException {
-        joonggonaraParser.getArticle("690308688");
+    void 중고나라_최근글데이터_테스트() throws Exception {
+        joonggonaraParser.getArticle("602295788");
     }
 
     @Test
-    void 네이버로그인_테스트() throws Exception{
+    void 네이버로그인_테스트() throws Exception {
         joonggonaraParser.naverLogin();
+    }
+
+    @Test
+    void 네이버로그인_후_파싱_테스트() throws Exception {
+        joonggonaraParser.naverLogin();
+        joonggonaraParser.getArticle("602295788");
+        joonggonaraParser.getArticle("690923400");
     }
 }

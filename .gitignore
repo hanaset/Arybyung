@@ -20,7 +20,8 @@ build/
 *.iml
 *.ipr
 out/
-logs/*
+logs/
+arybyung-observer/logs
 
 ### NetBeans ###
 /nbproject/private/
@@ -31,3 +32,8 @@ logs/*
 
 ### VS Code ###
 .vscode/
+arybyung-common/src/test/resources/
+arybyung-observer/src/test/resources/
+src/main/resources/static/
+src/main/resources/templates/
+src/test/resources/
