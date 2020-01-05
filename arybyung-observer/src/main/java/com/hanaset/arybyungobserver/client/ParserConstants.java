@@ -9,4 +9,6 @@ public class ParserConstants {
 
     public static String DRIVER_PATH = "arybyung-observer/src/main/resources/webDriver/geckodriver";
     public static String TEST_DRIVER_PATH = "./src/main/resources/webDriver/geckodriver";
+
+    public static String DANGGNMARKET_POST_LIST = "https://www.daangn.com";
 }

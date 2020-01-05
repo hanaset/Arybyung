@@ -22,7 +22,7 @@ public class JoongnaraService {
     }
 
     private Long getTopArticleId() { // DB에서 저장된 가장 최근 게시글 번호 불러오기
-        ArticleEntity articleEntity = articleRepository.findTopByOrderByArticleIdDesc();
+        ArticleEntity articleEntity = articleRepository.findTopBySiteOrderByArticleIdDesc("joonggonara").orElse(ArticleEntity.builder().articleId(defaultArticleId).build());
         return articleEntity.getArticleId();
     }
 

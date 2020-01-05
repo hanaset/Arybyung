@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -48,7 +47,7 @@ public class JoonggonaraParser {
             String articleId = Arrays.asList(element.attr("href").split("&")).stream().filter(s -> s.contains("articleid")).map(s -> s.replaceAll("[^0-9]", "")).findFirst().get();
 
             return articleId;
-        }).max(String::compareToIgnoreCase).get();
+        }).max(String::compareToIgnoreCase).orElse("0");
 
         return Long.parseLong(maxArticleId);
     }
@@ -96,7 +95,7 @@ public class JoonggonaraParser {
                         .content(contentElement.text().length() > 4000 ? null : contentElement.text())
                         .postingDtime(LocalDateTime.parse(dateElement.text(), formatter).atZone(ZoneId.of("Asia/Seoul")))
                         .site("joongonara")
-                        .state(stateElement.attr("aria-label").equals("판매") ? ArticleState.S : ArticleState.E)
+                        .state(stateElement.attr("aria-label").equals("판매") ? ArticleState.S : ArticleState.C)
                         .url(url)
                         .build();
 
@@ -110,7 +109,7 @@ public class JoonggonaraParser {
         }
     }
 
-    @PostConstruct
+//    @PostConstruct
     public void naverLogin() throws InterruptedException {
 
         System.setProperty("webdriver.gecko.driver", ParserConstants.DRIVER_PATH);
