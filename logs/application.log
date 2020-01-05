@@ -730,3 +730,94 @@
 2020-01-05 03:34:08.662 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (107): ArticleId: 691001566 => null
 2020-01-05 03:34:08.677 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (107): ArticleId: 691001567 => null
 2020-01-05 03:34:09.257 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (107): ArticleId: 691001570 => null
+2020-01-05 05:14:56.212 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:16:30.939 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 05:17:30.944 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:19:08.064 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 05:22:02.047 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:23:17.102 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:24:54.099 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 05:24:54.100 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:26:29.858 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 05:26:29.859 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:28:16.637 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 05:28:16.638 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:31:00.002 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:32:44.191 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 05:33:00.004 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:34:00.005 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:35:48.758 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 05:36:00.003 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:38:00.001 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:40:00.006 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:42:00.001 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:45:00.003 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:47:24.310 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (49): articleId = 691060700
+2020-01-05 05:47:24.311 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (49): articleId = 691060800
+2020-01-05 05:47:24.312 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (49): articleId = 691060900
+2020-01-05 05:47:24.313 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (49): articleId = 691061000
+2020-01-05 05:47:24.314 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (49): articleId = 691061100
+2020-01-05 05:47:24.315 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (49): articleId = 691061200
+2020-01-05 05:47:24.317 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (49): articleId = 691061300
+2020-01-05 05:47:24.318 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (49): articleId = 691061400
+2020-01-05 05:47:24.319 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (49): articleId = 691061500
+2020-01-05 05:47:24.320 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (49): articleId = 691061600
+2020-01-05 05:47:24.320 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 05:48:00.006 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:51:03.926 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:51:58.336 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:55:35.911 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 05:56:56.143 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 06:00:39.506 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (52): articleId = 691061700
+2020-01-05 06:00:39.509 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (52): articleId = 691061800
+2020-01-05 06:00:39.515 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 16:58:58.020 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:00:01.421 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:00:49.886 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:04:42.663 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:04:43.621 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691061700
+2020-01-05 17:04:43.622 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691061800
+2020-01-05 17:04:43.623 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691061900
+2020-01-05 17:04:43.623 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691062000
+2020-01-05 17:04:43.624 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691062100
+2020-01-05 17:04:43.624 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691062200
+2020-01-05 17:04:43.625 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691062300
+2020-01-05 17:04:43.625 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691062400
+2020-01-05 17:04:43.626 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691062500
+2020-01-05 17:04:43.626 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691062600
+2020-01-05 17:04:43.639 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 17:09:49.683 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:11:42.943 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:11:43.420 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691061700
+2020-01-05 17:11:43.421 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691061800
+2020-01-05 17:11:43.422 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691061900
+2020-01-05 17:11:43.422 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691062000
+2020-01-05 17:11:43.423 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691062100
+2020-01-05 17:11:43.423 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691062200
+2020-01-05 17:11:43.424 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691062300
+2020-01-05 17:11:43.424 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691062400
+2020-01-05 17:11:43.425 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691062500
+2020-01-05 17:11:43.426 INFO [   scheduling-1] [c.h.a.s.JoongnaraService] parsingArticle (53): articleId = 691062600
+2020-01-05 17:11:43.443 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 17:13:01.854 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:13:02.313 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 17:14:01.855 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:14:01.993 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 17:15:01.856 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:15:01.988 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 17:16:18.502 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:16:19.063 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 17:17:18.504 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:17:18.723 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 17:18:18.505 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:18:18.632 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 17:19:18.508 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:19:18.641 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 17:20:47.191 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:20:47.746 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 17:21:47.197 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:21:47.332 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 17:22:47.197 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:22:47.355 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======
+2020-01-05 17:24:08.640 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (20): ======= Joonggonara Parsing Start =======
+2020-01-05 17:24:09.189 INFO [   scheduling-1] [c.h.a.s.JoonggonaraScheduler] parsing (22): ======= Joonggonara Parsing end =======

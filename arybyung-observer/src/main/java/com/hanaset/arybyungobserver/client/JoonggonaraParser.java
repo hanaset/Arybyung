@@ -108,7 +108,6 @@ public class JoonggonaraParser {
         } catch (NullPointerException e) {
 //            log.error("ArticleId: {} => {}", articleId, e.getMessage());
         }
-
     }
 
     @PostConstruct

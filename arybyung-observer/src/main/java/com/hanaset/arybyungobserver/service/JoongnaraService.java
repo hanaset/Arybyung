@@ -1,14 +1,13 @@
 package com.hanaset.arybyungobserver.service;
 
+import com.google.common.collect.Lists;
 import com.hanaset.arybyungcommon.entity.ArticleEntity;
 import com.hanaset.arybyungcommon.repository.ArticleRepository;
 import com.hanaset.arybyungobserver.client.JoonggonaraParser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.time.ZonedDateTime;
-import java.util.List;
-
+@Slf4j
 @Service
 public class JoongnaraService {
 
@@ -23,10 +22,8 @@ public class JoongnaraService {
     }
 
     private Long getTopArticleId() { // DB에서 저장된 가장 최근 게시글 번호 불러오기
-        List<ArticleEntity> articleEntityList = articleRepository.findByPostingDtimeAfter(ZonedDateTime.now().minusMonths(1L));
-        Long articleId = articleEntityList.stream().map(ArticleEntity::getArticleId).max(Long::compareTo).orElse(defaultArticleId);
-
-        return articleId;
+        ArticleEntity articleEntity = articleRepository.findTopByOrderByArticleIdDesc();
+        return articleEntity.getArticleId();
     }
 
     public void parsingArticle() throws Exception {
@@ -34,9 +31,13 @@ public class JoongnaraService {
         Long topArticleId = getTopArticleId();
         Long recentArticleId = joonggonaraParser.getRecentArticleId();
 
-        if(topArticleId.compareTo(recentArticleId) < 0) {
+        if (recentArticleId > topArticleId + 1500) {
+            recentArticleId = topArticleId + 1500;
+        }
 
-            for(Long i = topArticleId + 1 ; i <= recentArticleId ; i++) {
+        if (topArticleId.compareTo(recentArticleId) < 0) {
+
+            for (Long i = topArticleId + 1; i <= recentArticleId; i++) {
                 joonggonaraParser.getArticle(i);
             }
         }

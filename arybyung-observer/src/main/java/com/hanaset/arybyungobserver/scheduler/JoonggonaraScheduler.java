@@ -16,7 +16,9 @@ public class JoonggonaraScheduler {
     }
 
     @Scheduled(fixedRate = 1000 * 60)
-    public void test() throws Exception {
+    public void parsing() throws Exception {
+        log.info("======= Joonggonara Parsing Start =======");
         joongnaraService.parsingArticle();
+        log.info("======= Joonggonara Parsing end =======");
     }
 }

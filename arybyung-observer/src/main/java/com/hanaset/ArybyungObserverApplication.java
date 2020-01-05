@@ -23,9 +23,8 @@ public class ArybyungObserverApplication {
     public TaskExecutor joonggonaraTaskExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setThreadNamePrefix("joonggonaraTaskExecutor-");
-        taskExecutor.setCorePoolSize(4);
-//        taskExecutor.setQueueCapacity(100);
-        taskExecutor.setMaxPoolSize(4);
+        taskExecutor.setCorePoolSize(6);
+        taskExecutor.setMaxPoolSize(6);
 
         return taskExecutor;
     }
