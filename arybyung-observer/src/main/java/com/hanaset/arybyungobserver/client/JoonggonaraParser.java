@@ -15,7 +15,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -55,11 +54,11 @@ public class JoonggonaraParser {
     @Async(value = "joonggonaraTaskExecutor")
     public void getArticle(Long articleId) throws Exception {
 
+
+        String url = ParserConstants.JOONGGONARA_POST + articleId;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd. HH:mm");
+
         try {
-
-            String url = ParserConstants.JOONGGONARA_POST + articleId;
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd. HH:mm");
-
             Document document = Jsoup.connect(url)
                     .cookies(cookieMaps)
                     .get();
@@ -105,11 +104,11 @@ public class JoonggonaraParser {
                 naverLogin();
             }
         } catch (NullPointerException e) {
-//            log.error("ArticleId: {} => {}", articleId, e.getMessage());
+            log.error("{} : {}", url, e.getMessage());
         }
     }
 
-//    @PostConstruct
+    //    @PostConstruct
     public void naverLogin() throws InterruptedException {
 
         System.setProperty("webdriver.gecko.driver", ParserConstants.DRIVER_PATH);

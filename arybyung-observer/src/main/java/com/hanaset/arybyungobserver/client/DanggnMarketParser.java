@@ -43,7 +43,6 @@ public class DanggnMarketParser {
         String url = ParserConstants.DANGGNMARKET_POST_LIST + "/articles/" + articleId;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        System.out.println(url);
         try {
 
             Document document = Jsoup.connect(url).get();
