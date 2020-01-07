@@ -1,13 +1,20 @@
 package com.hanaset.arybyungobserver.client;
 
+import com.hanaset.arybyungcommon.entity.ArticleEntity;
+import com.hanaset.arybyungcommon.model.type.ArticleState;
 import com.hanaset.arybyungcommon.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Slf4j
@@ -30,28 +37,59 @@ public class DanggnMarketParser {
         return maxArticleId;
     }
 
-    public void getArticle(Long articleId) throws IOException{
+    @Async(value = "danggnMarketTaskExecutor")
+    public void getArticle(Long articleId) throws IOException {
 
         String url = ParserConstants.DANGGNMARKET_POST_LIST + "/articles/" + articleId;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-        Document document = Jsoup.connect(url).get();
+        System.out.println(url);
+        try {
 
-        Element subjectElement = document.getElementById("article-title");
-        System.out.println(subjectElement.text());
+            Document document = Jsoup.connect(url).get();
 
-        Element priceElement = document.getElementById("article-price");
-        System.out.println(priceElement.text());
+            Element subjectElement = document.getElementById("article-title");
+//        System.out.println(subjectElement.text());
 
-        Element imageElement = document.selectFirst("[class=portrait]");
-        System.out.println(imageElement.attr("data-lazy"));
+            Element priceElement = document.getElementById("article-price") == null ? document.getElementById("article-price-nanum") : document.getElementById("article-price");
+            String stringPrice = priceElement.text().replaceAll("[^0-9]", "");
+//        System.out.println(priceElement.text());
 
-        Element regionElement = document.getElementById("region-name");
-        System.out.println(regionElement.text());
+            ArticleState state = priceElement.text().equals("무료나눔") ? ArticleState.F : ArticleState.S;
+            Long price = Long.parseLong(stringPrice.equals("") ? "0" : stringPrice);
 
-        Element dateElement = document.selectFirst("[datatype=xsd:date]");
-        System.out.println(dateElement.attr("content"));
+            Element imageElement = document.selectFirst("[class=image-wrap]").child(0);
+//        System.out.println(imageElement.attr("data-lazy"));
 
-        Element contentElement = document.getElementById("article-detail");
-        System.out.println(contentElement.text());
+            Element regionElement = document.getElementById("region-name");
+//        System.out.println(regionElement.text());
+
+            Element dateElement = document.selectFirst("[datatype=xsd:date]");
+//        System.out.println(dateElement.attr("content"));
+
+            Element contentElement = document.getElementById("article-detail");
+//        System.out.println(contentElement.text());
+
+            String content = contentElement.text() + "\n" + regionElement.text();
+
+            ArticleEntity articleEntity = ArticleEntity.builder()
+                    .articleId(articleId)
+                    .url(url)
+                    .subject(subjectElement.text())
+                    .price(price)
+                    .state(state)
+                    .image(imageElement.attr("data-lazy"))
+                    .site("danggn")
+                    .postingDtime(LocalDate.parse(dateElement.attr("content"), formatter).atStartOfDay(ZoneId.of("Asia/Seoul")))
+                    .content(content.length() > 4000 ? null : content)
+                    .build();
+
+            articleRepository.save(articleEntity);
+        } catch (HttpStatusException e) {
+            log.error("{} : Not found", url);
+        } catch (NullPointerException e) {
+            log.error("{} : Secret Article", url);
+            log.error("{}", e.getCause());
+        }
     }
 }

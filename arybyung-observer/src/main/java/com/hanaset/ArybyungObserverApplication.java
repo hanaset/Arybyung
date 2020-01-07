@@ -29,4 +29,14 @@ public class ArybyungObserverApplication {
         return taskExecutor;
     }
 
+    @Bean
+    public TaskExecutor danggnMarketTaskExecutor() {
+        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+        taskExecutor.setThreadNamePrefix("danggnMarketTaskExecutor-");
+        taskExecutor.setCorePoolSize(3);
+        taskExecutor.setMaxPoolSize(3);
+
+        return taskExecutor;
+    }
+
 }
