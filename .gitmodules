@@ -1,0 +1,3 @@
+[submodule "howmuch-common"]
+	path = howmuch-common
+	url = git@github.com:hanaset/howmuch-common.git
