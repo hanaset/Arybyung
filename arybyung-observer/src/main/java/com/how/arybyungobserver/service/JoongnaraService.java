@@ -13,6 +13,7 @@ public class JoongnaraService {
     private final JoonggonaraParser joonggonaraParser;
     private final ArticleRepository articleRepository;
     private final Long defaultArticleId = 691000000L;
+    private Long nowArticleId = 0L;
 
     public JoongnaraService(JoonggonaraParser joonggonaraParser,
                             ArticleRepository articleRepository) {
@@ -28,10 +29,16 @@ public class JoongnaraService {
     public void parsingArticle() throws Exception {
 
         Long topArticleId = getTopArticleId();
+
+        if(topArticleId < nowArticleId) {
+            topArticleId = nowArticleId;
+        }
+
         Long recentArticleId = joonggonaraParser.getRecentArticleId();
 
-        if (recentArticleId > topArticleId + 1500) {
-            recentArticleId = topArticleId + 1500;
+        if (recentArticleId > topArticleId + 150) {
+            recentArticleId = topArticleId + 150;
+            nowArticleId = recentArticleId;
         }
 
         if (topArticleId.compareTo(recentArticleId) < 0) {

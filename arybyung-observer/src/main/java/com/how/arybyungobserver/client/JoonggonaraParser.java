@@ -15,6 +15,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -108,7 +109,7 @@ public class JoonggonaraParser {
         }
     }
 
-    //    @PostConstruct
+    @PostConstruct
     public void naverLogin() throws InterruptedException {
 
         System.setProperty("webdriver.gecko.driver", ParserConstants.DRIVER_PATH);

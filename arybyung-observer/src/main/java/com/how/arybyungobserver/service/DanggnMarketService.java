@@ -15,6 +15,7 @@ public class DanggnMarketService {
     private final DanggnMarketParser danggnMarketParser;
     private final ArticleRepository articleRepository;
     private final Long defaultArticleId = 54593000L;
+    private Long nowArticleId = 0L;
 
     public DanggnMarketService(DanggnMarketParser danggnMarketParser,
                                ArticleRepository articleRepository) {
@@ -31,6 +32,10 @@ public class DanggnMarketService {
     public void parsingArticle() throws IOException {
         Long topArticleId = getTopArticleId();
         Long recentArticleId = danggnMarketParser.getRecentArticleId();
+
+        if(topArticleId < nowArticleId) {
+            topArticleId = nowArticleId;
+        }
 
         if(recentArticleId > topArticleId + 500) {
             recentArticleId = topArticleId + 500;
