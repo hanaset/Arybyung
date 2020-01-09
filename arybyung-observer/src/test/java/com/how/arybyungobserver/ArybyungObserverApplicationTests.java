@@ -1,6 +1,6 @@
-package com.hanaset.arybyungobserver;
+package com.how.arybyungobserver;
 
-import com.hanaset.arybyungobserver.client.JoonggonaraParser;
+import com.how.arybyungobserver.client.JoonggonaraParser;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

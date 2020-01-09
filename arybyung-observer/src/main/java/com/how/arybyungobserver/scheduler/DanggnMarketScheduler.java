@@ -1,6 +1,6 @@
-package com.hanaset.arybyungobserver.scheduler;
+package com.how.arybyungobserver.scheduler;
 
-import com.hanaset.arybyungobserver.service.DanggnMarketService;
+import com.how.arybyungobserver.service.DanggnMarketService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;

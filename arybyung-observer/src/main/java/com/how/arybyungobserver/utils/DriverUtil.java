@@ -1,9 +1,8 @@
-package com.hanaset.arybyungobserver.utils;
+package com.how.arybyungobserver.utils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
 import java.awt.*;

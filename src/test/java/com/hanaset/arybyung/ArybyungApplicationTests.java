@@ -1,4 +1,4 @@
-package com.hanaset.arybyung;
+package com.how.arybyung;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,9 +1,8 @@
-package com.hanaset.arybyungobserver.service;
+package com.how.arybyungobserver.service;
 
-import com.google.common.collect.Lists;
-import com.hanaset.arybyungcommon.entity.ArticleEntity;
-import com.hanaset.arybyungcommon.repository.ArticleRepository;
-import com.hanaset.arybyungobserver.client.JoonggonaraParser;
+import com.how.arybyungcommon.entity.ArticleEntity;
+import com.how.arybyungcommon.repository.ArticleRepository;
+import com.how.arybyungobserver.client.JoonggonaraParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.hanaset.arybyungobserver.client;
+package com.how.arybyungobserver.client;
 
 public class ParserConstants {
 

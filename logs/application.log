@@ -62,3 +62,41 @@
 2020-01-09 21:03:30.268 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (90): https://www.daangn.com/articles/54594060 : Secret Article
 2020-01-09 21:03:30.268 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (91): {}
 2020-01-09 21:03:30.478 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594064 : Not found
+2020-01-09 21:06:27.099 INFO [   scheduling-1] [c.h.a.s.DanggnMarketScheduler] parsing (22): ======= danggnMarket Parsing Start =======
+2020-01-09 21:06:27.963 INFO [   scheduling-1] [c.h.a.s.DanggnMarketScheduler] parsing (24): ======= danggnMarket Parsing end =======
+2020-01-09 21:06:28.079 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594064 : Not found
+2020-01-09 21:06:28.349 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (90): https://www.daangn.com/articles/54594068 : Secret Article
+2020-01-09 21:06:28.350 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (91): {}
+2020-01-09 21:06:29.347 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594083 : Not found
+2020-01-09 21:06:29.483 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594084 : Not found
+2020-01-09 21:06:29.611 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594086 : Not found
+2020-01-09 21:06:29.947 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594092 : Not found
+2020-01-09 21:06:30.117 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594095 : Not found
+2020-01-09 21:06:30.437 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594099 : Not found
+2020-01-09 21:06:30.538 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594101 : Not found
+2020-01-09 21:06:30.618 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594103 : Not found
+2020-01-09 21:06:30.652 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594104 : Not found
+2020-01-09 21:06:32.821 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594110 : Not found
+2020-01-09 21:06:33.614 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594120 : Not found
+2020-01-09 21:06:33.738 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594123 : Not found
+2020-01-09 21:06:33.757 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594124 : Not found
+2020-01-09 21:06:33.855 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594125 : Not found
+2020-01-09 21:06:34.235 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594132 : Not found
+2020-01-09 21:06:34.534 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594136 : Not found
+2020-01-09 21:06:34.653 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594139 : Not found
+2020-01-09 21:06:34.968 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (90): https://www.daangn.com/articles/54594142 : Secret Article
+2020-01-09 21:06:34.968 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (91): {}
+2020-01-09 21:06:35.096 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (90): https://www.daangn.com/articles/54594144 : Secret Article
+2020-01-09 21:06:35.097 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (91): {}
+2020-01-09 21:06:35.176 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594146 : Not found
+2020-01-09 21:06:35.677 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594152 : Not found
+2020-01-09 21:06:35.973 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594157 : Not found
+2020-01-09 21:06:38.134 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594165 : Not found
+2020-01-09 21:06:39.530 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594180 : Not found
+2020-01-09 21:06:40.151 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594189 : Not found
+2020-01-09 21:06:40.572 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594195 : Not found
+2020-01-09 21:06:40.758 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (90): https://www.daangn.com/articles/54594198 : Secret Article
+2020-01-09 21:06:40.759 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (91): {}
+2020-01-09 21:06:41.311 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594206 : Not found
+2020-01-09 21:06:41.761 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594213 : Not found
+2020-01-09 21:06:42.436 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594223 : Not found

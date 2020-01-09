@@ -1,8 +1,8 @@
-package com.hanaset.arybyungobserver.service;
+package com.how.arybyungobserver.service;
 
-import com.hanaset.arybyungcommon.entity.ArticleEntity;
-import com.hanaset.arybyungcommon.repository.ArticleRepository;
-import com.hanaset.arybyungobserver.client.DanggnMarketParser;
+import com.how.arybyungcommon.entity.ArticleEntity;
+import com.how.arybyungcommon.repository.ArticleRepository;
+import com.how.arybyungobserver.client.DanggnMarketParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

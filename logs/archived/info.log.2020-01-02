@@ -28,7 +28,7 @@ ERROR in ch.qos.logback.core.joran.spi.Interpreter@196:77 - ActionException in A
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
-	at com.hanaset.ArybyungObserverApplication.main(ArybyungObserverApplication.java:10)
+	at com.how.ArybyungObserverApplication.main(ArybyungObserverApplication.java:10)
 2020-01-02 22:33:59.928 ERROR [           main] [o.s.b.SpringApplication] reportFailure (826): Application run failed
 java.lang.IllegalStateException: Logback configuration error detected: 
 ERROR in ch.qos.logback.core.joran.action.AppenderAction - Could not create an Appender of type [ca.pjer.logback.AwsLogsAppender]. ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type ca.pjer.logback.AwsLogsAppender
@@ -59,7 +59,7 @@ ERROR in ch.qos.logback.core.joran.spi.Interpreter@196:77 - ActionException in A
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
-	at com.hanaset.ArybyungObserverApplication.main(ArybyungObserverApplication.java:10)
+	at com.how.ArybyungObserverApplication.main(ArybyungObserverApplication.java:10)
 2020-01-02 22:34:25.160 ERROR [           main] [o.s.b.SpringApplication] reportFailure (826): Application run failed
 java.lang.IllegalStateException: Logback configuration error detected: 
 ERROR in ch.qos.logback.core.joran.action.AppenderAction - Could not create an Appender of type [ca.pjer.logback.AwsLogsAppender]. ch.qos.logback.core.util.DynamicClassLoadingException: Failed to instantiate type ca.pjer.logback.AwsLogsAppender
@@ -88,7 +88,7 @@ ERROR in ch.qos.logback.core.joran.spi.Interpreter@165:82 - ActionException in A
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1226)
 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1215)
-	at com.hanaset.ArybyungObserverApplication.main(ArybyungObserverApplication.java:10)
+	at com.how.ArybyungObserverApplication.main(ArybyungObserverApplication.java:10)
 2020-01-02 22:35:49.805 INFO [           main] [c.h.a.ArybyungObserverApplication] logStarting (55): Starting ArybyungObserverApplication on luke.local with PID 47922 (/Users/luke/workplace/Arybyung/arybyung-observer/out/production/classes started by luke in /Users/luke/workplace/Arybyung)
 2020-01-02 22:35:49.805 INFO [           main] [c.h.a.ArybyungObserverApplication] logStartupProfileInfo (655): The following profiles are active: local
 2020-01-02 22:35:50.389 INFO [           main] [o.s.d.r.c.RepositoryConfigurationDelegate] registerRepositoriesIn (127): Bootstrapping Spring Data JPA repositories in DEFAULT mode.

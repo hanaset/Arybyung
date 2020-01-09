@@ -11,7 +11,7 @@
             <appender-ref ref="error_log"/>
         </root>
 
-        <logger name="com.hanaset.arybyungobserver" level="DEBUG">
+        <logger name="com.how.arybyungobserver" level="DEBUG">
             <appender-ref ref="application_log"/>
         </logger>
 
@@ -40,7 +40,7 @@
 <!--            <appender-ref ref="cloudWatch_error_log"/>-->
         </root>
 
-        <logger name="com.hanaset.arybyungobserver" level="DEBUG">
+        <logger name="com.how.arybyungobserver" level="DEBUG">
             <appender-ref ref="application_log"/>
 <!--            <appender-ref ref="cloudWatch_application_log"/>-->
         </logger>
@@ -74,7 +74,7 @@
 <!--            <appender-ref ref="cloudWatch_error_log"/>-->
         </root>
 
-        <logger name="com.hanaset.arybyungobserver" level="INFO">
+        <logger name="com.how.arybyungobserver" level="INFO">
             <appender-ref ref="application_log"/>
 <!--            <appender-ref ref="cloudWatch_application_log"/>-->
         </logger>

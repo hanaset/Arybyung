@@ -1,9 +1,9 @@
-package com.hanaset.arybyungobserver.client;
+package com.how.arybyungobserver.client;
 
-import com.hanaset.arybyungcommon.entity.ArticleEntity;
-import com.hanaset.arybyungcommon.model.type.ArticleState;
-import com.hanaset.arybyungcommon.repository.ArticleRepository;
-import com.hanaset.arybyungobserver.utils.DriverUtil;
+import com.how.arybyungcommon.entity.ArticleEntity;
+import com.how.arybyungcommon.model.type.ArticleState;
+import com.how.arybyungcommon.repository.ArticleRepository;
+import com.how.arybyungobserver.utils.DriverUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

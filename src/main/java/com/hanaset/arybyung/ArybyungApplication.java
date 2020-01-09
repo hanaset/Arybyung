@@ -1,4 +1,4 @@
-package com.hanaset.arybyung;
+package com.how.arybyung;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
