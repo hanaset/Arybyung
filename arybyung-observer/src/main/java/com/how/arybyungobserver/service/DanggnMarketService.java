@@ -14,7 +14,7 @@ public class DanggnMarketService {
 
     private final DanggnMarketParser danggnMarketParser;
     private final ArticleRepository articleRepository;
-    private final Long defaultArticleId = 54593000L;
+    private final Long defaultArticleId = 55000000L;
     private Long nowArticleId = 0L;
 
     public DanggnMarketService(DanggnMarketParser danggnMarketParser,

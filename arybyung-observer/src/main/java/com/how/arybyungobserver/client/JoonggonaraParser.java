@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
@@ -72,17 +73,25 @@ public class JoonggonaraParser {
                 Element subjectElement = document.selectFirst("[class=b m-tcol-c]");
 
                 if(!subjectElement.text().contains("공식앱")) {
-                    System.out.println(subjectElement.text());
+//                    System.out.println(subjectElement.text());
 
                     Element imageElement = document.selectFirst("[class=imgs border-sub]");
-                    System.out.println(imageElement.attr("src"));
+//                    System.out.println(imageElement.attr("src"));
 
                     Element costElement = document.selectFirst("[class=cost]");
-                    System.out.println(costElement.text());
+//                    System.out.println(costElement.text());
                     Long price = Long.parseLong(costElement.text().replaceAll("[^0-9]", ""));
 
-                    Element contentElement = document.selectFirst("[class=tbody m-tcol-c]");
-                    System.out.println(contentElement.text());
+                    Elements contentElements1 = document.select("[class=NHN_Writeform_Main]");
+//                    System.out.println(contentElements1.text());
+                    Elements contentElements2 = document.selectFirst("[class=tbody m-tcol-c]").select("p").select("span");
+//                    System.out.println(contentElements2.text());
+
+                    String content = contentElements1.text() + "\n" + contentElements2.text();
+
+                    if(content.length() > 2000) {
+                        return;
+                    }
 
                     Element dateElement = document.selectFirst("[class=m-tcol-c date]");
                     System.out.println(dateElement.text());
@@ -95,7 +104,7 @@ public class JoonggonaraParser {
                             .subject(subjectElement.text())
                             .image(imageElement.attr("src"))
                             .price(price)
-                            .content(contentElement.text().length() > 4000 ? null : contentElement.text())
+                            .content(content)
                             .postingDtime(LocalDateTime.parse(dateElement.text(), formatter).atZone(ZoneId.of("Asia/Seoul")))
                             .site("joongonara")
                             .state(stateElement.attr("aria-label").equals("판매") ? ArticleState.S : ArticleState.C)
@@ -107,12 +116,12 @@ public class JoonggonaraParser {
                     Element bodyElement = document.selectFirst("[class=tbody m-tcol-c]");
 
                     Element imgElement = bodyElement.selectFirst("img");
-                    System.out.println(imgElement.attr("src"));
+//                    System.out.println(imgElement.attr("src"));
 
-                    System.out.println(bodyElement.text());
+//                    System.out.println(bodyElement.text());
 
                     Element dateElement = document.selectFirst("[class=m-tcol-c date]");
-                    System.out.println(dateElement.text());
+//                    System.out.println(dateElement.text());
 
                     Long price = Long.parseLong(bodyElement.selectFirst("[color=#FF6C00]").text().replaceAll("[^0-9]", ""));
 
@@ -121,7 +130,7 @@ public class JoonggonaraParser {
                             .subject(subjectElement.text())
                             .image(imgElement.attr("img"))
                             .price(price)
-                            .content(bodyElement.text().length() > 4000 ? null : bodyElement.text())
+                            .content(bodyElement.text().length() > 2000 ? null : bodyElement.text())
                             .postingDtime(LocalDateTime.parse(dateElement.text(), formatter).atZone(ZoneId.of("Asia/Seoul")))
                             .site("joongonara")
                             .state(ArticleState.S)
@@ -142,8 +151,8 @@ public class JoonggonaraParser {
     @PostConstruct
     public void naverLogin() throws InterruptedException {
 
-//        System.setProperty("webdriver.gecko.driver", ParserConstants.DRIVER_PATH);
-        System.setProperty("webdriver.gecko.driver", ParserConstants.TEST_DRIVER_PATH); //테스트코드
+        System.setProperty("webdriver.gecko.driver", ParserConstants.DRIVER_PATH);
+//        System.setProperty("webdriver.gecko.driver", ParserConstants.TEST_DRIVER_PATH); //테스트코드
         System.setProperty("java.awt.headless", "false");
 
         WebDriver driver = new FirefoxDriver();

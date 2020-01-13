@@ -71,6 +71,10 @@ public class DanggnMarketParser {
 
             String content = contentElement.text() + "\n" + regionElement.text();
 
+            if(content.length() > 2000) {
+                return;
+            }
+
             ArticleEntity articleEntity = ArticleEntity.builder()
                     .articleId(articleId)
                     .url(url)
@@ -80,7 +84,7 @@ public class DanggnMarketParser {
                     .image(imageElement.attr("data-lazy"))
                     .site("danggn")
                     .postingDtime(LocalDate.parse(dateElement.attr("content"), formatter).atStartOfDay(ZoneId.of("Asia/Seoul")))
-                    .content(content.length() > 4000 ? null : content)
+                    .content(content)
                     .build();
 
             articleRepository.save(articleEntity);
