@@ -1,8 +1,8 @@
 package com.how.arybyungobserver.client;
 
-import com.how.arybyungcommon.entity.ArticleEntity;
-import com.how.arybyungcommon.model.type.ArticleState;
-import com.how.arybyungcommon.repository.ArticleRepository;
+import com.how.muchcommon.entity.ArticleEntity;
+import com.how.muchcommon.model.type.ArticleState;
+import com.how.muchcommon.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;

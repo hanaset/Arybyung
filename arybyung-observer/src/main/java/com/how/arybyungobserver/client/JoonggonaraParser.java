@@ -1,9 +1,9 @@
 package com.how.arybyungobserver.client;
 
-import com.how.arybyungcommon.entity.ArticleEntity;
-import com.how.arybyungcommon.model.type.ArticleState;
-import com.how.arybyungcommon.repository.ArticleRepository;
 import com.how.arybyungobserver.utils.DriverUtil;
+import com.how.muchcommon.entity.ArticleEntity;
+import com.how.muchcommon.model.type.ArticleState;
+import com.how.muchcommon.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -58,6 +58,7 @@ public class JoonggonaraParser {
 
         String url = ParserConstants.JOONGGONARA_POST + articleId;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd. HH:mm");
+        System.out.println(url);
 
         try {
             Document document = Jsoup.connect(url)
@@ -69,37 +70,66 @@ public class JoonggonaraParser {
             if (!login.attr("title").equals("로그인영역")) { // cookie가 유효한지 확인 (정상적으로 파싱 완료)
 
                 Element subjectElement = document.selectFirst("[class=b m-tcol-c]");
-//            System.out.println(subjectElement.text());
 
-                Element imageElement = document.selectFirst("[class=imgs border-sub]");
-//            System.out.println(imageElement.attr("src"));
+                if(!subjectElement.text().contains("공식앱")) {
+                    System.out.println(subjectElement.text());
 
-                Element costElement = document.selectFirst("[class=cost]");
-//            System.out.println(costElement.text());
-                Long price = Long.parseLong(costElement.text().replaceAll("[^0-9]", ""));
+                    Element imageElement = document.selectFirst("[class=imgs border-sub]");
+                    System.out.println(imageElement.attr("src"));
 
-                Element contentElement = document.selectFirst("[class=tbody m-tcol-c]");
-//            System.out.println(contentElement.text());
+                    Element costElement = document.selectFirst("[class=cost]");
+                    System.out.println(costElement.text());
+                    Long price = Long.parseLong(costElement.text().replaceAll("[^0-9]", ""));
 
-                Element dateElement = document.selectFirst("[class=m-tcol-c date]");
-//            System.out.println(dateElement.text());
+                    Element contentElement = document.selectFirst("[class=tbody m-tcol-c]");
+                    System.out.println(contentElement.text());
 
-                Element stateElement = document.selectFirst("em");
-//            System.out.println(stateElement.attr("aria-label"));
+                    Element dateElement = document.selectFirst("[class=m-tcol-c date]");
+                    System.out.println(dateElement.text());
 
-                ArticleEntity entity = ArticleEntity.builder()
-                        .articleId(articleId)
-                        .subject(subjectElement.text())
-                        .image(imageElement.attr("src"))
-                        .price(price)
-                        .content(contentElement.text().length() > 4000 ? null : contentElement.text())
-                        .postingDtime(LocalDateTime.parse(dateElement.text(), formatter).atZone(ZoneId.of("Asia/Seoul")))
-                        .site("joongonara")
-                        .state(stateElement.attr("aria-label").equals("판매") ? ArticleState.S : ArticleState.C)
-                        .url(url)
-                        .build();
+                    Element stateElement = document.selectFirst("em");
+                    System.out.println(stateElement.attr("aria-label"));
 
-                articleRepository.save(entity);
+                    ArticleEntity entity = ArticleEntity.builder()
+                            .articleId(articleId)
+                            .subject(subjectElement.text())
+                            .image(imageElement.attr("src"))
+                            .price(price)
+                            .content(contentElement.text().length() > 4000 ? null : contentElement.text())
+                            .postingDtime(LocalDateTime.parse(dateElement.text(), formatter).atZone(ZoneId.of("Asia/Seoul")))
+                            .site("joongonara")
+                            .state(stateElement.attr("aria-label").equals("판매") ? ArticleState.S : ArticleState.C)
+                            .url(url)
+                            .build();
+
+                    articleRepository.save(entity);
+                } else {
+                    Element bodyElement = document.selectFirst("[class=tbody m-tcol-c]");
+
+                    Element imgElement = bodyElement.selectFirst("img");
+                    System.out.println(imgElement.attr("src"));
+
+                    System.out.println(bodyElement.text());
+
+                    Element dateElement = document.selectFirst("[class=m-tcol-c date]");
+                    System.out.println(dateElement.text());
+
+                    Long price = Long.parseLong(bodyElement.selectFirst("[color=#FF6C00]").text().replaceAll("[^0-9]", ""));
+
+                    ArticleEntity entity = ArticleEntity.builder()
+                            .articleId(articleId)
+                            .subject(subjectElement.text())
+                            .image(imgElement.attr("img"))
+                            .price(price)
+                            .content(bodyElement.text().length() > 4000 ? null : bodyElement.text())
+                            .postingDtime(LocalDateTime.parse(dateElement.text(), formatter).atZone(ZoneId.of("Asia/Seoul")))
+                            .site("joongonara")
+                            .state(ArticleState.S)
+                            .url(url)
+                            .build();
+
+                    articleRepository.save(entity);
+                }
 
             } else { // 쿠키를 재발급 받아야할 때 (비정상적으로 파싱)
                 naverLogin();
@@ -112,8 +142,8 @@ public class JoonggonaraParser {
     @PostConstruct
     public void naverLogin() throws InterruptedException {
 
-        System.setProperty("webdriver.gecko.driver", ParserConstants.DRIVER_PATH);
-//        System.setProperty("webdriver.gecko.driver", ParserConstants.TEST_DRIVER_PATH); //테스트코드
+//        System.setProperty("webdriver.gecko.driver", ParserConstants.DRIVER_PATH);
+        System.setProperty("webdriver.gecko.driver", ParserConstants.TEST_DRIVER_PATH); //테스트코드
         System.setProperty("java.awt.headless", "false");
 
         WebDriver driver = new FirefoxDriver();

@@ -1,102 +1,54 @@
-2020-01-04 18:01:32.774 ERROR [   scheduling-1] [o.s.s.s.TaskUtils$LoggingErrorHandler] handleError (95): Unexpected error occurred in scheduled task
-java.lang.IllegalStateException: The driver executable does not exist: /Users/luke/workplace/Arybyung/arybyung-observer/arybyung-observer/src/main/resources/webDriver/geckodriver
-	at com.google.common.base.Preconditions.checkState(Preconditions.java:585)
-	at org.openqa.selenium.remote.service.DriverService.checkExecutable(DriverService.java:146)
-	at org.openqa.selenium.remote.service.DriverService.findExecutable(DriverService.java:141)
-	at org.openqa.selenium.firefox.GeckoDriverService.access$100(GeckoDriverService.java:44)
-	at org.openqa.selenium.firefox.GeckoDriverService$Builder.findDefaultExecutable(GeckoDriverService.java:167)
-	at org.openqa.selenium.remote.service.DriverService$Builder.build(DriverService.java:355)
-	at org.openqa.selenium.firefox.FirefoxDriver.toExecutor(FirefoxDriver.java:190)
-	at org.openqa.selenium.firefox.FirefoxDriver.<init>(FirefoxDriver.java:147)
-	at org.openqa.selenium.firefox.FirefoxDriver.<init>(FirefoxDriver.java:125)
-	at com.how.arybyungobserver.client.JoonggonaraParser.naverLogin(JoonggonaraParser.java:71)
-	at com.how.arybyungobserver.scheduler.JoonggonaraScheduler.test(JoonggonaraScheduler.java:20)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84)
-	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
-	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-2020-01-04 18:02:07.731 ERROR [   scheduling-1] [o.s.s.s.TaskUtils$LoggingErrorHandler] handleError (95): Unexpected error occurred in scheduled task
-java.lang.IllegalStateException: The path to the driver executable must be set by the webdriver.gecko.driver system property; for more information, see https://github.com/mozilla/geckodriver. The latest version can be downloaded from https://github.com/mozilla/geckodriver/releases
-	at com.google.common.base.Preconditions.checkState(Preconditions.java:847)
-	at org.openqa.selenium.remote.service.DriverService.findExecutable(DriverService.java:134)
-	at org.openqa.selenium.firefox.GeckoDriverService.access$100(GeckoDriverService.java:44)
-	at org.openqa.selenium.firefox.GeckoDriverService$Builder.findDefaultExecutable(GeckoDriverService.java:167)
-	at org.openqa.selenium.remote.service.DriverService$Builder.build(DriverService.java:355)
-	at org.openqa.selenium.firefox.FirefoxDriver.toExecutor(FirefoxDriver.java:190)
-	at org.openqa.selenium.firefox.FirefoxDriver.<init>(FirefoxDriver.java:147)
-	at org.openqa.selenium.firefox.FirefoxDriver.<init>(FirefoxDriver.java:125)
-	at com.how.arybyungobserver.client.JoonggonaraParser.naverLogin(JoonggonaraParser.java:71)
-	at com.how.arybyungobserver.scheduler.JoonggonaraScheduler.test(JoonggonaraScheduler.java:20)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84)
-	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
-	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-2020-01-04 18:03:27.476 ERROR [   scheduling-1] [o.s.s.s.TaskUtils$LoggingErrorHandler] handleError (95): Unexpected error occurred in scheduled task
-java.lang.IllegalStateException: The driver executable does not exist: /Users/luke/workplace/Arybyung/arybyung-observer/arybyung-observer/src/main/resources/webDriver/geckodriver
-	at com.google.common.base.Preconditions.checkState(Preconditions.java:585)
-	at org.openqa.selenium.remote.service.DriverService.checkExecutable(DriverService.java:146)
-	at org.openqa.selenium.remote.service.DriverService.findExecutable(DriverService.java:141)
-	at org.openqa.selenium.firefox.GeckoDriverService.access$100(GeckoDriverService.java:44)
-	at org.openqa.selenium.firefox.GeckoDriverService$Builder.findDefaultExecutable(GeckoDriverService.java:167)
-	at org.openqa.selenium.remote.service.DriverService$Builder.build(DriverService.java:355)
-	at org.openqa.selenium.firefox.FirefoxDriver.toExecutor(FirefoxDriver.java:190)
-	at org.openqa.selenium.firefox.FirefoxDriver.<init>(FirefoxDriver.java:147)
-	at org.openqa.selenium.firefox.FirefoxDriver.<init>(FirefoxDriver.java:125)
-	at com.how.arybyungobserver.client.JoonggonaraParser.naverLogin(JoonggonaraParser.java:71)
-	at com.how.arybyungobserver.scheduler.JoonggonaraScheduler.test(JoonggonaraScheduler.java:20)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84)
-	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
-	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
-2020-01-04 18:04:09.115 ERROR [   scheduling-1] [o.s.s.s.TaskUtils$LoggingErrorHandler] handleError (95): Unexpected error occurred in scheduled task
-java.lang.IllegalStateException: The path to the driver executable must be set by the webdriver.gecko.driver system property; for more information, see https://github.com/mozilla/geckodriver. The latest version can be downloaded from https://github.com/mozilla/geckodriver/releases
-	at com.google.common.base.Preconditions.checkState(Preconditions.java:847)
-	at org.openqa.selenium.remote.service.DriverService.findExecutable(DriverService.java:134)
-	at org.openqa.selenium.firefox.GeckoDriverService.access$100(GeckoDriverService.java:44)
-	at org.openqa.selenium.firefox.GeckoDriverService$Builder.findDefaultExecutable(GeckoDriverService.java:167)
-	at org.openqa.selenium.remote.service.DriverService$Builder.build(DriverService.java:355)
-	at org.openqa.selenium.firefox.FirefoxDriver.toExecutor(FirefoxDriver.java:190)
-	at org.openqa.selenium.firefox.FirefoxDriver.<init>(FirefoxDriver.java:147)
-	at org.openqa.selenium.firefox.FirefoxDriver.<init>(FirefoxDriver.java:125)
-	at com.how.arybyungobserver.client.JoonggonaraParser.naverLogin(JoonggonaraParser.java:71)
-	at com.how.arybyungobserver.scheduler.JoonggonaraScheduler.test(JoonggonaraScheduler.java:20)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.springframework.scheduling.support.ScheduledMethodRunnable.run(ScheduledMethodRunnable.java:84)
-	at org.springframework.scheduling.support.DelegatingErrorHandlingRunnable.run(DelegatingErrorHandlingRunnable.java:54)
-	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
-	at java.util.concurrent.FutureTask.runAndReset(FutureTask.java:308)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.access$301(ScheduledThreadPoolExecutor.java:180)
-	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:294)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at java.lang.Thread.run(Thread.java:748)
+2020-01-13 11:14:36.710 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594900 : Not found
+2020-01-13 11:14:36.755 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000001 : null
+2020-01-13 11:14:36.771 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000002 : null
+2020-01-13 11:14:36.779 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594903 : Not found
+2020-01-13 11:14:36.931 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000003 : null
+2020-01-13 11:14:36.950 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000004 : null
+2020-01-13 11:14:36.968 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000005 : null
+2020-01-13 11:14:36.984 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000006 : null
+2020-01-13 11:14:37.160 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594910 : Not found
+2020-01-13 11:14:37.311 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000008 : null
+2020-01-13 11:14:37.572 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594920 : Not found
+2020-01-13 11:14:37.699 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000010 : null
+2020-01-13 11:14:37.784 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000011 : null
+2020-01-13 11:14:37.884 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000012 : null
+2020-01-13 11:14:37.960 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (90): https://www.daangn.com/articles/54594927 : Secret Article
+2020-01-13 11:14:37.960 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (91): {}
+2020-01-13 11:14:38.046 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594929 : Not found
+2020-01-13 11:14:38.115 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594928 : Not found
+2020-01-13 11:14:38.184 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594932 : Not found
+2020-01-13 11:14:38.258 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594934 : Not found
+2020-01-13 11:14:38.378 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (90): https://www.daangn.com/articles/54594937 : Secret Article
+2020-01-13 11:14:38.378 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (91): {}
+2020-01-13 11:14:38.461 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594938 : Not found
+2020-01-13 11:14:38.480 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594940 : Not found
+2020-01-13 11:14:38.524 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000015 : null
+2020-01-13 11:14:38.541 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000016 : null
+2020-01-13 11:14:38.671 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594945 : Not found
+2020-01-13 11:14:38.942 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000018 : null
+2020-01-13 11:14:38.957 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000019 : null
+2020-01-13 11:14:38.971 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000020 : null
+2020-01-13 11:14:38.989 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000021 : null
+2020-01-13 11:14:39.256 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000023 : null
+2020-01-13 11:14:39.320 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594957 : Not found
+2020-01-13 11:14:39.401 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594960 : Not found
+2020-01-13 11:14:39.505 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594962 : Not found
+2020-01-13 11:14:39.564 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594964 : Not found
+2020-01-13 11:14:39.569 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000025 : null
+2020-01-13 11:14:39.585 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000026 : null
+2020-01-13 11:14:39.602 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000027 : null
+2020-01-13 11:14:39.976 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594974 : Not found
+2020-01-13 11:14:40.211 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594980 : Not found
+2020-01-13 11:14:40.260 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594982 : Not found
+2020-01-13 11:14:40.340 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594984 : Not found
+2020-01-13 11:14:40.389 ERROR [tTaskExecutor-2] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594985 : Not found
+2020-01-13 11:14:40.730 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (90): https://www.daangn.com/articles/54594992 : Secret Article
+2020-01-13 11:14:40.730 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (91): {}
+2020-01-13 11:14:40.766 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000032 : null
+2020-01-13 11:14:40.783 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000033 : null
+2020-01-13 11:14:40.799 ERROR [   scheduling-1] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=691000034 : null
+2020-01-13 11:14:40.823 ERROR [tTaskExecutor-1] [c.h.a.c.DanggnMarketParser] getArticle (88): https://www.daangn.com/articles/54594996 : Not found
+2020-01-13 11:14:41.220 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (90): https://www.daangn.com/articles/54595002 : Secret Article
+2020-01-13 11:14:41.220 ERROR [tTaskExecutor-3] [c.h.a.c.DanggnMarketParser] getArticle (91): {}
+2020-01-13 11:15:46.717 ERROR [           main] [c.h.a.c.JoonggonaraParser] getArticle (109): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=694781369 : null
+2020-01-13 11:18:33.621 ERROR [           main] [c.h.a.c.JoonggonaraParser] getArticle (108): https://cafe.naver.com/ArticleRead.nhn?clubid=10050146&page=1&boardtype=L&referrerAllArticles=true&articleid=694781369 : null

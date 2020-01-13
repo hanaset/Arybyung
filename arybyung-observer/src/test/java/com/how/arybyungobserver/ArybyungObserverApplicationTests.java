@@ -27,7 +27,7 @@ class ArybyungObserverApplicationTests {
 
     @Test
     void 중고나라_최근글데이터_테스트() throws Exception {
-        joonggonaraParser.getArticle("602295788");
+//        joonggonaraParser.getArticle("602295788");
     }
 
     @Test
@@ -38,7 +38,7 @@ class ArybyungObserverApplicationTests {
     @Test
     void 네이버로그인_후_파싱_테스트() throws Exception {
         joonggonaraParser.naverLogin();
-        joonggonaraParser.getArticle("602295788");
-        joonggonaraParser.getArticle("690923400");
+//        joonggonaraParser.getArticle("602295788");
+        joonggonaraParser.getArticle(694781369L);
     }
 }
