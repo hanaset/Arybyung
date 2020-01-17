@@ -1,5 +1,6 @@
 package com.how.arybyungobserver.client;
 
+import com.how.arybyungobserver.service.FilteringWordService;
 import com.how.muchcommon.entity.ArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
 import com.how.muchcommon.repository.ArticleRepository;
@@ -22,9 +23,12 @@ import java.util.List;
 public class DanggnMarketParser {
 
     private final ArticleRepository articleRepository;
+    private final FilteringWordService filteringWordService;
 
-    public DanggnMarketParser(ArticleRepository articleRepository) {
+    public DanggnMarketParser(ArticleRepository articleRepository,
+                              FilteringWordService filteringWordService) {
         this.articleRepository = articleRepository;
+        this.filteringWordService = filteringWordService;
     }
 
     public Long getRecentArticleId() throws IOException {
@@ -71,7 +75,7 @@ public class DanggnMarketParser {
 
             String content = contentElement.text() + "\n" + regionElement.text();
 
-            if(content.length() > 2000) {
+            if(content.length() > 2000 || content.matches(filteringWordService.getAllReg())) {
                 return;
             }
 

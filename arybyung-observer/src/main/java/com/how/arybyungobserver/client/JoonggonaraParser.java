@@ -1,5 +1,6 @@
 package com.how.arybyungobserver.client;
 
+import com.how.arybyungobserver.service.FilteringWordService;
 import com.how.arybyungobserver.utils.DriverUtil;
 import com.how.muchcommon.entity.ArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
@@ -32,10 +33,13 @@ import java.util.stream.Collectors;
 public class JoonggonaraParser {
 
     private final ArticleRepository articleRepository;
+    private final FilteringWordService filteringWordService;
     private Map<String, String> cookieMaps;
 
-    public JoonggonaraParser(ArticleRepository articleRepository) {
+    public JoonggonaraParser(ArticleRepository articleRepository,
+                             FilteringWordService filteringWordService) {
         this.articleRepository = articleRepository;
+        this.filteringWordService = filteringWordService;
     }
 
     public Long getRecentArticleId() throws IOException {
@@ -59,7 +63,7 @@ public class JoonggonaraParser {
 
         String url = ParserConstants.JOONGGONARA_POST + articleId;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd. HH:mm");
-        System.out.println(url);
+//        System.out.println(url);
 
         try {
             Document document = Jsoup.connect(url)
@@ -72,7 +76,11 @@ public class JoonggonaraParser {
 
                 Element subjectElement = document.selectFirst("[class=b m-tcol-c]");
 
-                if(!subjectElement.text().contains("공식앱")) {
+                if(subjectElement.text().matches(filteringWordService.getAllReg())) {
+                    return;
+                }
+
+                if (!subjectElement.text().contains("공식앱")) {
 //                    System.out.println(subjectElement.text());
 
                     Element imageElement = document.selectFirst("[class=imgs border-sub]");
@@ -89,15 +97,15 @@ public class JoonggonaraParser {
 
                     String content = contentElements1.text() + "\n" + contentElements2.text();
 
-                    if(content.length() > 2000) {
+                    if (content.length() > 2000 || content.matches(filteringWordService.getAllReg())) {
                         return;
                     }
 
                     Element dateElement = document.selectFirst("[class=m-tcol-c date]");
-                    System.out.println(dateElement.text());
+//                    System.out.println(dateElement.text());
 
                     Element stateElement = document.selectFirst("em");
-                    System.out.println(stateElement.attr("aria-label"));
+//                    System.out.println(stateElement.attr("aria-label"));
 
                     ArticleEntity entity = ArticleEntity.builder()
                             .articleId(articleId)
@@ -125,12 +133,16 @@ public class JoonggonaraParser {
 
                     Long price = Long.parseLong(bodyElement.selectFirst("[color=#FF6C00]").text().replaceAll("[^0-9]", ""));
 
+                    if(bodyElement.text().length() > 2000 || bodyElement.text().matches(filteringWordService.getAllReg())){
+                        return;
+                    }
+
                     ArticleEntity entity = ArticleEntity.builder()
                             .articleId(articleId)
                             .subject(subjectElement.text())
                             .image(imgElement.attr("img"))
                             .price(price)
-                            .content(bodyElement.text().length() > 2000 ? null : bodyElement.text())
+                            .content(bodyElement.text())
                             .postingDtime(LocalDateTime.parse(dateElement.text(), formatter).atZone(ZoneId.of("Asia/Seoul")))
                             .site("joongonara")
                             .state(ArticleState.S)
