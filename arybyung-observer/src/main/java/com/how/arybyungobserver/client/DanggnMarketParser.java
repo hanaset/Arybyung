@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.regex.Matcher;
 
 @Slf4j
 @Component
@@ -54,6 +55,11 @@ public class DanggnMarketParser {
             Element subjectElement = document.getElementById("article-title");
 //        System.out.println(subjectElement.text());
 
+            Matcher matcher = filteringWordService.getPattern().matcher(subjectElement.text());
+            if(matcher.find()){
+                return;
+            }
+
             Element priceElement = document.getElementById("article-price") == null ? document.getElementById("article-price-nanum") : document.getElementById("article-price");
             String stringPrice = priceElement.text().replaceAll("[^0-9]", "");
 //        System.out.println(priceElement.text());
@@ -75,7 +81,8 @@ public class DanggnMarketParser {
 
             String content = contentElement.text() + "\n" + regionElement.text();
 
-            if(content.length() > 2000 || content.matches(filteringWordService.getAllReg())) {
+            matcher = filteringWordService.getPattern().matcher(content);
+            if(content.length() > 2000 || matcher.find()) {
                 return;
             }
 

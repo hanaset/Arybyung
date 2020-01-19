@@ -12,7 +12,7 @@ public class JoongnaraService {
 
     private final JoonggonaraParser joonggonaraParser;
     private final ArticleRepository articleRepository;
-    private final Long defaultArticleId = 694890000L;
+    private final Long defaultArticleId = 697676742L;
     private Long nowArticleId = 0L;
 
     public JoongnaraService(JoonggonaraParser joonggonaraParser,

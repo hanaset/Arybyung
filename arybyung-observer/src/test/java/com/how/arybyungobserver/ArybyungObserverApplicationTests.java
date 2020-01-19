@@ -1,6 +1,7 @@
 package com.how.arybyungobserver;
 
 import com.how.arybyungobserver.client.JoonggonaraParser;
+import com.how.arybyungobserver.service.FilteringWordService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ class ArybyungObserverApplicationTests {
 
     @Autowired
     private JoonggonaraParser joonggonaraParser;
+
+    @Autowired
+    private FilteringWordService filteringWordService;
 
     @Test
     void 중고나라_최근글번호_테스트() throws IOException {

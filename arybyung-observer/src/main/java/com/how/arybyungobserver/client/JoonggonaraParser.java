@@ -26,6 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -76,7 +77,8 @@ public class JoonggonaraParser {
 
                 Element subjectElement = document.selectFirst("[class=b m-tcol-c]");
 
-                if(subjectElement.text().matches(filteringWordService.getAllReg())) {
+                Matcher matcher = filteringWordService.getPattern().matcher(subjectElement.text());
+                if(matcher.find()) {
                     return;
                 }
 
@@ -97,7 +99,8 @@ public class JoonggonaraParser {
 
                     String content = contentElements1.text() + "\n" + contentElements2.text();
 
-                    if (content.length() > 2000 || content.matches(filteringWordService.getAllReg())) {
+                    matcher = filteringWordService.getPattern().matcher(content);
+                    if (content.length() > 2000 || matcher.find()) {
                         return;
                     }
 
@@ -133,7 +136,8 @@ public class JoonggonaraParser {
 
                     Long price = Long.parseLong(bodyElement.selectFirst("[color=#FF6C00]").text().replaceAll("[^0-9]", ""));
 
-                    if(bodyElement.text().length() > 2000 || bodyElement.text().matches(filteringWordService.getAllReg())){
+                    matcher = filteringWordService.getPattern().matcher(bodyElement.text());
+                    if(bodyElement.text().length() > 2000 || matcher.find()){
                         return;
                     }
 
