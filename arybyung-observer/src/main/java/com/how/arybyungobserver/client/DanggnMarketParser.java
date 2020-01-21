@@ -53,36 +53,24 @@ public class DanggnMarketParser {
             Document document = Jsoup.connect(url).get();
 
             Element subjectElement = document.getElementById("article-title");
-//        System.out.println(subjectElement.text());
-
-            Matcher matcher = filteringWordService.getPattern().matcher(subjectElement.text());
-            if(matcher.find()){
+            if(filteringWordService.stringFilter(subjectElement.text())){
                 return;
             }
 
             Element priceElement = document.getElementById("article-price") == null ? document.getElementById("article-price-nanum") : document.getElementById("article-price");
             String stringPrice = priceElement.text().replaceAll("[^0-9]", "");
-//        System.out.println(priceElement.text());
 
             ArticleState state = priceElement.text().equals("무료나눔") ? ArticleState.F : ArticleState.S;
             Long price = Long.parseLong(stringPrice.equals("") ? "0" : stringPrice);
 
             Element imageElement = document.selectFirst("[class=image-wrap]").child(0);
-//        System.out.println(imageElement.attr("data-lazy"));
-
             Element regionElement = document.getElementById("region-name");
-//        System.out.println(regionElement.text());
-
             Element dateElement = document.selectFirst("[datatype=xsd:date]");
-//        System.out.println(dateElement.attr("content"));
-
             Element contentElement = document.getElementById("article-detail");
-//        System.out.println(contentElement.text());
 
             String content = contentElement.text() + "\n" + regionElement.text();
 
-            matcher = filteringWordService.getPattern().matcher(content);
-            if(content.length() > 2000 || matcher.find()) {
+            if(content.length() > 2000 || filteringWordService.stringFilter(content)) {
                 return;
             }
 
@@ -103,7 +91,6 @@ public class DanggnMarketParser {
             log.error("{} : Not found", url);
         } catch (NullPointerException e) {
             log.error("{} : Secret Article", url);
-            log.error("{}", e.getCause());
         }
     }
 }

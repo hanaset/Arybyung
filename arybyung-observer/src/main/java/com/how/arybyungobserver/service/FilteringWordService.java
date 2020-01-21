@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -34,5 +35,11 @@ public class FilteringWordService {
 
         String allReg = allFilter.stream().map(s -> "(" + s + ")").collect(Collectors.joining("|"));
         pattern = Pattern.compile(allReg, Pattern.MULTILINE);
+    }
+
+    public boolean stringFilter(String content) {
+        Matcher matcher = this.pattern.matcher(content);
+
+        return matcher.find();
     }
 }

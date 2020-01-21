@@ -1,10 +1,12 @@
 package com.how.arybyungobserver.service;
 
+import com.how.arybyungobserver.client.JoonggonaraParser;
 import com.how.muchcommon.entity.ArticleEntity;
 import com.how.muchcommon.repository.ArticleRepository;
-import com.how.arybyungobserver.client.JoonggonaraParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Slf4j
 @Service
@@ -26,11 +28,13 @@ public class JoongnaraService {
         return articleEntity.getArticleId();
     }
 
-    public void parsingArticle() throws Exception {
+    public void parsingArticle() {
+
+        joonggonaraParser.setCount(0);
 
         Long topArticleId = getTopArticleId();
 
-        if(topArticleId < nowArticleId) {
+        if (topArticleId < nowArticleId) {
             topArticleId = nowArticleId;
         }
 
@@ -38,13 +42,12 @@ public class JoongnaraService {
 
         if (recentArticleId > topArticleId + 150) {
             recentArticleId = topArticleId + 150;
-            nowArticleId = recentArticleId;
         }
 
         if (topArticleId.compareTo(recentArticleId) < 0) {
 
-            for (Long i = topArticleId + 1; i <= recentArticleId; i++) {
-                joonggonaraParser.getArticle(i);
+            for (nowArticleId = topArticleId + 1; nowArticleId <= recentArticleId; nowArticleId++) {
+                joonggonaraParser.getArticle(nowArticleId);
             }
         }
     }

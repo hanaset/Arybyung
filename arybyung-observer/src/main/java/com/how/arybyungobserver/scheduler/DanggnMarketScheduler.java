@@ -17,7 +17,7 @@ public class DanggnMarketScheduler {
         this.danggnMarketService = danggnMarketService;
     }
 
-    @Scheduled(fixedRate = 1000 * 60)
+    @Scheduled(fixedDelay = 1000 * 60)
     public void parsing() throws IOException {
         log.info("======= danggnMarket Parsing Start =======");
         danggnMarketService.parsingArticle();

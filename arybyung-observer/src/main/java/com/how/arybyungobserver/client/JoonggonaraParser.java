@@ -1,11 +1,15 @@
 package com.how.arybyungobserver.client;
 
+import com.how.arybyungobserver.exception.ArybyungException;
+import com.how.arybyungobserver.exception.SchedulerException;
 import com.how.arybyungobserver.service.FilteringWordService;
 import com.how.arybyungobserver.utils.DriverUtil;
 import com.how.muchcommon.entity.ArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
 import com.how.muchcommon.repository.ArticleRepository;
+import lombok.Synchronized;
 import lombok.extern.slf4j.Slf4j;
+import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -26,7 +30,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Matcher;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -36,6 +40,7 @@ public class JoonggonaraParser {
     private final ArticleRepository articleRepository;
     private final FilteringWordService filteringWordService;
     private Map<String, String> cookieMaps;
+    private Integer count = 0;
 
     public JoonggonaraParser(ArticleRepository articleRepository,
                              FilteringWordService filteringWordService) {
@@ -43,28 +48,39 @@ public class JoonggonaraParser {
         this.filteringWordService = filteringWordService;
     }
 
-    public Long getRecentArticleId() throws IOException {
-        Document document = Jsoup.connect(ParserConstants.JOONGGONARA_POST_LIST)
-                .cookies(cookieMaps)
-                .get();
+    public Long getRecentArticleId() {
 
-        List<Element> elements = document.select("[class=article]");
-        String maxArticleId = elements.stream().map(element -> {
-            String articleId = Arrays.asList(element.attr("href").split("&")).stream().filter(s -> s.contains("articleid")).map(s -> s.replaceAll("[^0-9]", "")).findFirst().get();
+        if(getCount() > 0) {
+            return 0L;
+        }
 
-            return articleId;
-        }).max(String::compareToIgnoreCase).orElse("0");
+        try {
+            Document document = Jsoup.connect(ParserConstants.JOONGGONARA_POST_LIST)
+                    .cookies(cookieMaps)
+                    .get();
 
-        return Long.parseLong(maxArticleId);
+            List<Element> elements = document.select("[class=article]");
+            String maxArticleId = elements.stream().map(element -> {
+                String articleId = Arrays.asList(element.attr("href").split("&")).stream().filter(s -> s.contains("articleid")).map(s -> s.replaceAll("[^0-9]", "")).findFirst().get();
+
+                return articleId;
+            }).max(String::compareToIgnoreCase).orElse("0");
+
+            return Long.parseLong(maxArticleId);
+        } catch (IOException e) {
+            throw new ArybyungException("Jonnggonara getRecentArticleId IOException : " + e.getCause());
+        }
     }
 
     @Async(value = "joonggonaraTaskExecutor")
-    public void getArticle(Long articleId) throws Exception {
-
+    public void getArticle(Long articleId) {
 
         String url = ParserConstants.JOONGGONARA_POST + articleId;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd. HH:mm");
-//        System.out.println(url);
+
+        if(getCount() > 0) {
+            return;
+        }
 
         try {
             Document document = Jsoup.connect(url)
@@ -77,38 +93,28 @@ public class JoonggonaraParser {
 
                 Element subjectElement = document.selectFirst("[class=b m-tcol-c]");
 
-                Matcher matcher = filteringWordService.getPattern().matcher(subjectElement.text());
-                if(matcher.find()) {
+                if (filteringWordService.stringFilter(subjectElement.text())) {
                     return;
                 }
 
                 if (!subjectElement.text().contains("공식앱")) {
-//                    System.out.println(subjectElement.text());
 
                     Element imageElement = document.selectFirst("[class=imgs border-sub]");
-//                    System.out.println(imageElement.attr("src"));
 
                     Element costElement = document.selectFirst("[class=cost]");
-//                    System.out.println(costElement.text());
                     Long price = Long.parseLong(costElement.text().replaceAll("[^0-9]", ""));
 
                     Elements contentElements1 = document.select("[class=NHN_Writeform_Main]");
-//                    System.out.println(contentElements1.text());
                     Elements contentElements2 = document.selectFirst("[class=tbody m-tcol-c]").select("p").select("span");
-//                    System.out.println(contentElements2.text());
 
                     String content = contentElements1.text() + "\n" + contentElements2.text();
 
-                    matcher = filteringWordService.getPattern().matcher(content);
-                    if (content.length() > 2000 || matcher.find()) {
+                    if (content.length() > 2000 || filteringWordService.stringFilter(content)) {
                         return;
                     }
 
                     Element dateElement = document.selectFirst("[class=m-tcol-c date]");
-//                    System.out.println(dateElement.text());
-
                     Element stateElement = document.selectFirst("em");
-//                    System.out.println(stateElement.attr("aria-label"));
 
                     ArticleEntity entity = ArticleEntity.builder()
                             .articleId(articleId)
@@ -125,19 +131,11 @@ public class JoonggonaraParser {
                     articleRepository.save(entity);
                 } else {
                     Element bodyElement = document.selectFirst("[class=tbody m-tcol-c]");
-
                     Element imgElement = bodyElement.selectFirst("img");
-//                    System.out.println(imgElement.attr("src"));
-
-//                    System.out.println(bodyElement.text());
-
                     Element dateElement = document.selectFirst("[class=m-tcol-c date]");
-//                    System.out.println(dateElement.text());
-
                     Long price = Long.parseLong(bodyElement.selectFirst("[color=#FF6C00]").text().replaceAll("[^0-9]", ""));
 
-                    matcher = filteringWordService.getPattern().matcher(bodyElement.text());
-                    if(bodyElement.text().length() > 2000 || matcher.find()){
+                    if (bodyElement.text().length() > 2000 || filteringWordService.stringFilter(bodyElement.text())) {
                         return;
                     }
 
@@ -160,7 +158,14 @@ public class JoonggonaraParser {
                 naverLogin();
             }
         } catch (NullPointerException e) {
-            log.error("{} : {}", url, e.getMessage());
+            log.error("{} : Not found", url, e.getMessage());
+        } catch (HttpStatusException e) {
+            setCount(getCount() + 1);
+            log.error("Joonggonara 과다 호출 : {} / {}", e.getUrl(), e.getStatusCode());
+        } catch (InterruptedException e) {
+            log.error("Naver Login Interrupt Exception : {}", e.getMessage());
+        } catch (IOException e) {
+            log.error("get IOException : {}", e.getMessage());
         }
     }
 
@@ -181,5 +186,15 @@ public class JoonggonaraParser {
 
         Set<Cookie> cookies = driver.manage().getCookies();
         this.cookieMaps = cookies.stream().collect(Collectors.toMap(Cookie::getName, Cookie::getValue));
+    }
+
+    @Synchronized
+    public Integer getCount() {
+        return count;
+    }
+
+    @Synchronized
+    public void setCount(Integer count) {
+        this.count = count;
     }
 }
