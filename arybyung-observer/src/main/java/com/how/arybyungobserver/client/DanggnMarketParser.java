@@ -88,9 +88,9 @@ public class DanggnMarketParser {
 
             articleRepository.save(articleEntity);
         } catch (HttpStatusException e) {
-            log.error("{} : Not found", url);
+//            log.error("{} : Not found", url);
         } catch (NullPointerException e) {
-            log.error("{} : Secret Article", url);
+//            log.error("{} : Secret Article", url);
         }
     }
 }

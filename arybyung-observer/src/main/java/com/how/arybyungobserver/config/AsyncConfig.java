@@ -1,6 +1,5 @@
 package com.how.arybyungobserver.config;
 
-import com.how.arybyungobserver.handler.SchedulerExceptionHandler;
 import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,8 +15,9 @@ public class AsyncConfig implements AsyncConfigurer {
     public ThreadPoolTaskExecutor joonggonaraTaskExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setThreadNamePrefix("joonggonaraTaskExecutor-");
-        taskExecutor.setCorePoolSize(10);
-        taskExecutor.setMaxPoolSize(10);
+        taskExecutor.setQueueCapacity(200);
+        taskExecutor.setCorePoolSize(20);
+        taskExecutor.setMaxPoolSize(20);
 
         return taskExecutor;
     }
@@ -26,14 +26,15 @@ public class AsyncConfig implements AsyncConfigurer {
     public ThreadPoolTaskExecutor danggnMarketTaskExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setThreadNamePrefix("danggnMarketTaskExecutor-");
-        taskExecutor.setCorePoolSize(10);
-        taskExecutor.setMaxPoolSize(10);
+        taskExecutor.setQueueCapacity(750);
+        taskExecutor.setCorePoolSize(20);
+        taskExecutor.setMaxPoolSize(20);
 
         return taskExecutor;
     }
 
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
-        return new SchedulerExceptionHandler(joonggonaraTaskExecutor());
+        return null;
     }
 }

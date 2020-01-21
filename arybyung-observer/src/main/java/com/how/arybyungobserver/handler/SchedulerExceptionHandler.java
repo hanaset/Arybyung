@@ -20,6 +20,6 @@ public class SchedulerExceptionHandler implements AsyncUncaughtExceptionHandler 
 
     @Override
     public void handleUncaughtException(Throwable throwable, Method method, Object... obj) {
-        joonggonaraTaskExecutor.destroy();
+//        joonggonaraTaskExecutor.destroy();
     }
 }

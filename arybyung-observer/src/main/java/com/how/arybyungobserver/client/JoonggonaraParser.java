@@ -158,7 +158,7 @@ public class JoonggonaraParser {
                 naverLogin();
             }
         } catch (NullPointerException e) {
-            log.error("{} : Not found", url, e.getMessage());
+//            log.error("{} : Not found", url, e.getMessage());
         } catch (HttpStatusException e) {
             setCount(getCount() + 1);
             log.error("Joonggonara 과다 호출 : {} / {}", e.getUrl(), e.getStatusCode());

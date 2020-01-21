@@ -17,8 +17,6 @@ public class JoonggonaraScheduler {
 
     @Scheduled(fixedDelay = 1000 * 10)
     public void parsing() {
-        log.info("======= Joonggonara Parsing Start =======");
         joongnaraService.parsingArticle();
-        log.info("======= Joonggonara Parsing end =======");
     }
 }

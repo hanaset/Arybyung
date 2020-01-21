@@ -6,8 +6,6 @@ import com.how.muchcommon.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 @Slf4j
 @Service
 public class JoongnaraService {
@@ -49,6 +47,10 @@ public class JoongnaraService {
             for (nowArticleId = topArticleId + 1; nowArticleId <= recentArticleId; nowArticleId++) {
                 joonggonaraParser.getArticle(nowArticleId);
             }
+
+            log.info("JoonggoNARA ArticleId {} ~ {}", topArticleId, recentArticleId);
+        } else {
+            log.info("JoonggoNARA Not found Article");
         }
     }
 }

@@ -37,15 +37,18 @@ public class DanggnMarketService {
             topArticleId = nowArticleId;
         }
 
-        if(recentArticleId > topArticleId + 500) {
-            recentArticleId = topArticleId + 500;
+        if(recentArticleId > topArticleId + 150) {
+            recentArticleId = topArticleId + 150;
         }
 
         if(topArticleId.compareTo(recentArticleId) < 0) {
 
-            for( Long i = topArticleId + 1 ; i <= recentArticleId ; i ++) {
-                danggnMarketParser.getArticle(i);
+            for( nowArticleId = topArticleId + 1 ; nowArticleId <= recentArticleId ; nowArticleId ++) {
+                danggnMarketParser.getArticle(nowArticleId);
             }
+            log.info("DanggnMarket ArticleId {} ~ {}", topArticleId, recentArticleId);
+        } else {
+            log.info("DanggnMarket Not found Article");
         }
     }
 }
