@@ -9,6 +9,7 @@ import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.springframework.http.HttpHeaders;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -34,6 +35,9 @@ public class DanggnMarketParser {
 
     public Long getRecentArticleId() throws IOException {
         Document document = Jsoup.connect(ParserConstants.DANGGNMARKET_POST_LIST)
+                .header(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
+                .header(HttpHeaders.ACCEPT, "text/html,application/xhtml+xml,application/xml;q=0.9,imgwebp,*/*;q=0.8")
+                .header(HttpHeaders.ACCEPT_CHARSET, "utf-8")
                 .get();
 
         List<Element> elements = document.select("[data-event-label]");
@@ -43,14 +47,18 @@ public class DanggnMarketParser {
     }
 
     @Async(value = "danggnMarketTaskExecutor")
-    public void getArticle(Long articleId) throws IOException {
+    public void getArticle(Long articleId) {
 
         String url = ParserConstants.DANGGNMARKET_POST_LIST + "/articles/" + articleId;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         try {
 
-            Document document = Jsoup.connect(url).get();
+            Document document = Jsoup.connect(url)
+                    .header(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
+                    .header(HttpHeaders.ACCEPT, "text/html,application/xhtml+xml,application/xml;q=0.9,imgwebp,*/*;q=0.8")
+                    .header(HttpHeaders.ACCEPT_CHARSET, "utf-8")
+                    .get();
 
             Element subjectElement = document.getElementById("article-title");
             if(filteringWordService.stringFilter(subjectElement.text())){
@@ -91,6 +99,8 @@ public class DanggnMarketParser {
 //            log.error("{} : Not found", url);
         } catch (NullPointerException e) {
 //            log.error("{} : Secret Article", url);
+        } catch (IOException e) {
+//            log.error("{} : Connect Time", url);
         }
     }
 }

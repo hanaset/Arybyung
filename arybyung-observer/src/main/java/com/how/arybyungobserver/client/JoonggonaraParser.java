@@ -1,7 +1,5 @@
 package com.how.arybyungobserver.client;
 
-import com.how.arybyungobserver.exception.ArybyungException;
-import com.how.arybyungobserver.exception.SchedulerException;
 import com.how.arybyungobserver.service.FilteringWordService;
 import com.how.arybyungobserver.utils.DriverUtil;
 import com.how.muchcommon.entity.ArticleEntity;
@@ -18,6 +16,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.springframework.http.HttpHeaders;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +29,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -56,6 +54,8 @@ public class JoonggonaraParser {
 
         try {
             Document document = Jsoup.connect(ParserConstants.JOONGGONARA_POST_LIST)
+                    .header(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
+                    .header(HttpHeaders.ACCEPT_CHARSET, "utf-8")
                     .cookies(cookieMaps)
                     .get();
 
@@ -68,7 +68,8 @@ public class JoonggonaraParser {
 
             return Long.parseLong(maxArticleId);
         } catch (IOException e) {
-            throw new ArybyungException("Jonnggonara getRecentArticleId IOException : " + e.getCause());
+            log.error("JoonggoNARA 과다 호출로 인한 일시 제한");
+            return 0L;
         }
     }
 
@@ -84,6 +85,8 @@ public class JoonggonaraParser {
 
         try {
             Document document = Jsoup.connect(url)
+                    .header(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
+                    .header(HttpHeaders.ACCEPT_CHARSET, "utf-8")
                     .cookies(cookieMaps)
                     .get();
 
@@ -123,7 +126,7 @@ public class JoonggonaraParser {
                             .price(price)
                             .content(content)
                             .postingDtime(LocalDateTime.parse(dateElement.text(), formatter).atZone(ZoneId.of("Asia/Seoul")))
-                            .site("joongonara")
+                            .site("joonggonara")
                             .state(stateElement.attr("aria-label").equals("판매") ? ArticleState.S : ArticleState.C)
                             .url(url)
                             .build();

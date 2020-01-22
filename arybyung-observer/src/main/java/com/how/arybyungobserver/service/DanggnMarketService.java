@@ -1,8 +1,8 @@
 package com.how.arybyungobserver.service;
 
+import com.how.arybyungobserver.client.DanggnMarketParser;
 import com.how.muchcommon.entity.ArticleEntity;
 import com.how.muchcommon.repository.ArticleRepository;
-import com.how.arybyungobserver.client.DanggnMarketParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,6 @@ public class DanggnMarketService {
 
     private final DanggnMarketParser danggnMarketParser;
     private final ArticleRepository articleRepository;
-    private final Long defaultArticleId = 55000000L;
     private Long nowArticleId = 0L;
 
     public DanggnMarketService(DanggnMarketParser danggnMarketParser,
@@ -25,30 +24,30 @@ public class DanggnMarketService {
 
     private Long getTopArticleId() {
         ArticleEntity articleEntity = articleRepository.findTopBySiteOrderByArticleIdDesc("danggn").orElse(ArticleEntity.builder()
-                .articleId(defaultArticleId).build());
+                .articleId(0L).build());
         return articleEntity.getArticleId();
     }
 
     public void parsingArticle() throws IOException {
         Long topArticleId = getTopArticleId();
         Long recentArticleId = danggnMarketParser.getRecentArticleId();
+        Long gap = recentArticleId - topArticleId;
 
-        if(topArticleId < nowArticleId) {
-            topArticleId = nowArticleId;
-        }
-
-        if(recentArticleId > topArticleId + 150) {
+        if (gap <= 0) {
+            log.info("DanggnMarket Not found Article");
+            return;
+        } else if (gap > 0 && gap <= 100000) {
+            recentArticleId = topArticleId + 150;
+        } else {
+            topArticleId = recentArticleId - 100000;
             recentArticleId = topArticleId + 150;
         }
 
-        if(topArticleId.compareTo(recentArticleId) < 0) {
 
-            for( nowArticleId = topArticleId + 1 ; nowArticleId <= recentArticleId ; nowArticleId ++) {
-                danggnMarketParser.getArticle(nowArticleId);
-            }
-            log.info("DanggnMarket ArticleId {} ~ {}", topArticleId, recentArticleId);
-        } else {
-            log.info("DanggnMarket Not found Article");
+        for (nowArticleId = topArticleId + 1; nowArticleId <= recentArticleId; nowArticleId++) {
+            danggnMarketParser.getArticle(nowArticleId);
         }
+        log.info("DanggnMarket ArticleId {} ~ {}", topArticleId, recentArticleId);
+
     }
 }

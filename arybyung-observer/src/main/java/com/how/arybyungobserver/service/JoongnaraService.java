@@ -31,26 +31,25 @@ public class JoongnaraService {
         joonggonaraParser.setCount(0);
 
         Long topArticleId = getTopArticleId();
-
-        if (topArticleId < nowArticleId) {
-            topArticleId = nowArticleId;
-        }
-
         Long recentArticleId = joonggonaraParser.getRecentArticleId();
 
-        if (recentArticleId > topArticleId + 150) {
+        Long gap = recentArticleId - topArticleId;
+
+        if (gap <= 0) {
+            log.info("JoonggoNARA Not found Article");
+            return;
+        } else if (gap > 0 && gap <= 100000) {
+            recentArticleId = topArticleId + 150;
+        } else {
+            topArticleId = recentArticleId - 100000;
             recentArticleId = topArticleId + 150;
         }
 
-        if (topArticleId.compareTo(recentArticleId) < 0) {
-
-            for (nowArticleId = topArticleId + 1; nowArticleId <= recentArticleId; nowArticleId++) {
-                joonggonaraParser.getArticle(nowArticleId);
-            }
-
-            log.info("JoonggoNARA ArticleId {} ~ {}", topArticleId, recentArticleId);
-        } else {
-            log.info("JoonggoNARA Not found Article");
+        for (nowArticleId = topArticleId + 1; nowArticleId <= recentArticleId; nowArticleId++) {
+            joonggonaraParser.getArticle(nowArticleId);
         }
+
+        log.info("JoonggoNARA ArticleId {} ~ {}", topArticleId, recentArticleId);
+
     }
 }
