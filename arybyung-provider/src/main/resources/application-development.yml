@@ -1,0 +1,18 @@
+server:
+  port: 6000
+
+spring:
+  datasource:
+    username: admin
+    password: wjdqls56
+    url: jdbc:mysql://luke-database.cmprxqq8kkbj.ap-northeast-2.rds.amazonaws.com:3306/Onepiece?characterEncoding=UTF-8&serverTimezone=Asia/Seoul&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+
+
+

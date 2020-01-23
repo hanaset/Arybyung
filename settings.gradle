@@ -1,3 +1,4 @@
 rootProject.name = 'arybyung'
 include 'howmuch-common'
 include 'arybyung-observer'
+include 'arybyung-provider'
