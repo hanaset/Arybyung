@@ -37,3 +37,4 @@ arybyung-observer/src/test/resources/
 src/main/resources/static/
 src/main/resources/templates/
 src/test/resources/
+logstash/mysql-connector-java-8.0.19/
