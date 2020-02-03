@@ -1,9 +1,9 @@
 package com.how.arybyungobserver.client;
 
 import com.how.arybyungobserver.service.FilteringWordService;
-import com.how.muchcommon.entity.ArticleEntity;
+import com.how.muchcommon.entity.japentity.ArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
-import com.how.muchcommon.repository.ArticleRepository;
+import com.how.muchcommon.repository.jparepository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
@@ -18,7 +18,6 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.regex.Matcher;
 
 @Slf4j
 @Component
@@ -90,7 +89,7 @@ public class DanggnMarketParser {
                     .state(state)
                     .image(imageElement.attr("data-lazy"))
                     .site("danggn")
-                    .postingDtime(LocalDate.parse(dateElement.attr("content"), formatter).atStartOfDay(ZoneId.of("Asia/Seoul")))
+                    .postingDtime(LocalDate.parse(dateElement.attr("content"), formatter).atStartOfDay(ZoneId.of("Asia/Seoul")).minusYears(2))
                     .content(content)
                     .build();
 

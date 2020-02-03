@@ -1,8 +1,8 @@
 package com.how.arybyungobserver.service;
 
 import com.how.arybyungobserver.client.JoonggonaraParser;
-import com.how.muchcommon.entity.ArticleEntity;
-import com.how.muchcommon.repository.ArticleRepository;
+import com.how.muchcommon.entity.japentity.ArticleEntity;
+import com.how.muchcommon.repository.jparepository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
