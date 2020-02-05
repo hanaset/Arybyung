@@ -3,4 +3,16 @@
 
 중고나라, 당근마켓, 번개장터에 대한 매물을 크롤링하여 데이터를 수집
 
+### 실행 방법
+```
+Logstash install
+Elastic Search install
+
+$brew install logstash
+$brew install elasticsearch
+
+$elasticsearch -d
+$logstash -f ./logstash/logstash.conf
+```
+
 

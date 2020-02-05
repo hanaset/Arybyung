@@ -1,5 +1,6 @@
 package com.how.arybyungprovider.config;
 
+import lombok.Getter;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -17,8 +18,12 @@ public class EsConfig {
     @Value("${elasticsearch.host}")
     private String esHost;
 
+    @Getter
+    @Value("${elasticsearch.index}")
+    private String esIndex;
+
     @Bean
-    RestHighLevelClient client() {
+    RestHighLevelClient restHighLevelClient() {
         ClientConfiguration clientConfiguration = ClientConfiguration.builder()
                 .connectedTo(esHost)
                 .build();
