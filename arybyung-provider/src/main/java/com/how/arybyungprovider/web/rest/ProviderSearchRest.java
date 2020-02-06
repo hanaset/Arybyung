@@ -1,6 +1,6 @@
 package com.how.arybyungprovider.web.rest;
 
-import com.how.arybyungprovider.service.ProviderEsService;
+import com.how.arybyungprovider.service.ProviderSearchService;
 import com.how.arybyungprovider.web.rest.support.ProviderRestSupport;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("v1/keyword")
 public class ProviderSearchRest extends ProviderRestSupport {
 
-    private final ProviderEsService providerSearchService;
+    private final ProviderSearchService providerSearchService;
 
-    public ProviderSearchRest(ProviderEsService providerSearchService) {
+    public ProviderSearchRest(ProviderSearchService providerSearchService) {
         this.providerSearchService = providerSearchService;
     }
 

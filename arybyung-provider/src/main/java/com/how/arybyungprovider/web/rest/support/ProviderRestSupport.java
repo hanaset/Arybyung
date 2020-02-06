@@ -18,4 +18,14 @@ public abstract class ProviderRestSupport {
                 )
         );
     }
+
+    protected static <T> ResponseEntity<?> providerResponseException(String code, String msg) {
+        return new ResponseEntity<>(
+                ImmutableMap.of(
+                        "code", code,
+                        "msg", msg,
+                        "data", "{}"
+                ), HttpStatus.BAD_REQUEST
+        );
+    }
 }

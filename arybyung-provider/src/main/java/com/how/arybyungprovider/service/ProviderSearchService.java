@@ -1,12 +1,16 @@
 package com.how.arybyungprovider.service;
 
+import com.how.arybyungprovider.constant.ProviderApiErrorCode;
+import com.how.arybyungprovider.exception.ProviderResponseException;
 import com.how.arybyungprovider.model.ArticleData;
+import com.how.arybyungprovider.model.KeywordResultData;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ProviderSearchService {
@@ -20,21 +24,44 @@ public class ProviderSearchService {
         this.redisTemplate = redisTemplate;
     }
 
-    public void searchKeyword(String keyword) {
-
+    public Object searchKeyword(String keyword) {
 
         if(!redisTemplate.hasKey(keyword)) {
-            registerResult(providerEsService.searchKeyword(keyword));
+            return registerResult(keyword, providerEsService.searchKeyword(keyword));
+        } else {
+            return redisTemplate.opsForValue().get(keyword);
         }
     }
 
-    private void registerResult(List<ArticleData> articleDatas) {
+    private KeywordResultData registerResult(String keyword, List<ArticleData> articleDatas) {
+
+        // 키워드에 대한 결과가 없을 경우 예외처리
+        if(articleDatas.isEmpty()) {
+            throw new ProviderResponseException(ProviderApiErrorCode.DATA_NOT_FOUND, "키워드에 적합한 결과가 없습니다.");
+        }
 
         // 하루 전 데이터부터 지금까지 (24시간 데이터)
         ZonedDateTime today = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).minusDays(1);
 
-        articleDatas.stream().filter(articleData -> articleData.getPostingDtime().)
+        // 24시간 기준 최고가, 최저가
+        Long todayHightestPrice = articleDatas.stream().filter(articleData -> articleData.getPostingDtime().isAfter(today)).map(ArticleData::getPrice).max(Long::compareTo).get();
+        Long todayLowestPrice = articleDatas.stream().filter(articleData -> articleData.getPostingDtime().isAfter(today)).map(ArticleData::getPrice).min(Long::compareTo).get();
 
+        // 1주일 기준 최고가, 최저가 (List에는 1주일동안의 데이터만 존재함)
+        Long thisWeekHighestPrice = articleDatas.stream().map(ArticleData::getPrice).max(Long::compareTo).get();
+        Long thisWeekLowestPrice = articleDatas.stream().map(ArticleData::getPrice).min(Long::compareTo).get();
 
+        KeywordResultData keywordResultData = KeywordResultData.builder()
+                .articleList(articleDatas)
+                .todayHighestPrice(todayHightestPrice)
+                .todayLowestPrice(todayLowestPrice)
+                .thisWeekHighestPrice(thisWeekHighestPrice)
+                .thisWeekLowestPrice(thisWeekLowestPrice)
+                .build();
+
+        // Redis에 키워드에 결과 저장 (만료시간 1시간)
+        redisTemplate.opsForValue().set(keyword, keywordResultData, 60, TimeUnit.MINUTES);
+
+        return keywordResultData;
     }
 }

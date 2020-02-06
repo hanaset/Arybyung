@@ -1,13 +1,17 @@
 package com.how.arybyungprovider.model;
 
 import com.how.muchcommon.model.type.ArticleState;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.ZonedDateTime;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class ArticleData {
 
     private Long articleId;

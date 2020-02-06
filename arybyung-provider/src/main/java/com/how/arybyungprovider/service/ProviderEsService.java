@@ -46,7 +46,7 @@ public class ProviderEsService {
                     .content(articleEsEntity.getContent())
                     .price(articleEsEntity.getPrice())
                     .image(articleEsEntity.getImage())
-                    .postingDtime(ZonedDateTime.from(articleEsEntity.getPostingDtime().toInstant()))
+                    .postingDtime(ZonedDateTime.from(articleEsEntity.getPostingDtime().toInstant().atZone(ZoneId.of("Asia/Seoul"))))
                     .site(articleEsEntity.getSite())
                     .url(articleEsEntity.getUrl())
                     .state(articleEsEntity.getState())
