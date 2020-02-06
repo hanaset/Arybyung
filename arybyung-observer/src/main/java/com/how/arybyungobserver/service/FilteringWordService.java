@@ -1,6 +1,6 @@
 package com.how.arybyungobserver.service;
 
-import com.how.muchcommon.entity.japentity.FilterEntity;
+import com.how.muchcommon.entity.jpaentity.FilterEntity;
 import com.how.muchcommon.repository.jparepository.FilterRepository;
 import lombok.Getter;
 import org.springframework.scheduling.annotation.Scheduled;

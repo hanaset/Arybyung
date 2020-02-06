@@ -1,5 +1,7 @@
 package com.how.arybyungprovider.service;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.how.arybyungprovider.config.EsConfig;
 import com.how.arybyungprovider.model.ArticleData;
 import com.how.muchcommon.entity.elasticentity.ArticleEsEntity;
@@ -7,8 +9,7 @@ import com.how.muchcommon.repository.elasticrepository.ArticleEsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.*;
 import org.elasticsearch.index.reindex.DeleteByQueryRequest;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,11 @@ import java.io.IOException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @Slf4j
@@ -37,20 +41,21 @@ public class ProviderEsService {
 
     public List<ArticleData> searchKeyword(String keyword) {
 
-        List<ArticleEsEntity> articleEsEntities = articleEsRepository.findBySubjectLikeOrContentLike(keyword, keyword);
+        MultiMatchQueryBuilder matchAllQueryBuilder = new MultiMatchQueryBuilder(keyword, "subject", "content").operator(Operator.AND);
+        List<ArticleEsEntity> articleEsEntities = StreamSupport.stream(articleEsRepository.search(matchAllQueryBuilder).spliterator(), false).collect(Collectors.toList());
 
         List<ArticleData> articleDatas = articleEsEntities.stream().map(articleEsEntity ->
-            ArticleData.builder()
-                    .articleId(articleEsEntity.getArticleId())
-                    .subject(articleEsEntity.getSubject())
-                    .content(articleEsEntity.getContent())
-                    .price(articleEsEntity.getPrice())
-                    .image(articleEsEntity.getImage())
-                    .postingDtime(ZonedDateTime.from(articleEsEntity.getPostingDtime().toInstant().atZone(ZoneId.of("Asia/Seoul"))))
-                    .site(articleEsEntity.getSite())
-                    .url(articleEsEntity.getUrl())
-                    .state(articleEsEntity.getState())
-                    .build()
+                ArticleData.builder()
+                        .articleId(articleEsEntity.getArticleId())
+                        .subject(articleEsEntity.getSubject())
+                        .content(articleEsEntity.getContent())
+                        .price(articleEsEntity.getPrice())
+                        .image(articleEsEntity.getImage())
+                        .postingDtime(ZonedDateTime.from(articleEsEntity.getPostingDtime().toInstant().atZone(ZoneId.of("Asia/Seoul"))))
+                        .site(articleEsEntity.getSite())
+                        .url(articleEsEntity.getUrl())
+                        .state(articleEsEntity.getState())
+                        .build()
         ).collect(Collectors.toList());
 
         return articleDatas;
@@ -67,7 +72,7 @@ public class ProviderEsService {
             request.setQuery(queryBuilder);
             restHighLevelClient.deleteByQuery(request, RequestOptions.DEFAULT);
 
-        }catch (IOException e) {
+        } catch (IOException e) {
             log.error("DeleteByQuery IOException : {}", e.getMessage());
         }
     }

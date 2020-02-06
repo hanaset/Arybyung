@@ -1,5 +1,6 @@
 package com.how.arybyungprovider.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.how.muchcommon.model.type.ArticleState;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +15,7 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 public class ArticleData {
 
+    @JsonProperty("article_id")
     private Long articleId;
 
     private String subject;
@@ -30,6 +32,7 @@ public class ArticleData {
 
     private ArticleState state;
 
+    @JsonProperty("posting_dtime")
     private ZonedDateTime postingDtime;
 
 }

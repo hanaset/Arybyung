@@ -2,7 +2,7 @@ package com.how.arybyungobserver.client;
 
 import com.how.arybyungobserver.service.FilteringWordService;
 import com.how.arybyungobserver.utils.DriverUtil;
-import com.how.muchcommon.entity.japentity.ArticleEntity;
+import com.how.muchcommon.entity.jpaentity.ArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
 import lombok.Synchronized;

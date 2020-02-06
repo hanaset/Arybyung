@@ -1,7 +1,7 @@
 package com.how.arybyungobserver.client;
 
 import com.how.arybyungobserver.service.FilteringWordService;
-import com.how.muchcommon.entity.japentity.ArticleEntity;
+import com.how.muchcommon.entity.jpaentity.ArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;

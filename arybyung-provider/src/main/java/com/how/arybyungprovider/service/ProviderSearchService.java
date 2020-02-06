@@ -44,12 +44,12 @@ public class ProviderSearchService {
         ZonedDateTime today = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).minusDays(1);
 
         // 24시간 기준 최고가, 최저가
-        Long todayHightestPrice = articleDatas.stream().filter(articleData -> articleData.getPostingDtime().isAfter(today)).map(ArticleData::getPrice).max(Long::compareTo).get();
-        Long todayLowestPrice = articleDatas.stream().filter(articleData -> articleData.getPostingDtime().isAfter(today)).map(ArticleData::getPrice).min(Long::compareTo).get();
+        Long todayHightestPrice = articleDatas.stream().filter(articleData -> articleData.getPostingDtime().isAfter(today)).map(ArticleData::getPrice).max(Long::compareTo).orElse(0L);
+        Long todayLowestPrice = articleDatas.stream().filter(articleData -> articleData.getPostingDtime().isAfter(today)).map(ArticleData::getPrice).min(Long::compareTo).orElse(0L);
 
         // 1주일 기준 최고가, 최저가 (List에는 1주일동안의 데이터만 존재함)
-        Long thisWeekHighestPrice = articleDatas.stream().map(ArticleData::getPrice).max(Long::compareTo).get();
-        Long thisWeekLowestPrice = articleDatas.stream().map(ArticleData::getPrice).min(Long::compareTo).get();
+        Long thisWeekHighestPrice = articleDatas.stream().map(ArticleData::getPrice).max(Long::compareTo).orElse(0L);
+        Long thisWeekLowestPrice = articleDatas.stream().map(ArticleData::getPrice).min(Long::compareTo).orElse(0L);
 
         KeywordResultData keywordResultData = KeywordResultData.builder()
                 .articleList(articleDatas)

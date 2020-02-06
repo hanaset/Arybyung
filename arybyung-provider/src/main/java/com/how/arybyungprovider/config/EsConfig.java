@@ -10,6 +10,7 @@ import org.springframework.data.elasticsearch.client.ClientConfiguration;
 import org.springframework.data.elasticsearch.client.RestClients;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
+@Getter
 @Configuration
 @PropertySource("classpath:properties/elasticsearch-${spring.profiles.active}.properties")
 @EnableElasticsearchRepositories(basePackages = "com.how.muchcommon.repository.elasticrepository")
@@ -18,9 +19,11 @@ public class EsConfig {
     @Value("${elasticsearch.host}")
     private String esHost;
 
-    @Getter
     @Value("${elasticsearch.index}")
     private String esIndex;
+
+    @Value("${elasticsearch.type}")
+    private String type;
 
     @Bean
     RestHighLevelClient restHighLevelClient() {
