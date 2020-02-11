@@ -31,6 +31,11 @@ public class FilteringWordService {
     @Scheduled(cron = "0 0 */1 * * *")
     public void refreshFilterWord() {
         List<FilterEntity> filterEntityList = filterRepository.findAll();
+
+        if(filterEntityList.isEmpty()) {
+            pattern = null;
+            return;
+        }
         List<String> allFilter = filterEntityList.stream().map(FilterEntity::getWord).collect(Collectors.toList());
 
         String allReg = allFilter.stream().map(s -> "(" + s + ")").collect(Collectors.joining("|"));
@@ -38,6 +43,10 @@ public class FilteringWordService {
     }
 
     public boolean stringFilter(String content) {
+
+        if(this.pattern == null) {
+            return false;
+        }
         Matcher matcher = this.pattern.matcher(content);
 
         return matcher.find();
