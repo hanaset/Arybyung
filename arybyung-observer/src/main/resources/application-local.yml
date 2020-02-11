@@ -5,7 +5,7 @@ spring:
   datasource:
     username: root
     password:
-    url: jdbc:mysql://localhost:3306/taco?characterEncoding=UTF-8&serverTimezone=Asia/Seoul&useSSL=false
+    url: jdbc:mysql://localhost:3306/taco?characterEncoding=UTF-8&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
