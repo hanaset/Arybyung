@@ -4,8 +4,10 @@ dependencies {
 
     compile('org.springframework.boot:spring-boot-starter-web')
 
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+
     compile group: 'org.jsoup', name: 'jsoup', version: '1.12.1' // Jsoup Parser
-    compileOnly('org.projectlombok:lombok')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 
     /** swagger */

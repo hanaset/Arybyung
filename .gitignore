@@ -38,3 +38,4 @@ src/main/resources/static/
 src/main/resources/templates/
 src/test/resources/
 logstash/mysql-connector-java-8.0.19/
+.DS_Store
