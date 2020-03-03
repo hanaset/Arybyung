@@ -41,7 +41,7 @@ public class ProviderEsService {
 
     public List<ArticleData> searchKeyword(String keyword) {
 
-        MultiMatchQueryBuilder matchAllQueryBuilder = new MultiMatchQueryBuilder(keyword, "subject", "content").operator(Operator.AND);
+        MultiMatchQueryBuilder matchAllQueryBuilder = new MultiMatchQueryBuilder(keyword, "subject", "content").operator(Operator.OR);
         List<ArticleEsEntity> articleEsEntities = StreamSupport.stream(articleEsRepository.search(matchAllQueryBuilder).spliterator(), false).collect(Collectors.toList());
 
         List<ArticleData> articleDatas = articleEsEntities.stream().map(articleEsEntity ->
