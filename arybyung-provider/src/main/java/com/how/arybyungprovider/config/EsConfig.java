@@ -1,13 +1,13 @@
 package com.how.arybyungprovider.config;
 
 import lombok.Getter;
+import org.apache.http.HttpHost;
+import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.data.elasticsearch.client.ClientConfiguration;
-import org.springframework.data.elasticsearch.client.RestClients;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 @Getter
@@ -27,10 +27,7 @@ public class EsConfig {
 
     @Bean
     RestHighLevelClient restHighLevelClient() {
-        ClientConfiguration clientConfiguration = ClientConfiguration.builder()
-                .connectedTo(esHost)
-                .build();
+        return new RestHighLevelClient(RestClient.builder(HttpHost.create(esHost)));
 
-        return RestClients.create(clientConfiguration).rest();
     }
 }

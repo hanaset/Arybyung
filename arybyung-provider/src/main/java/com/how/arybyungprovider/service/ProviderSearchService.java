@@ -1,15 +1,20 @@
 package com.how.arybyungprovider.service;
 
+import com.google.common.collect.Maps;
 import com.how.arybyungprovider.constant.ProviderApiErrorCode;
 import com.how.arybyungprovider.exception.ProviderResponseException;
 import com.how.arybyungprovider.model.ArticleData;
 import com.how.arybyungprovider.model.KeywordResultData;
+import com.how.arybyungprovider.model.kakao.response.KakaoResponse;
+import com.how.arybyungprovider.model.kakao.response.KakaoResponseTemplate;
+import com.how.arybyungprovider.model.kakao.response.template.listcard.ListCard;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -33,7 +38,7 @@ public class ProviderSearchService {
         }
     }
 
-    private KeywordResultData registerResult(String keyword, List<ArticleData> articleDatas) {
+    private KakaoResponse registerResult(String keyword, List<ArticleData> articleDatas) {
 
         // 키워드에 대한 결과가 없을 경우 예외처리
         if(articleDatas.isEmpty()) {
@@ -51,6 +56,20 @@ public class ProviderSearchService {
         Long thisWeekHighestPrice = articleDatas.stream().map(ArticleData::getPrice).max(Long::compareTo).orElse(0L);
         Long thisWeekLowestPrice = articleDatas.stream().map(ArticleData::getPrice).min(Long::compareTo).orElse(0L);
 
+        // TODO response 만들기
+//        ListCard listCard = ListCard.builder()
+//                .header()
+//                .items()
+//                .buttons()
+//                .build();
+//
+//        KakaoResponseTemplate<ListCard> kakaoResponseTemplate = KakaoResponseTemplate.builder()
+//                .outputs()
+//                .build();
+//        KakaoResponse kakaoResponse = KakaoResponse.builder()
+//                .version("v1.0")
+//                .template()
+//                .build();
         KeywordResultData keywordResultData = KeywordResultData.builder()
                 .articleList(articleDatas)
                 .todayHighestPrice(todayHightestPrice)

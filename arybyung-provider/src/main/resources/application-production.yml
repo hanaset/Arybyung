@@ -1,0 +1,18 @@
+server:
+  port: 5050
+
+spring:
+  datasource:
+    username: admin
+    password: howmuch!
+    url: jdbc:mysql://howmuch.ccsw8uhdjxyo.ap-northeast-2.rds.amazonaws.com:3306/onepiece?characterEncoding=UTF-8&serverTimezone=Asia/Seoul&useSSL=false&allowPulbicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update
+
+
+

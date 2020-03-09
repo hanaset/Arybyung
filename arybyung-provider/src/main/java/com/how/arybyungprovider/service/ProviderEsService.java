@@ -44,7 +44,7 @@ public class ProviderEsService {
         MultiMatchQueryBuilder matchAllQueryBuilder = new MultiMatchQueryBuilder(keyword, "subject", "content").operator(Operator.AND);
         List<ArticleEsEntity> articleEsEntities = StreamSupport.stream(articleEsRepository.search(matchAllQueryBuilder).spliterator(), false).collect(Collectors.toList());
 
-        List<ArticleData> articleDatas = articleEsEntities.stream().map(articleEsEntity ->
+        return articleEsEntities.stream().map(articleEsEntity ->
                 ArticleData.builder()
                         .articleId(articleEsEntity.getArticleId())
                         .subject(articleEsEntity.getSubject())
@@ -57,8 +57,6 @@ public class ProviderEsService {
                         .state(articleEsEntity.getState())
                         .build()
         ).collect(Collectors.toList());
-
-        return articleDatas;
     }
 
     public void deleteBeforeWeekData() {
