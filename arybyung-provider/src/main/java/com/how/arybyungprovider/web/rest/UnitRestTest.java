@@ -2,6 +2,7 @@ package com.how.arybyungprovider.web.rest;
 
 import com.how.arybyungprovider.service.ProviderEsService;
 import com.how.arybyungprovider.web.rest.support.ProviderRestSupport;
+import com.how.muchcommon.repository.elasticrepository.ArticleEsRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class UnitRestTest extends ProviderRestSupport {
 
     private final ProviderEsService providerEsService;
+    private final ArticleEsRepository articleEsRepository;
 
-    public UnitRestTest(ProviderEsService providerEsService) {
+    public UnitRestTest(ProviderEsService providerEsService,
+                        ArticleEsRepository articleEsRepository) {
         this.providerEsService = providerEsService;
+        this.articleEsRepository = articleEsRepository;
     }
 
     @ApiOperation(
@@ -35,5 +39,13 @@ public class UnitRestTest extends ProviderRestSupport {
     @GetMapping("/search")
     public ResponseEntity searchTest(String keyword) {
         return response(providerEsService.searchKeyword(keyword));
+    }
+
+    @ApiOperation(
+            value = "ES 전체 데이터"
+    )
+    @GetMapping("/findAll")
+    public ResponseEntity findAllTest() {
+        return response(articleEsRepository.findAll());
     }
 }
