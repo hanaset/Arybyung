@@ -4,14 +4,16 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @Builder
-public class KakaoResponse {
+@ToString
+public class KakaoResponse<T> {
     @SerializedName("version")
     @Expose
     public String version;
     @SerializedName("template")
     @Expose
-    public KakaoResponseTemplate template;
+    public KakaoResponseTemplate<T> template;
 }

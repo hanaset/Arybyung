@@ -1,10 +1,7 @@
 package com.how.arybyungprovider.web.rest;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.how.arybyungprovider.model.kakao.request.KakaoRequest;
 import com.how.arybyungprovider.model.kakao.response.KakaoResponse;
-import com.how.arybyungprovider.model.kakao.response.KakaoResponseTemplate;
 import com.how.arybyungprovider.service.ProviderSearchService;
 import com.how.arybyungprovider.web.rest.support.ProviderRestSupport;
 import io.swagger.annotations.Api;
@@ -13,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -29,29 +25,29 @@ public class ProviderSearchRest extends ProviderRestSupport {
     }
 
     @ApiOperation(
-            value = "HowMuch 중고 제품 조회"
+            value = "HowMuch 중고 제품 조회(오픈빌더)"
     )
-    @GetMapping("/search")
-    public KakaoResponse keywordSearch(String keyword) {
-        return providerSearchService.searchKeyword(keyword);
+    @PostMapping("/search")
+    public <T> KakaoResponse<?> keywordSearch(@RequestBody KakaoRequest request) {
+        Map<String, String> keywordMap = request.getAction().getParams();
+
+        if (keywordMap.containsKey("keyword")) {
+            log.info(keywordMap.get("keyword"));
+            return providerSearchService.kakaoSearchKeyword(keywordMap.get("keyword"));
+        } else {
+            return KakaoResponse.builder()
+                    .version("1.0")
+                    .template(null)
+                    .build();
+        }
+
     }
 
-    @PostMapping("/test")
-    public KakaoResponse test(@RequestBody KakaoRequest request) {
-        log.info("KakaoRequest => {}", request.toString());
-        List<Map<String, Map<String, String>>> outputs = Lists.newArrayList();
-        Map<String, String> innerMap = Maps.newHashMap();
-        Map<String, Map<String, String>> outerMap = Maps.newHashMap();
-
-        innerMap.put("text", "Test 입니다.");
-        outerMap.put("simpleText", innerMap);
-        outputs.add(outerMap);
-
-        return KakaoResponse.builder()
-                .version("v1.0")
-                .template(KakaoResponseTemplate.builder()
-                        .outputs(outputs)
-                        .build())
-                .build();
+    @ApiOperation(
+            value = "HowMuch 중고 제품 조회(default)"
+    )
+    @GetMapping("/test")
+    public ResponseEntity test(String keyword) {
+        return response(providerSearchService.basicSearchKeyword(keyword));
     }
 }
