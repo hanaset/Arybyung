@@ -11,7 +11,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 @EnableAsync
-@EnableConfigurationProperties
 public class ArybyungObserverApplication {
 
     public static void main(String[] args) {
