@@ -131,7 +131,7 @@ public class JoonggonaraParser {
                             .content(content)
                             .postingDtime(LocalDateTime.parse(dateElement.text(), formatter).atZone(ZoneId.of("Asia/Seoul")))
                             .site("joonggonara")
-                            .state(stateElement.attr("aria-label").equals("판매") ? ArticleState.S : ArticleState.C)
+                            .state(stateElement.attr("aria-label").equals("완료") ? ArticleState.C : ArticleState.S)
                             .url(url)
                             .build();
 
