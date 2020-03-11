@@ -1,5 +1,6 @@
 package com.how.arybyungobserver.client;
 
+import com.how.arybyungobserver.properties.NaverLoginProperties;
 import com.how.arybyungobserver.service.FilteringWordService;
 import com.how.arybyungobserver.utils.DriverUtil;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
@@ -37,13 +38,16 @@ public class JoonggonaraParser {
 
     private final ArticleRepository articleRepository;
     private final FilteringWordService filteringWordService;
+    private final NaverLoginProperties naverLoginProperties;
     private Map<String, String> cookieMaps;
     private Integer count = 0;
 
     public JoonggonaraParser(ArticleRepository articleRepository,
-                             FilteringWordService filteringWordService) {
+                             FilteringWordService filteringWordService,
+                             NaverLoginProperties naverLoginProperties) {
         this.articleRepository = articleRepository;
         this.filteringWordService = filteringWordService;
+        this.naverLoginProperties = naverLoginProperties;
     }
 
     public Long getRecentArticleId() {
@@ -182,8 +186,8 @@ public class JoonggonaraParser {
         WebDriver driver = new FirefoxDriver();
         driver.get(ParserConstants.NAVER_LOGIN);
 
-        DriverUtil.clipboardCopy("b183523", "//*[@id=\"id\"]", driver);
-        DriverUtil.clipboardCopy("thswjdqls56@!", "//*[@id=\"pw\"]", driver);
+        DriverUtil.clipboardCopy(naverLoginProperties.getUserId(), "//*[@id=\"id\"]", driver);
+        DriverUtil.clipboardCopy(naverLoginProperties.getPassword(), "//*[@id=\"pw\"]", driver);
 
         driver.findElement(By.xpath("//*[@id=\"frmNIDLogin\"]/fieldset/input")).click();
 
