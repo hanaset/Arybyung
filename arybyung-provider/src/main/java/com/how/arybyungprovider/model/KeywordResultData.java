@@ -20,11 +20,17 @@ public class KeywordResultData {
     @JsonProperty("today_lowest_price")
     private Long todayLowestPrice;
 
+    @JsonProperty("today_avg_price")
+    private double todayAvgPrice;
+
     @JsonProperty("this_week_highest_price")
     private Long thisWeekHighestPrice;
 
     @JsonProperty("this_week_lowest_price")
     private Long thisWeekLowestPrice;
+
+    @JsonProperty("this_week_avg_price")
+    private double thisWeekAvgPrice;
 
     @JsonProperty("article_list")
     private List<ArticleData> articleList;

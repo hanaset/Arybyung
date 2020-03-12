@@ -140,15 +140,29 @@ public class ProviderSearchService {
         Long thisWeekHighestPrice = articleDatas.stream().map(ArticleData::getPrice).max(Long::compareTo).orElse(0L);
         Long thisWeekLowestPrice = articleDatas.stream().map(ArticleData::getPrice).min(Long::compareTo).orElse(0L);
 
+        double thisWeekAvgPrice = articleDatas.stream()
+                .mapToDouble(ArticleData::getPrice)
+                .average()
+                .orElse(0);
+
+        double todayAvgPrice = articleDatas.stream()
+                .filter(articleData -> articleData.getPostingDtime().isAfter(today))
+                .mapToDouble(ArticleData::getPrice)
+                .average()
+                .orElse(0);
+
         KeywordResultData keywordResultData = KeywordResultData.builder()
                 .articleList(articleDatas)
                 .todayHighestPrice(todayHightestPrice)
                 .todayLowestPrice(todayLowestPrice)
+                .todayAvgPrice(Math.floor(todayAvgPrice))
                 .thisWeekHighestPrice(thisWeekHighestPrice)
                 .thisWeekLowestPrice(thisWeekLowestPrice)
+                .thisWeekAvgPrice(Math.floor(thisWeekAvgPrice))
                 .build();
 
         popularRankingService.countingPopularRank(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).truncatedTo(ChronoUnit.HOURS), keyword);
+
         redisTemplate.opsForValue().set(keyword, keywordResultData,60, TimeUnit.MINUTES);
 
         return keywordResultData;
