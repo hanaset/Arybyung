@@ -1,7 +1,7 @@
 package com.how.arybyungprovider.service;
 
-import com.how.muchcommon.config.EsConfig;
 import com.how.arybyungprovider.model.ArticleData;
+import com.how.muchcommon.config.EsConfig;
 import com.how.muchcommon.entity.elasticentity.ArticleEsEntity;
 import com.how.muchcommon.repository.elasticrepository.ArticleEsRepository;
 import lombok.extern.slf4j.Slf4j;
