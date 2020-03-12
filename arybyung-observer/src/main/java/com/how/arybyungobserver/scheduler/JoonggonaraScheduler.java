@@ -15,7 +15,7 @@ public class JoonggonaraScheduler {
         this.joongnaraService = joongnaraService;
     }
 
-//    @Scheduled(fixedDelay = 1000 * 10)
+    @Scheduled(fixedDelay = 1000 * 10)
     public void parsing() {
         joongnaraService.parsingArticle();
     }

@@ -17,7 +17,7 @@ public class DanggnMarketScheduler {
         this.danggnMarketService = danggnMarketService;
     }
 
-//    @Scheduled(fixedDelay = 1000 * 10)
+    @Scheduled(fixedDelay = 1000 * 10)
     public void parsing() throws IOException {
         danggnMarketService.parsingArticle();
     }

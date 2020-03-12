@@ -15,4 +15,7 @@ public class NaverLoginProperties {
 
     @Value("${naver.password}")
     private String password;
+
+    @Value("${naver.url}")
+    private String url;
 }

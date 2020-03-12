@@ -1,8 +1,8 @@
 package com.how.arybyungobserver.client.bunjang;
 
-import com.how.arybyungobserver.client.ParserConstants;
 import com.how.arybyungobserver.client.bunjang.model.BunjangHomeResponse;
 import com.how.arybyungobserver.client.bunjang.model.BunjangItemResponse;
+import com.how.arybyungobserver.properties.UrlProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import retrofit2.Call;
@@ -15,10 +15,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class BunjangApiClient {
 
     private final BunjangApiService bunjangApiService;
+    private final UrlProperties urlProperties;
 
-    public BunjangApiClient() {
+    public BunjangApiClient(UrlProperties urlProperties) {
+        this.urlProperties = urlProperties;
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ParserConstants.BUNJANG_API)
+                .baseUrl(urlProperties.getBunjangApiUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();

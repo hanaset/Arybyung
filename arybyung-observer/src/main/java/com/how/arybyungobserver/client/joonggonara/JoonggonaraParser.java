@@ -1,7 +1,7 @@
 package com.how.arybyungobserver.client.joonggonara;
 
-import com.how.arybyungobserver.client.ParserConstants;
 import com.how.arybyungobserver.properties.NaverLoginProperties;
+import com.how.arybyungobserver.properties.UrlProperties;
 import com.how.arybyungobserver.service.FilteringWordService;
 import com.how.arybyungobserver.utils.DriverUtil;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
@@ -23,6 +23,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -40,15 +41,18 @@ public class JoonggonaraParser {
     private final ArticleRepository articleRepository;
     private final FilteringWordService filteringWordService;
     private final NaverLoginProperties naverLoginProperties;
+    private final UrlProperties urlProperties;
     private Map<String, String> cookieMaps;
     private Integer count = 0;
 
     public JoonggonaraParser(ArticleRepository articleRepository,
                              FilteringWordService filteringWordService,
-                             NaverLoginProperties naverLoginProperties) {
+                             NaverLoginProperties naverLoginProperties,
+                             UrlProperties urlProperties) {
         this.articleRepository = articleRepository;
         this.filteringWordService = filteringWordService;
         this.naverLoginProperties = naverLoginProperties;
+        this.urlProperties = urlProperties;
     }
 
     public Long getRecentArticleId() {
@@ -58,7 +62,7 @@ public class JoonggonaraParser {
         }
 
         try {
-            Document document = Jsoup.connect(ParserConstants.JOONGGONARA_POST_LIST)
+            Document document = Jsoup.connect(urlProperties.getJoonggoArticleListUrl())
                     .header(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
                     .header(HttpHeaders.ACCEPT_CHARSET, "utf-8")
                     .cookies(cookieMaps)
@@ -82,7 +86,7 @@ public class JoonggonaraParser {
     @Transactional
     public void getArticle(Long articleId) {
 
-        String url = ParserConstants.JOONGGONARA_POST + articleId;
+        String url = urlProperties.getJoonggoArtlcleUrl() + articleId;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd. HH:mm");
 
         if(getCount() > 0) {
@@ -178,11 +182,11 @@ public class JoonggonaraParser {
         }
     }
 
-//    @PostConstruct
+    @PostConstruct
     public void naverLogin() throws InterruptedException {
 
         WebDriver driver = new FirefoxDriver();
-        driver.get(ParserConstants.NAVER_LOGIN);
+        driver.get(naverLoginProperties.getUrl());
 
         DriverUtil.clipboardCopy(naverLoginProperties.getUserId(), "//*[@id=\"id\"]", driver);
         DriverUtil.clipboardCopy(naverLoginProperties.getPassword(), "//*[@id=\"pw\"]", driver);

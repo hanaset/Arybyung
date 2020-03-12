@@ -1,7 +1,7 @@
 package com.how.arybyungobserver;
 
 import com.how.arybyungobserver.client.joonggonara.JoonggonaraParser;
-import com.how.arybyungobserver.client.ParserConstants;
+import com.how.arybyungobserver.client.DriverConstants;
 import com.how.arybyungobserver.service.bunjang.BunjangService;
 import com.how.arybyungobserver.service.FilteringWordService;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ class ArybyungObserverApplicationTests {
     private FilteringWordService filteringWordService;
 
     public void beFore() {
-        System.setProperty("webdriver.gecko.driver", ParserConstants.TEST_DRIVER_PATH); //테스트코드
+        System.setProperty("webdriver.gecko.driver", DriverConstants.TEST_DRIVER_PATH); //테스트코드
         System.setProperty("java.awt.headless", "false");
     }
 

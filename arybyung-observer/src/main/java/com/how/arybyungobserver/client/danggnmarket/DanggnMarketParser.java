@@ -1,6 +1,6 @@
 package com.how.arybyungobserver.client.danggnmarket;
 
-import com.how.arybyungobserver.client.ParserConstants;
+import com.how.arybyungobserver.properties.UrlProperties;
 import com.how.arybyungobserver.service.FilteringWordService;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
@@ -27,15 +27,18 @@ public class DanggnMarketParser {
 
     private final ArticleRepository articleRepository;
     private final FilteringWordService filteringWordService;
+    private final UrlProperties urlProperties;
 
     public DanggnMarketParser(ArticleRepository articleRepository,
-                              FilteringWordService filteringWordService) {
+                              FilteringWordService filteringWordService,
+                              UrlProperties urlProperties) {
         this.articleRepository = articleRepository;
         this.filteringWordService = filteringWordService;
+        this.urlProperties = urlProperties;
     }
 
     public Long getRecentArticleId() throws IOException {
-        Document document = Jsoup.connect(ParserConstants.DANGGNMARKET_POST_LIST)
+        Document document = Jsoup.connect(urlProperties.getDanggnArticleUrl())
                 .header(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
                 .header(HttpHeaders.ACCEPT, "text/html,application/xhtml+xml,application/xml;q=0.9,imgwebp,*/*;q=0.8")
                 .header(HttpHeaders.ACCEPT_CHARSET, "utf-8")
@@ -51,7 +54,7 @@ public class DanggnMarketParser {
     @Transactional
     public void getArticle(Long articleId) {
 
-        String url = ParserConstants.DANGGNMARKET_POST_LIST + "/articles/" + articleId;
+        String url = urlProperties.getDanggnArticleUrl() + "/articles/" + articleId;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         try {

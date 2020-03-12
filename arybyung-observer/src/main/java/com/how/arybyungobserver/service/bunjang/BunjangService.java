@@ -1,14 +1,16 @@
 package com.how.arybyungobserver.service.bunjang;
 
-import com.how.arybyungobserver.client.ParserConstants;
+import com.how.arybyungobserver.client.DriverConstants;
 import com.how.arybyungobserver.client.bunjang.BunjangApiClient;
 import com.how.arybyungobserver.client.bunjang.model.BunjangHomeItem;
 import com.how.arybyungobserver.client.bunjang.model.BunjangHomeResponse;
 import com.how.arybyungobserver.client.bunjang.model.BunjangItemResponse;
+import com.how.arybyungobserver.properties.UrlProperties;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import retrofit2.Response;
@@ -24,12 +26,15 @@ public class BunjangService {
 
     private final BunjangApiClient bunjangApiClient;
     private final ArticleRepository articleRepository;
+    private final UrlProperties urlProperties;
     private Long nowArticleId = 0L;
 
     public BunjangService(BunjangApiClient bunjangApiClient,
-                          ArticleRepository articleRepository) {
+                          ArticleRepository articleRepository,
+                          UrlProperties urlProperties) {
         this.bunjangApiClient = bunjangApiClient;
         this.articleRepository = articleRepository;
+        this.urlProperties = urlProperties;
     }
 
     private Long getTopArticleId() {
@@ -43,12 +48,12 @@ public class BunjangService {
             Response<BunjangHomeResponse> response = bunjangApiClient.getArticleList().execute();
             if(response.isSuccessful()) {
 
-                String recentAritlceId = response.body().getList().stream()
-                        .map(BunjangHomeItem::getPid)
-                        .max(String::compareToIgnoreCase)
-                        .orElse("0");
+                Long recentArticleId = response.body().getList().stream()
+                        .map(bunjangHomeItem -> Long.parseLong(bunjangHomeItem.getPid()))
+                        .max(Long::compareTo)
+                        .orElse(0L);
 
-                return Long.parseLong(recentAritlceId);
+                return recentArticleId;
             } else {
                 log.error("Bunjang getRecentArtilceId Failed : {}", response.errorBody().byteStream().toString());
                 return 0L;
@@ -59,6 +64,7 @@ public class BunjangService {
         }
     }
 
+    @Async(value = "bunjangTaskExecutor")
     @Transactional
     public void getArticle(Long articleId) {
         try {
@@ -77,7 +83,7 @@ public class BunjangService {
                         .state(ArticleState.S)
                         .site("bunjang")
                         .price(Long.parseLong(response.body().getItemInfo().getPrice()))
-                        .url(ParserConstants.BUNJANG_POST + articleId)
+                        .url(urlProperties.getBunjangArticleUrl() + articleId)
                         .subject(response.body().getItemInfo().getName())
                         .content(response.body().getItemInfo().getDescription() + "\n" + response.body().getItemInfo().getLocation())
                         .image(response.body().getItemInfo().getProductImage())
@@ -101,7 +107,7 @@ public class BunjangService {
         Long gap = recentArticleId - topArticleId;
 
         if (gap <= 0) {
-            log.info("Bunjang Not found Article");
+            log.info("Bunjang Not found Article : recent = {} / top = {}", recentArticleId, topArticleId);
             return;
         } else if (gap > 0 && gap <= 100000) {
             recentArticleId = topArticleId + 150;

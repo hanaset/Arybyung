@@ -26,7 +26,18 @@ public class AsyncConfig implements AsyncConfigurer {
     public ThreadPoolTaskExecutor danggnMarketTaskExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setThreadNamePrefix("danggnMarketTaskExecutor-");
-        taskExecutor.setQueueCapacity(750);
+        taskExecutor.setQueueCapacity(200);
+        taskExecutor.setCorePoolSize(20);
+        taskExecutor.setMaxPoolSize(20);
+
+        return taskExecutor;
+    }
+
+    @Bean
+    public ThreadPoolTaskExecutor bunjangTaskExecutor() {
+        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+        taskExecutor.setThreadNamePrefix("bunjangMarketTaskExecutor-");
+        taskExecutor.setQueueCapacity(200);
         taskExecutor.setCorePoolSize(20);
         taskExecutor.setMaxPoolSize(20);
 
