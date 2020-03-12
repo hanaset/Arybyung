@@ -1,28 +1,27 @@
 package com.how.arybyungprovider.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.how.arybyungprovider.constant.ProviderApiErrorCode;
 import com.how.arybyungprovider.exception.ProviderResponseException;
 import com.how.arybyungprovider.model.ArticleData;
 import com.how.arybyungprovider.model.KeywordResultData;
-import com.how.arybyungprovider.model.kakao.response.KakaoResponse;
-import com.how.arybyungprovider.model.kakao.response.KakaoResponseTemplate;
-import com.how.arybyungprovider.model.kakao.response.template.listcard.ListCard;
-import com.how.arybyungprovider.model.kakao.response.template.listcard.ListCardHeader;
-import com.how.arybyungprovider.model.kakao.response.template.listcard.ListCardItem;
+import com.how.muchcommon.model.kakaobuilder.response.KakaoResponse;
+import com.how.muchcommon.model.kakaobuilder.response.KakaoResponseTemplate;
+import com.how.muchcommon.model.kakaobuilder.response.template.listcard.ListCard;
+import com.how.muchcommon.model.kakaobuilder.response.template.listcard.ListCardHeader;
+import com.how.muchcommon.model.kakaobuilder.response.template.listcard.ListCardItem;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -33,13 +32,25 @@ public class ProviderSearchService {
 
     private final ProviderEsService providerEsService;
     private final RedisTemplate redisTemplate;
+    private final PopularRankingService popularRankingService;
 
     public ProviderSearchService(ProviderEsService providerEsService,
-                                 RedisTemplate redisTemplate) {
+                                 RedisTemplate redisTemplate, PopularRankingService popularRankingService) {
         this.providerEsService = providerEsService;
         this.redisTemplate = redisTemplate;
+        this.popularRankingService = popularRankingService;
     }
 
+    public Object basicSearchKeyword(String keyword) {
+        if (!redisTemplate.hasKey(keyword)) {
+            return searchResult(keyword, providerEsService.searchKeyword(keyword));
+        } else {
+            popularRankingService.countingPopularRank(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).truncatedTo(ChronoUnit.HOURS), keyword);
+            return redisTemplate.opsForValue().get(keyword);
+        }
+    }
+
+    @Deprecated
     public KakaoResponse<?> kakaoSearchKeyword(String keyword) {
         Gson gson = new Gson();
         if (!redisTemplate.hasKey("KAKAO_" + keyword)) {
@@ -50,15 +61,7 @@ public class ProviderSearchService {
         }
     }
 
-    public Object basicSearchKeyword(String keyword) {
-        if (!redisTemplate.hasKey("BASIC_" + keyword)) {
-            return searchResult(keyword, providerEsService.searchKeyword(keyword));
-        } else {
-            // return mapper.readValue((String) Objects.requireNonNull(redisTemplate.opsForValue().get(keyword)), KakaoResponse.class);
-            return redisTemplate.opsForValue().get("BASIC_" + keyword);
-        }
-    }
-
+    @Deprecated
     private KakaoResponse<?> openBuilderResult(String keyword, List<ArticleData> articleDatas) {
 
         // 키워드에 대한 결과가 없을 경우 예외처리
@@ -137,7 +140,7 @@ public class ProviderSearchService {
         Long thisWeekHighestPrice = articleDatas.stream().map(ArticleData::getPrice).max(Long::compareTo).orElse(0L);
         Long thisWeekLowestPrice = articleDatas.stream().map(ArticleData::getPrice).min(Long::compareTo).orElse(0L);
 
-        KeywordResultData keywordResultData =  KeywordResultData.builder()
+        KeywordResultData keywordResultData = KeywordResultData.builder()
                 .articleList(articleDatas)
                 .todayHighestPrice(todayHightestPrice)
                 .todayLowestPrice(todayLowestPrice)
@@ -145,7 +148,8 @@ public class ProviderSearchService {
                 .thisWeekLowestPrice(thisWeekLowestPrice)
                 .build();
 
-        redisTemplate.opsForValue().set("BASIC_" + keyword, keywordResultData,60, TimeUnit.MINUTES);
+        popularRankingService.countingPopularRank(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).truncatedTo(ChronoUnit.HOURS), keyword);
+        redisTemplate.opsForValue().set(keyword, keywordResultData,60, TimeUnit.MINUTES);
 
         return keywordResultData;
     }

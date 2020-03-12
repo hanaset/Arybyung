@@ -1,9 +1,7 @@
 package com.how.arybyungprovider.service;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
-import com.how.arybyungprovider.config.EsConfig;
 import com.how.arybyungprovider.model.ArticleData;
+import com.how.muchcommon.config.EsConfig;
 import com.how.muchcommon.entity.elasticentity.ArticleEsEntity;
 import com.how.muchcommon.repository.elasticrepository.ArticleEsRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +15,7 @@ import java.io.IOException;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
