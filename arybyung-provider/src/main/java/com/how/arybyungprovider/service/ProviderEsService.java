@@ -42,7 +42,7 @@ public class ProviderEsService {
 
     public List<ArticleData> searchKeyword(String keyword, FieldParam field, OrderType order) {
 
-        MultiMatchQueryBuilder matchAllQueryBuilder = new MultiMatchQueryBuilder(keyword, "subject", "content").operator(Operator.OR);
+        MultiMatchQueryBuilder matchAllQueryBuilder = new MultiMatchQueryBuilder(keyword, "subject", "content").operator(Operator.AND);
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder()
                 .withQuery(matchAllQueryBuilder)
                 .withSort(SortBuilders.fieldSort(field.getValue()).order(SortOrder.fromString(order.getValue())));
