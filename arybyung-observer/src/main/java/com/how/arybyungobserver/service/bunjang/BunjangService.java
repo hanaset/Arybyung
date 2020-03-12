@@ -6,6 +6,7 @@ import com.how.arybyungobserver.client.bunjang.model.BunjangHomeItem;
 import com.how.arybyungobserver.client.bunjang.model.BunjangHomeResponse;
 import com.how.arybyungobserver.client.bunjang.model.BunjangItemResponse;
 import com.how.arybyungobserver.properties.UrlProperties;
+import com.how.arybyungobserver.service.FilteringWordService;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
@@ -27,14 +28,17 @@ public class BunjangService {
     private final BunjangApiClient bunjangApiClient;
     private final ArticleRepository articleRepository;
     private final UrlProperties urlProperties;
+    private final FilteringWordService filteringWordService;
     private Long nowArticleId = 0L;
 
     public BunjangService(BunjangApiClient bunjangApiClient,
                           ArticleRepository articleRepository,
-                          UrlProperties urlProperties) {
+                          UrlProperties urlProperties,
+                          FilteringWordService filteringWordService) {
         this.bunjangApiClient = bunjangApiClient;
         this.articleRepository = articleRepository;
         this.urlProperties = urlProperties;
+        this.filteringWordService = filteringWordService;
     }
 
     private Long getTopArticleId() {
@@ -72,6 +76,10 @@ public class BunjangService {
             if(response.isSuccessful()) {
 
                 if(response.body().getItemInfo() == null) {
+                    return;
+                }
+
+                if(filteringWordService.stringFilter(response.body().getItemInfo().getDescription())) {
                     return;
                 }
 
