@@ -1,6 +1,6 @@
-package com.how.arybyungobserver.service;
+package com.how.arybyungobserver.service.joonggonara;
 
-import com.how.arybyungobserver.client.JoonggonaraParser;
+import com.how.arybyungobserver.client.joonggonara.JoonggonaraParser;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;

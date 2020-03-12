@@ -1,5 +1,6 @@
-package com.how.arybyungobserver.client;
+package com.how.arybyungobserver.client.danggnmarket;
 
+import com.how.arybyungobserver.client.ParserConstants;
 import com.how.arybyungobserver.service.FilteringWordService;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
@@ -12,6 +13,7 @@ import org.jsoup.nodes.Element;
 import org.springframework.http.HttpHeaders;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -46,6 +48,7 @@ public class DanggnMarketParser {
     }
 
     @Async(value = "danggnMarketTaskExecutor")
+    @Transactional
     public void getArticle(Long articleId) {
 
         String url = ParserConstants.DANGGNMARKET_POST_LIST + "/articles/" + articleId;

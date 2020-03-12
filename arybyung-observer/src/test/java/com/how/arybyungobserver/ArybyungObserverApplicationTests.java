@@ -1,6 +1,8 @@
 package com.how.arybyungobserver;
 
-import com.how.arybyungobserver.client.JoonggonaraParser;
+import com.how.arybyungobserver.client.joonggonara.JoonggonaraParser;
+import com.how.arybyungobserver.client.ParserConstants;
+import com.how.arybyungobserver.service.bunjang.BunjangService;
 import com.how.arybyungobserver.service.FilteringWordService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -22,8 +24,21 @@ class ArybyungObserverApplicationTests {
     private JoonggonaraParser joonggonaraParser;
 
     @Autowired
+    private BunjangService bunjangService;
+
+    @Autowired
     private FilteringWordService filteringWordService;
 
+    public void beFore() {
+        System.setProperty("webdriver.gecko.driver", ParserConstants.TEST_DRIVER_PATH); //테스트코드
+        System.setProperty("java.awt.headless", "false");
+    }
+
+    @Test
+    void 번개장터_테스트() {
+        beFore();
+        bunjangService.parsingArticle();
+    }
     @Test
     void 중고나라_최근글번호_테스트() throws IOException {
         joonggonaraParser.getRecentArticleId();

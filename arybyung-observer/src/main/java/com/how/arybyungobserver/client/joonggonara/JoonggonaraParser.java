@@ -1,5 +1,6 @@
-package com.how.arybyungobserver.client;
+package com.how.arybyungobserver.client.joonggonara;
 
+import com.how.arybyungobserver.client.ParserConstants;
 import com.how.arybyungobserver.properties.NaverLoginProperties;
 import com.how.arybyungobserver.service.FilteringWordService;
 import com.how.arybyungobserver.utils.DriverUtil;
@@ -20,8 +21,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.springframework.http.HttpHeaders;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -78,6 +79,7 @@ public class JoonggonaraParser {
     }
 
     @Async(value = "joonggonaraTaskExecutor")
+    @Transactional
     public void getArticle(Long articleId) {
 
         String url = ParserConstants.JOONGGONARA_POST + articleId;
@@ -176,12 +178,8 @@ public class JoonggonaraParser {
         }
     }
 
-    @PostConstruct
+//    @PostConstruct
     public void naverLogin() throws InterruptedException {
-
-        System.setProperty("webdriver.gecko.driver", ParserConstants.DRIVER_PATH);
-//        System.setProperty("webdriver.gecko.driver", ParserConstants.TEST_DRIVER_PATH); //테스트코드
-        System.setProperty("java.awt.headless", "false");
 
         WebDriver driver = new FirefoxDriver();
         driver.get(ParserConstants.NAVER_LOGIN);
@@ -192,6 +190,7 @@ public class JoonggonaraParser {
         driver.findElement(By.xpath("//*[@id=\"frmNIDLogin\"]/fieldset/input")).click();
 
         Set<Cookie> cookies = driver.manage().getCookies();
+        driver.quit();
         this.cookieMaps = cookies.stream().collect(Collectors.toMap(Cookie::getName, Cookie::getValue));
     }
 
