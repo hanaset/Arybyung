@@ -2,6 +2,8 @@ package com.how.arybyungprovider.web.rest;
 
 import com.how.arybyungprovider.service.ProviderEsService;
 import com.how.arybyungprovider.web.rest.support.ProviderRestSupport;
+import com.how.muchcommon.model.type.FieldParam;
+import com.how.muchcommon.model.type.OrderType;
 import com.how.muchcommon.repository.elasticrepository.ArticleEsRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -37,8 +39,8 @@ public class UnitRestTest extends ProviderRestSupport {
             value = "ES에서 직접 검색 TEST"
     )
     @GetMapping("/search")
-    public ResponseEntity searchTest(String keyword) {
-        return response(providerEsService.searchKeyword(keyword));
+    public ResponseEntity searchTest(String keyword, FieldParam field, OrderType order) {
+        return response(providerEsService.searchKeyword(keyword, field, order));
     }
 
     @ApiOperation(

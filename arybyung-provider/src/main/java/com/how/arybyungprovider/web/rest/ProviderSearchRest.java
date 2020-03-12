@@ -3,6 +3,8 @@ package com.how.arybyungprovider.web.rest;
 import com.how.arybyungprovider.service.PopularRankingService;
 import com.how.arybyungprovider.service.ProviderSearchService;
 import com.how.arybyungprovider.web.rest.support.ProviderRestSupport;
+import com.how.muchcommon.model.type.FieldParam;
+import com.how.muchcommon.model.type.OrderType;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -43,8 +45,10 @@ public class ProviderSearchRest extends ProviderRestSupport {
             value = "HowMuch 중고 제품 조회"
     )
     @PostMapping("/search")
-    public ResponseEntity keywordSearch(String keyword) {
-        return response(providerSearchService.basicSearchKeyword(keyword));
+    public ResponseEntity keywordSearch(@RequestParam(value = "keyword") String keyword,
+                                        @RequestParam(value = "field") FieldParam field,
+                                        @RequestParam(value = "order") OrderType order) {
+        return response(providerSearchService.searchKeyword(keyword, field, order));
     }
 
     @ApiOperation(

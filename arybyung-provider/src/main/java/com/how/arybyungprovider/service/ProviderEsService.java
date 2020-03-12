@@ -3,12 +3,17 @@ package com.how.arybyungprovider.service;
 import com.how.arybyungprovider.model.ArticleData;
 import com.how.muchcommon.config.EsConfig;
 import com.how.muchcommon.entity.elasticentity.ArticleEsEntity;
+import com.how.muchcommon.model.type.FieldParam;
+import com.how.muchcommon.model.type.OrderType;
 import com.how.muchcommon.repository.elasticrepository.ArticleEsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.*;
 import org.elasticsearch.index.reindex.DeleteByQueryRequest;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -35,10 +40,14 @@ public class ProviderEsService {
         this.esConfig = esConfig;
     }
 
-    public List<ArticleData> searchKeyword(String keyword) {
+    public List<ArticleData> searchKeyword(String keyword, FieldParam field, OrderType order) {
 
         MultiMatchQueryBuilder matchAllQueryBuilder = new MultiMatchQueryBuilder(keyword, "subject", "content").operator(Operator.OR);
-        List<ArticleEsEntity> articleEsEntities = StreamSupport.stream(articleEsRepository.search(matchAllQueryBuilder).spliterator(), false).collect(Collectors.toList());
+        NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder()
+                .withQuery(matchAllQueryBuilder)
+                .withSort(SortBuilders.fieldSort(field.getValue()).order(SortOrder.fromString(order.getValue())));
+
+        List<ArticleEsEntity> articleEsEntities = StreamSupport.stream(articleEsRepository.search(nativeSearchQueryBuilder.build()).spliterator(), false).collect(Collectors.toList());
 
         return articleEsEntities.stream().map(articleEsEntity ->
                 ArticleData.builder()
