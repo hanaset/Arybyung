@@ -13,7 +13,7 @@ public class ProviderPopularUpdateScheduler {
 
     private final PopularRankingService popularRankingService;
 
-    @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul")
+    @Scheduled(cron = "0 0 * * * *", zone = "Asia/Seoul")
     public void updatePopularChart() {
         popularRankingService.updatePopularChart();
     }
