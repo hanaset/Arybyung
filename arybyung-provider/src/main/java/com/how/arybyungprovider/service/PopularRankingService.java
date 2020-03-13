@@ -37,6 +37,7 @@ public class PopularRankingService {
     }
 
     public PopularRankResponse updatePopularChart() {
+
         ZonedDateTime updateDateTime = DateTimeHelper.currentTime("Asia/Seoul");
         ZonedDateTime startDateTime = DateTimeHelper.currentTime("Asia/Seoul").minusDays(1);
 
@@ -74,6 +75,7 @@ public class PopularRankingService {
                 .build();
 
         // redis로 현재 검색 저장
+        log.info("UPDATE Popular Rank !!");
         redisTemplate.opsForValue().set(RANKING_NAME, gson.toJson(res));
         return res;
     }
