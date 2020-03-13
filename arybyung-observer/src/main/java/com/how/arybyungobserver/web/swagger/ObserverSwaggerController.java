@@ -1,13 +1,13 @@
-package com.how.arybyungprovider.web.rest.swagger;
+package com.how.arybyungobserver.web.swagger;
 
-import com.how.arybyungprovider.web.rest.support.ProviderRestSupport;
+import com.how.arybyungobserver.web.rest.support.ObserverRestSupport;
 import io.swagger.annotations.Api;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 @Api(tags = "HowMuch Swagger")
-public class ProviderSwaggerController extends ProviderRestSupport {
+public class ObserverSwaggerController extends ObserverRestSupport {
 
     @GetMapping("/swagger")
     public String redirect() {
