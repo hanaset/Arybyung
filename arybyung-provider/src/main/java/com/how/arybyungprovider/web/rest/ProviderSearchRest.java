@@ -42,7 +42,7 @@ public class ProviderSearchRest extends ProviderRestSupport {
     @ApiOperation(
             value = "HowMuch 중고 제품 조회"
     )
-    @PostMapping("/search")
+    @GetMapping("/search")
     public ResponseEntity keywordSearch(String keyword) {
         return response(providerSearchService.basicSearchKeyword(keyword));
     }
