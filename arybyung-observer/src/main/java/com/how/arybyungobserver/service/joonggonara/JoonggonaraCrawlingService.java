@@ -86,7 +86,6 @@ public class JoonggonaraCrawlingService {
                 Instant i = Instant.ofEpochMilli(response.body().getArticle().getWriteDate());
                 ZonedDateTime postDtime = ZonedDateTime.ofInstant(i, ZoneId.of("Asia/Seoul"));
 
-
                 ArticleState state;
                 switch (response.body().getSaleInfo().getSaleStatus()) {
                     case "SALE":

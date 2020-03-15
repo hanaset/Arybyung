@@ -130,11 +130,13 @@ public class ProviderSearchService {
         }
 
         // 하루 전 데이터부터 지금까지 (24시간 데이터)
-        ZonedDateTime today = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).minusDays(1);
+        Long yesterday = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).minusDays(1).toInstant().getEpochSecond();
+
+        System.out.println(yesterday);
 
         // 24시간 기준 최고가, 최저가
-        Long todayHightestPrice = articleDatas.stream().filter(articleData -> articleData.getPostingDtime().isAfter(today)).map(ArticleData::getPrice).max(Long::compareTo).orElse(0L);
-        Long todayLowestPrice = articleDatas.stream().filter(articleData -> articleData.getPostingDtime().isAfter(today)).map(ArticleData::getPrice).min(Long::compareTo).orElse(0L);
+        Long todayHightestPrice = articleDatas.stream().filter(articleData -> articleData.getPostingDtime() >= yesterday).map(ArticleData::getPrice).max(Long::compareTo).orElse(0L);
+        Long todayLowestPrice = articleDatas.stream().filter(articleData -> articleData.getPostingDtime() >= yesterday).map(ArticleData::getPrice).min(Long::compareTo).orElse(0L);
 
         // 1주일 기준 최고가, 최저가 (List에는 1주일동안의 데이터만 존재함)
         Long thisWeekHighestPrice = articleDatas.stream().map(ArticleData::getPrice).max(Long::compareTo).orElse(0L);
@@ -146,7 +148,7 @@ public class ProviderSearchService {
                 .orElse(0);
 
         double todayAvgPrice = articleDatas.stream()
-                .filter(articleData -> articleData.getPostingDtime().isAfter(today))
+                .filter(articleData -> articleData.getPostingDtime() >= yesterday)
                 .mapToDouble(ArticleData::getPrice)
                 .average()
                 .orElse(0);

@@ -33,9 +33,9 @@ public class ArticleData {
     private ArticleState state;
 
     @JsonProperty("posting_dtime")
-    private ZonedDateTime postingDtime;
+    private Long postingDtime;
 
     @JsonProperty("upd_dtime")
-    private ZonedDateTime updDtime;
+    private Long updDtime;
 
 }

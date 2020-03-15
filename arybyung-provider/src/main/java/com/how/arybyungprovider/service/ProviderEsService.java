@@ -56,7 +56,7 @@ public class ProviderEsService {
                         .content(articleEsEntity.getContent())
                         .price(articleEsEntity.getPrice())
                         .image(articleEsEntity.getImage())
-                        .postingDtime(ZonedDateTime.from(articleEsEntity.getPostingDtime().toInstant().atZone(ZoneId.of("Asia/Seoul"))))
+                        .postingDtime(articleEsEntity.getPostingDtime().toInstant().atZone(ZoneId.of("Asia/Seoul")).toEpochSecond())
                         .site(articleEsEntity.getSite())
                         .url(articleEsEntity.getUrl())
                         .state(articleEsEntity.getState())
@@ -71,6 +71,18 @@ public class ProviderEsService {
             ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).minusWeeks(1);
 
             QueryBuilder queryBuilder = QueryBuilders.rangeQuery("posting_dtime").lt(zonedDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            DeleteByQueryRequest request = new DeleteByQueryRequest(esConfig.getEsIndex());
+            request.setQuery(queryBuilder);
+            restHighLevelClient.deleteByQuery(request, RequestOptions.DEFAULT);
+
+        } catch (IOException e) {
+            log.error("DeleteByQuery IOException : {}", e.getMessage());
+        }
+    }
+
+    public void deleteAllData() {
+        try {
+            QueryBuilder queryBuilder = QueryBuilders.matchAllQuery();
             DeleteByQueryRequest request = new DeleteByQueryRequest(esConfig.getEsIndex());
             request.setQuery(queryBuilder);
             restHighLevelClient.deleteByQuery(request, RequestOptions.DEFAULT);

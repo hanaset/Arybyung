@@ -34,6 +34,15 @@ public class UnitRestTest extends ProviderRestSupport {
     }
 
     @ApiOperation(
+            value = "1주일 이상의 데이터 삭제 TEST"
+    )
+    @GetMapping("/delete_all")
+    public ResponseEntity deleteAllTest() {
+        providerEsService.deleteAllData();
+        return response("ok");
+    }
+
+    @ApiOperation(
             value = "ES에서 직접 검색 TEST"
     )
     @GetMapping("/search")
