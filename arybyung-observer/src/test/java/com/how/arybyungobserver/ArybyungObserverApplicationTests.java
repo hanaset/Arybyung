@@ -1,7 +1,9 @@
 package com.how.arybyungobserver;
 
+import com.how.arybyungobserver.client.joonggonara.JoonggonaraApiClient;
 import com.how.arybyungobserver.client.joonggonara.JoonggonaraParser;
 import com.how.arybyungobserver.client.DriverConstants;
+import com.how.arybyungobserver.client.joonggonara.model.JoonggonaraListResponse;
 import com.how.arybyungobserver.service.bunjang.BunjangService;
 import com.how.arybyungobserver.service.FilteringWordService;
 import org.junit.jupiter.api.Test;
@@ -11,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import retrofit2.Response;
 
 import java.io.IOException;
 
@@ -21,7 +24,7 @@ import java.io.IOException;
 class ArybyungObserverApplicationTests {
 
     @Autowired
-    private JoonggonaraParser joonggonaraParser;
+    private JoonggonaraApiClient joonggonaraApiClient;
 
     @Autowired
     private BunjangService bunjangService;
@@ -29,31 +32,17 @@ class ArybyungObserverApplicationTests {
     @Autowired
     private FilteringWordService filteringWordService;
 
-    public void beFore() {
-        System.setProperty("webdriver.gecko.driver", DriverConstants.TEST_DRIVER_PATH); //테스트코드
-        System.setProperty("java.awt.headless", "false");
-    }
-
     @Test
     void 번개장터_테스트() {
-        beFore();
         bunjangService.parsingArticle();
     }
-    @Test
-    void 중고나라_최근글번호_테스트() throws IOException {
-        joonggonaraParser.getRecentArticleId();
-    }
 
     @Test
-    void 네이버로그인_테스트() throws Exception {
-        joonggonaraParser.naverLogin();
-    }
-
-    @Test
-    void 네이버로그인_후_파싱_테스트() throws Exception {
-//        joonggonaraParser.getArticle(694878920L);
-//        joonggonaraParser.getArticle(694781369L);
-        joonggonaraParser.getArticle(694890065L);
+    void 중고나라_테스트() throws Exception {
+        System.out.println(joonggonaraApiClient.getArticleList().request().headers());
+        Response<JoonggonaraListResponse> response = joonggonaraApiClient.getArticleList().execute();
+        System.out.println(response);
+        System.out.println(response.body());
     }
 
     @Test

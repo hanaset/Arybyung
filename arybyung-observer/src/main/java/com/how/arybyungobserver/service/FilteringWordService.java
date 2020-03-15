@@ -44,7 +44,7 @@ public class FilteringWordService {
 
     public boolean stringFilter(String content) {
 
-        if(this.pattern == null) {
+        if(this.pattern == null || content == null) {
             return false;
         }
         Matcher matcher = this.pattern.matcher(content);

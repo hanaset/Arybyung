@@ -1,5 +1,6 @@
 package com.how.arybyungobserver.client.joonggonara;
 
+import com.google.common.collect.Maps;
 import com.how.arybyungobserver.properties.NaverLoginProperties;
 import com.how.arybyungobserver.properties.UrlProperties;
 import com.how.arybyungobserver.service.FilteringWordService;
@@ -15,16 +16,25 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.http.HttpHeaders;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import javax.naming.MalformedLinkException;
+import javax.print.DocFlavor;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -42,7 +52,7 @@ public class JoonggonaraParser {
     private final FilteringWordService filteringWordService;
     private final NaverLoginProperties naverLoginProperties;
     private final UrlProperties urlProperties;
-    private Map<String, String> cookieMaps;
+    private Map<String, String> cookieMaps = Maps.newHashMap();
     private Integer count = 0;
 
     public JoonggonaraParser(ArticleRepository articleRepository,
@@ -175,27 +185,34 @@ public class JoonggonaraParser {
         } catch (HttpStatusException e) {
             setCount(getCount() + 1);
             log.error("Joonggonara 과다 호출 : {} / {}", e.getUrl(), e.getStatusCode());
-        } catch (InterruptedException e) {
-            log.error("Naver Login Interrupt Exception : {}", e.getMessage());
         } catch (IOException e) {
             log.error("get IOException : {}", e.getMessage());
         }
     }
 
-    @PostConstruct
-    public void naverLogin() throws InterruptedException {
+//    @PostConstruct
+    public void naverLogin() {
 
-        WebDriver driver = new FirefoxDriver();
-        driver.get(naverLoginProperties.getUrl());
+        try {
 
-        DriverUtil.clipboardCopy(naverLoginProperties.getUserId(), "//*[@id=\"id\"]", driver);
-        DriverUtil.clipboardCopy(naverLoginProperties.getPassword(), "//*[@id=\"pw\"]", driver);
+//        WebDriver driver = new FirefoxDriver();
 
-        driver.findElement(By.xpath("//*[@id=\"frmNIDLogin\"]/fieldset/input")).click();
+            FirefoxOptions options = new FirefoxOptions().setAcceptInsecureCerts(false);
+            WebDriver driver = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), options);
+            driver.get(naverLoginProperties.getUrl());
 
-        Set<Cookie> cookies = driver.manage().getCookies();
-        driver.quit();
-        this.cookieMaps = cookies.stream().collect(Collectors.toMap(Cookie::getName, Cookie::getValue));
+            DriverUtil.clipboardCopy(naverLoginProperties.getUserId(), "//*[@id=\"id\"]", driver);
+            DriverUtil.clipboardCopy(naverLoginProperties.getPassword(), "//*[@id=\"pw\"]", driver);
+
+            driver.findElement(By.xpath("//*[@id=\"frmNIDLogin\"]/fieldset/input")).click();
+
+            Set<Cookie> cookies = driver.manage().getCookies();
+            driver.quit();
+            this.cookieMaps = cookies.stream().collect(Collectors.toMap(Cookie::getName, Cookie::getValue));
+
+        } catch (Exception e) {
+            log.error("naverLogin Exception : {}", e.getMessage());
+        }
     }
 
     @Synchronized

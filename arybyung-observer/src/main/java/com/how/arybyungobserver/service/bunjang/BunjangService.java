@@ -103,7 +103,7 @@ public class BunjangService {
                 log.error("Bunjang getArticle Failed :{}",  response.errorBody().byteStream().toString());
             }
 
-        } catch (IOException e) {
+        } catch (IOException | NullPointerException e) {
             log.error("Bunjang getArticle IOException : {}", e.getMessage());
         }
     }
