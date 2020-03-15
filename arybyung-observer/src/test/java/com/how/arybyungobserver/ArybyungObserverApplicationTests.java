@@ -1,11 +1,14 @@
 package com.how.arybyungobserver;
 
 import com.how.arybyungobserver.client.joonggonara.JoonggonaraApiClient;
-import com.how.arybyungobserver.client.joonggonara.JoonggonaraParser;
-import com.how.arybyungobserver.client.DriverConstants;
+import com.how.arybyungobserver.client.joonggonara.model.JoonggonaraArticleDetailResponse;
 import com.how.arybyungobserver.client.joonggonara.model.JoonggonaraListResponse;
-import com.how.arybyungobserver.service.bunjang.BunjangService;
+import com.how.arybyungobserver.service.bunjang.BunjangCrawlingService;
 import com.how.arybyungobserver.service.FilteringWordService;
+import com.how.arybyungobserver.service.bunjang.BunjangService;
+import com.how.arybyungobserver.service.joonggonara.JoonggonaraCrawlingService;
+import com.how.muchcommon.repository.jparepository.CookieRepository;
+import org.jsoup.Jsoup;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +18,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import retrofit2.Response;
 
-import java.io.IOException;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles("local")
+@ActiveProfiles("production")
 @ContextConfiguration
 class ArybyungObserverApplicationTests {
+
+    @Autowired
+    private CookieRepository cookieRepository;
+
+    @Autowired
+    private JoonggonaraCrawlingService joonggonaraCrawlingService;
 
     @Autowired
     private JoonggonaraApiClient joonggonaraApiClient;
@@ -38,11 +45,14 @@ class ArybyungObserverApplicationTests {
     }
 
     @Test
-    void 중고나라_테스트() throws Exception {
-        System.out.println(joonggonaraApiClient.getArticleList().request().headers());
+    void 중고나라_리스트_테스트() throws Exception {
         Response<JoonggonaraListResponse> response = joonggonaraApiClient.getArticleList().execute();
-        System.out.println(response);
         System.out.println(response.body());
+    }
+
+    @Test
+    void 중고나라_게시글_테스트() throws Exception {
+        joonggonaraCrawlingService.getArticle(723844243L);
     }
 
     @Test

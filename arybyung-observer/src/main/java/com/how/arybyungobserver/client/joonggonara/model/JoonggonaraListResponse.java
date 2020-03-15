@@ -6,6 +6,4 @@ import lombok.Data;
 public class JoonggonaraListResponse {
 
     private JoonggonaraMessage message;
-
-    private JoonggonaraResult result;
 }

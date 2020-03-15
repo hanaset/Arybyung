@@ -1,6 +1,7 @@
 package com.how.arybyungobserver.scheduler;
 
 import com.how.arybyungobserver.service.ObserverControlService;
+import com.how.arybyungobserver.service.bunjang.BunjangCrawlingService;
 import com.how.arybyungobserver.service.bunjang.BunjangService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -24,6 +25,7 @@ public class BunjangScheduler {
 
         if(!observerControlService.checkSite("bunjang"))
             return;
+
         bunjangService.parsingArticle();
     }
 }

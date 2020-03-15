@@ -8,4 +8,6 @@ public class JoonggonaraMessage {
     private String status;
 
     private JoonggonaraError error;
+
+    private JoonggonaraResult result;
 }

@@ -47,6 +47,10 @@ public class FilteringWordService {
         if(this.pattern == null || content == null) {
             return false;
         }
+
+        if(content.length() > 2000) {
+            return true;
+        }
         Matcher matcher = this.pattern.matcher(content);
 
         return matcher.find();
