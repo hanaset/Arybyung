@@ -35,4 +35,7 @@ public class ArticleData {
     @JsonProperty("posting_dtime")
     private ZonedDateTime postingDtime;
 
+    @JsonProperty("upd_dtime")
+    private ZonedDateTime updDtime;
+
 }

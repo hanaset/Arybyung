@@ -9,6 +9,9 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.*;
 import org.elasticsearch.index.reindex.DeleteByQueryRequest;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -38,7 +41,10 @@ public class ProviderEsService {
     public List<ArticleData> searchKeyword(String keyword) {
 
         MultiMatchQueryBuilder matchAllQueryBuilder = new MultiMatchQueryBuilder(keyword, "subject", "content").operator(Operator.AND);
-        List<ArticleEsEntity> articleEsEntities = StreamSupport.stream(articleEsRepository.search(matchAllQueryBuilder).spliterator(), false).collect(Collectors.toList());
+        NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder()
+                .withQuery(matchAllQueryBuilder)
+                .withSort(SortBuilders.fieldSort("posting_dtime").order(SortOrder.DESC));
+        List<ArticleEsEntity> articleEsEntities = StreamSupport.stream(articleEsRepository.search(nativeSearchQueryBuilder.build()).spliterator(), false).collect(Collectors.toList());
 
         return articleEsEntities.stream().map(articleEsEntity ->
                 ArticleData.builder()

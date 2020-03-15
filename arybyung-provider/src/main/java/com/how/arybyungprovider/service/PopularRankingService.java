@@ -52,7 +52,25 @@ public class PopularRankingService {
         List<PopularRankEntity> currentPopularRanking = popularRankRepository.findAllByPopularRank(startDateTime, updateDateTime);
 
         if (currentPopularRanking.size() < 1) {
-            throw new ProviderResponseException(ProviderApiErrorCode.DATA_NOT_FOUND, "인기차트 데이터 없음.");
+            log.info("인기차트 없음.. 기본 값으로 세팅..");
+            List<PopularRankItem> list = new ArrayList<>();
+            String[] keywords = {"아이폰 11", "2019 맥북프로", "아이폰 xs", "갤럭시 s20", "갤럭시 폴드", "맥북프로 13인치", "2019 맥북프로 16인치", "자전거", "맥북프로 15인치", "맥북프로"};
+
+            for (String keyword : keywords) {
+                list.add(PopularRankItem.builder()
+                        .keyword(keyword)
+                        .count(1)
+                        .state(0)
+                        .build());
+            }
+            PopularRankResponse es = PopularRankResponse.builder()
+                    .updateTime(updateDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                    .list(list)
+                    .build();
+
+            redisTemplate.opsForValue().set(RANKING_NAME, gson.toJson(es));
+
+            return es;
         }
 
         List<PopularRankItem> popularRankItems = Lists.newArrayList();
