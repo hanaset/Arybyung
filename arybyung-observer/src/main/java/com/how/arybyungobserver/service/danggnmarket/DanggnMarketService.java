@@ -43,6 +43,9 @@ public class DanggnMarketService {
             recentArticleId = topArticleId + 150;
         }
 
+        if(topArticleId < nowArticleId) {
+            topArticleId = nowArticleId;
+        }
 
         for (nowArticleId = topArticleId + 1; nowArticleId <= recentArticleId; nowArticleId++) {
             danggnMarketParser.getArticle(nowArticleId);

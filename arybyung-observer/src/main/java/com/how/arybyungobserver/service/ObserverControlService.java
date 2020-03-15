@@ -46,7 +46,7 @@ public class ObserverControlService {
             siteController.put(site, onoff);
             return entity;
         }).collect(Collectors.toList());
-        
+
         siteRepository.saveAll(siteEntities);
 
         log.info("{} ==> {}", siteList, onoff.equals("Y") ? "ON" : "OFF");

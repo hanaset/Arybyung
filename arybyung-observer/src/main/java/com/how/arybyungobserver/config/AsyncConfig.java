@@ -16,8 +16,8 @@ public class AsyncConfig implements AsyncConfigurer {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setThreadNamePrefix("joonggonaraTaskExecutor-");
         taskExecutor.setQueueCapacity(200);
-        taskExecutor.setCorePoolSize(20);
-        taskExecutor.setMaxPoolSize(20);
+        taskExecutor.setCorePoolSize(50);
+        taskExecutor.setMaxPoolSize(50);
 
         return taskExecutor;
     }
@@ -27,8 +27,8 @@ public class AsyncConfig implements AsyncConfigurer {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setThreadNamePrefix("danggnMarketTaskExecutor-");
         taskExecutor.setQueueCapacity(200);
-        taskExecutor.setCorePoolSize(20);
-        taskExecutor.setMaxPoolSize(20);
+        taskExecutor.setCorePoolSize(50);
+        taskExecutor.setMaxPoolSize(50);
 
         return taskExecutor;
     }
@@ -38,8 +38,8 @@ public class AsyncConfig implements AsyncConfigurer {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setThreadNamePrefix("bunjangMarketTaskExecutor-");
         taskExecutor.setQueueCapacity(200);
-        taskExecutor.setCorePoolSize(20);
-        taskExecutor.setMaxPoolSize(20);
+        taskExecutor.setCorePoolSize(50);
+        taskExecutor.setMaxPoolSize(50);
 
         return taskExecutor;
     }

@@ -25,4 +25,7 @@ public class UrlProperties {
 
     @Value("${url.bunjangApiUrl}")
     private String bunjangApiUrl;
+
+    @Value("${url.joonggoApiUrl}")
+    private String joonggoApiUrl;
 }

@@ -44,8 +44,12 @@ public class FilteringWordService {
 
     public boolean stringFilter(String content) {
 
-        if(this.pattern == null) {
+        if(this.pattern == null || content == null) {
             return false;
+        }
+
+        if(content.length() > 2000) {
+            return true;
         }
         Matcher matcher = this.pattern.matcher(content);
 
