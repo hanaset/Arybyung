@@ -56,7 +56,7 @@ public class ProviderArticleService {
 
         List<ArticleData> articleDataList = resultData.getArticleList();
         List<ArticleEsEntity> articleList = Lists.newArrayList();
-        articleDataList.stream().forEach(articleData -> {
+        articleDataList.forEach(articleData -> {
 
             ArticleState state = ArticleState.S;
             switch (articleData.getSite()) {
@@ -72,8 +72,10 @@ public class ProviderArticleService {
             }
 
             if(state.equals(ArticleState.D) || state.equals(ArticleState.C)) {
-                articleList.add(ArticleEsEntity.builder().id(articleData.getId()).build());
-                System.out.println(articleData.getId());
+                articleList.add(
+                        ArticleEsEntity.builder()
+                        .id(articleData.getId())
+                        .build());
             }
         });
 
