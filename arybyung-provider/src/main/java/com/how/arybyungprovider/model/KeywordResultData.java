@@ -16,19 +16,19 @@ import java.util.List;
 public class KeywordResultData {
 
     @JsonProperty("today_highest_price")
-    private Long todayHighestPrice;
+    private ArticleData todayHighestPrice;
 
     @JsonProperty("today_lowest_price")
-    private Long todayLowestPrice;
+    private ArticleData todayLowestPrice;
 
     @JsonProperty("today_avg_price")
     private double todayAvgPrice;
 
     @JsonProperty("this_week_highest_price")
-    private Long thisWeekHighestPrice;
+    private ArticleData thisWeekHighestPrice;
 
     @JsonProperty("this_week_lowest_price")
-    private Long thisWeekLowestPrice;
+    private ArticleData thisWeekLowestPrice;
 
     @JsonProperty("this_week_avg_price")
     private double thisWeekAvgPrice;
