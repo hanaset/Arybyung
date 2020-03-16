@@ -73,14 +73,13 @@ public class ProviderArticleService {
 
             if(state.equals(ArticleState.D) || state.equals(ArticleState.C)) {
                 articleList.add(ArticleEsEntity.builder().id(articleData.getId()).build());
-                System.out.println(articleData.getId());
             }
         });
 
         articleEsRepository.deleteAll(articleList);
         KeywordResultData validResult = providerEsService.searchResult(keyword);
         validResult.setValidating(true);
-        redisTemplate.opsForValue().set(keyword, validResult, 10, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(keyword, validResult, 1, TimeUnit.MINUTES);
         log.info("DeadLink Check completed");
     }
 

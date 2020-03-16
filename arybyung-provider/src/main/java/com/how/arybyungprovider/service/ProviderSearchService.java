@@ -31,7 +31,7 @@ public class ProviderSearchService {
     public Object basicSearchKeyword(String keyword) {
         if (!redisTemplate.hasKey(keyword)) {
             KeywordResultData result = providerEsService.searchResult(keyword);
-            redisTemplate.opsForValue().set(keyword, result, 10, TimeUnit.MINUTES);
+            redisTemplate.opsForValue().set(keyword, result, 1, TimeUnit.MINUTES);
             providerArticleService.validationArticle(keyword, result);
             return result;
         } else {

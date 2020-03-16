@@ -26,6 +26,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -50,10 +51,10 @@ public class ProviderEsService {
     }
 
     private List<ArticleData> searchKeyword(String keyword) {
-
-        MultiMatchQueryBuilder matchAllQueryBuilder = new MultiMatchQueryBuilder(keyword, "subject", "content").operator(Operator.AND);
+        String keywordNumber = Long.toString(keyword.split(" ").length);
+        MultiMatchQueryBuilder multiMatchQueryBuilder = new MultiMatchQueryBuilder(keyword, "subject").operator(Operator.OR).minimumShouldMatch(keywordNumber);
         NativeSearchQueryBuilder nativeSearchQueryBuilder = new NativeSearchQueryBuilder()
-                .withQuery(matchAllQueryBuilder)
+                .withQuery(multiMatchQueryBuilder)
                 .withPageable(PageRequest.of(0, 100))
                 .withSort(SortBuilders.fieldSort("posting_dtime").order(SortOrder.DESC));
         List<ArticleEsEntity> articleEsEntities = StreamSupport.stream(articleEsRepository.search(nativeSearchQueryBuilder.build()).spliterator(), false).collect(Collectors.toList());
@@ -70,6 +71,7 @@ public class ProviderEsService {
                         .site(articleEsEntity.getSite())
                         .url(articleEsEntity.getUrl())
                         .state(articleEsEntity.getState())
+                        .updDtime(articleEsEntity.getUpdDtime().toInstant().atZone(ZoneId.of("Asia/Seoul")).toEpochSecond())
                         .build()
         ).collect(Collectors.toList());
     }
@@ -83,16 +85,17 @@ public class ProviderEsService {
             throw new ProviderResponseException(ProviderApiErrorCode.DATA_NOT_FOUND, "키워드에 적합한 결과가 없습니다.");
         }
 
+        final Comparator<ArticleData> comp = (a1, a2) -> Long.compare(a1.getPrice(), a2.getPrice());
         // 하루 전 데이터부터 지금까지 (24시간 데이터)
         Long yesterday = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).minusDays(1).toInstant().getEpochSecond();
 
         // 24시간 기준 최고가, 최저가
-        Long todayHightestPrice = articleDatas.stream().filter(articleData -> articleData.getPostingDtime() >= yesterday).map(ArticleData::getPrice).max(Long::compareTo).orElse(0L);
-        Long todayLowestPrice = articleDatas.stream().filter(articleData -> articleData.getPostingDtime() >= yesterday).map(ArticleData::getPrice).min(Long::compareTo).orElse(0L);
+        ArticleData todayHightestArticle = articleDatas.stream().filter(articleData -> articleData.getPostingDtime() >= yesterday).max(comp).get();
+        ArticleData todayLowestArticle = articleDatas.stream().filter(articleData -> articleData.getPostingDtime() >= yesterday).min(comp).get();
 
         // 1주일 기준 최고가, 최저가 (List에는 1주일동안의 데이터만 존재함)
-        Long thisWeekHighestPrice = articleDatas.stream().map(ArticleData::getPrice).max(Long::compareTo).orElse(0L);
-        Long thisWeekLowestPrice = articleDatas.stream().map(ArticleData::getPrice).min(Long::compareTo).orElse(0L);
+        ArticleData thisWeekHighestArticle = articleDatas.stream().max(comp).get();
+        ArticleData thisWeekLowestArticle = articleDatas.stream().min(comp).get();
 
         double thisWeekAvgPrice = articleDatas.stream()
                 .mapToDouble(ArticleData::getPrice)
@@ -107,11 +110,11 @@ public class ProviderEsService {
 
         KeywordResultData keywordResultData = KeywordResultData.builder()
                 .articleList(articleDatas)
-                .todayHighestPrice(todayHightestPrice)
-                .todayLowestPrice(todayLowestPrice)
+                .todayHighestPrice(todayHightestArticle)
+                .todayLowestPrice(todayLowestArticle)
                 .todayAvgPrice(Math.floor(todayAvgPrice))
-                .thisWeekHighestPrice(thisWeekHighestPrice)
-                .thisWeekLowestPrice(thisWeekLowestPrice)
+                .thisWeekHighestPrice(thisWeekHighestArticle)
+                .thisWeekLowestPrice(thisWeekLowestArticle)
                 .thisWeekAvgPrice(Math.floor(thisWeekAvgPrice))
                 .validating(false)
                 .build();
