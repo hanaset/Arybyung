@@ -1,5 +1,5 @@
 spring:
   profiles:
-    active: production
+    active: local
   pid:
     file: logs/observer.pid

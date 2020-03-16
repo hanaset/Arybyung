@@ -15,6 +15,8 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor
 public class ArticleData {
 
+    private Long id;
+
     @JsonProperty("article_id")
     private Long articleId;
 

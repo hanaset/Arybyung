@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Data
@@ -31,6 +32,9 @@ public class KeywordResultData {
 
     @JsonProperty("this_week_avg_price")
     private double thisWeekAvgPrice;
+
+    @JsonProperty("validating")
+    private Boolean validating;
 
     @JsonProperty("article_list")
     private List<ArticleData> articleList;

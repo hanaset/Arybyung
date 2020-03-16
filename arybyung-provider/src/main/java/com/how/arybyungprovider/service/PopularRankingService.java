@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class PopularRankingService {
         return gson.fromJson((String) redisTemplate.opsForValue().get(RANKING_NAME), PopularRankResponse.class);
     }
 
+    @PostConstruct
     public PopularRankResponse updatePopularChart() {
 
         ZonedDateTime updateDateTime = DateTimeHelper.currentTime("Asia/Seoul");

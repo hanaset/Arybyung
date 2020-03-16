@@ -1,15 +1,17 @@
 package com.how.arybyungobserver.service.joonggonara;
 
-import com.how.arybyungobserver.client.joonggonara.JoonggonaraApiClient;
-import com.how.arybyungobserver.client.joonggonara.model.JoonggonaraArticleDetailResponse;
-import com.how.arybyungobserver.client.joonggonara.model.JoonggonaraListResponse;
-import com.how.arybyungobserver.properties.UrlProperties;
-import com.how.arybyungobserver.service.FilteringWordService;
+import com.how.arybyungcommon.client.joonggonara.JoonggonaraApiClient;
+import com.how.arybyungcommon.client.joonggonara.model.JoonggonaraArticleDetailResponse;
+import com.how.arybyungcommon.client.joonggonara.model.JoonggonaraListResponse;
+import com.how.arybyungcommon.properties.UrlProperties;
+import com.how.arybyungcommon.service.FilteringWordService;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.exception.DataException;
 import org.jsoup.Jsoup;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,7 +80,6 @@ public class JoonggonaraCrawlingService {
                 }
 
                 String content = Jsoup.parse(response.body().getArticle().getContent()).getAllElements().text();
-
                 if (filteringWordService.stringFilter(content)) {
                     return;
                 }
@@ -117,7 +118,7 @@ public class JoonggonaraCrawlingService {
 //                log.error("JoonggoNARA getArticle Failed articleID: {} => {}",articleId, response.errorBody().byteStream().toString());
             }
 
-        } catch (IOException | NullPointerException e) {
+        } catch (IOException | NullPointerException | DataIntegrityViolationException e) {
             log.error("JoonggoNARA getArticle articleId : {} => Exception : {}", articleId, e.getMessage());
         }
     }

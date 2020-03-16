@@ -1,10 +1,10 @@
 package com.how.arybyungobserver.service.bunjang;
 
-import com.how.arybyungobserver.client.bunjang.BunjangApiClient;
-import com.how.arybyungobserver.client.bunjang.model.BunjangHomeResponse;
-import com.how.arybyungobserver.client.bunjang.model.BunjangItemResponse;
-import com.how.arybyungobserver.properties.UrlProperties;
-import com.how.arybyungobserver.service.FilteringWordService;
+import com.how.arybyungcommon.client.bunjang.BunjangApiClient;
+import com.how.arybyungcommon.client.bunjang.model.BunjangHomeResponse;
+import com.how.arybyungcommon.client.bunjang.model.BunjangItemResponse;
+import com.how.arybyungcommon.properties.UrlProperties;
+import com.how.arybyungcommon.service.FilteringWordService;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
@@ -47,7 +47,7 @@ public class BunjangCrawlingService {
     public Long getRecentArticleId() {
         try {
             Response<BunjangHomeResponse> response = bunjangApiClient.getArticleList().execute();
-            if(response.isSuccessful()) {
+            if (response.isSuccessful()) {
 
                 Long recentArticleId = response.body().getList().stream()
                         .map(bunjangHomeItem -> Long.parseLong(bunjangHomeItem.getPid()))
@@ -59,7 +59,7 @@ public class BunjangCrawlingService {
                 log.error("Bunjang getRecentArtilceId Failed : {}", response.errorBody().byteStream().toString());
                 return 0L;
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             log.error("Bunjang getRecentArticleId IOException : {}", e.getMessage());
             return 0L;
         }
@@ -70,13 +70,13 @@ public class BunjangCrawlingService {
     public void getArticle(Long articleId) {
         try {
             Response<BunjangItemResponse> response = bunjangApiClient.getArticle(articleId).execute();
-            if(response.isSuccessful()) {
+            if (response.isSuccessful()) {
 
-                if(response.body().getItemInfo() == null) {
+                if (response.body().getItemInfo() == null) {
                     return;
                 }
 
-                if(filteringWordService.stringFilter(response.body().getItemInfo().getDescription())) {
+                if (filteringWordService.stringFilter(response.body().getItemInfo().getDescription())) {
                     return;
                 }
 
@@ -97,7 +97,7 @@ public class BunjangCrawlingService {
 
                 articleRepository.save(articleEntity);
             } else {
-                log.error("Bunjang getArticle Failed :{}",  response.errorBody().byteStream().toString());
+                log.error("Bunjang getArticle Failed :{}", response.errorBody().byteStream().toString());
             }
 
         } catch (IOException | NullPointerException e) {

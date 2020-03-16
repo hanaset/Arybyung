@@ -47,7 +47,7 @@ public class UnitRestTest extends ProviderRestSupport {
     )
     @GetMapping("/search")
     public ResponseEntity searchTest(String keyword) {
-        return response(providerEsService.searchKeyword(keyword));
+        return response(providerEsService.searchResult(keyword));
     }
 
     @ApiOperation(

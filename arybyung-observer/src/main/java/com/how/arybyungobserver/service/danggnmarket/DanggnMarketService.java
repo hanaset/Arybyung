@@ -1,6 +1,6 @@
 package com.how.arybyungobserver.service.danggnmarket;
 
-import com.how.arybyungobserver.client.danggnmarket.DanggnMarketParser;
+import com.how.arybyungcommon.client.danggnmarket.DanggnMarketParser;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
