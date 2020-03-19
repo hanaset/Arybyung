@@ -8,6 +8,8 @@ import com.how.arybyungcommon.client.joonggonara.JoonggonaraApiClient;
 import com.how.arybyungcommon.client.joonggonara.model.JoonggonaraArticleDetailResponse;
 import com.how.arybyungprovider.model.ArticleData;
 import com.how.arybyungprovider.model.KeywordResultData;
+import com.how.arybyungprovider.service.validation.ValidationFactory;
+import com.how.arybyungprovider.service.validation.ValidationMarket;
 import com.how.muchcommon.entity.elasticentity.ArticleEsEntity;
 import com.how.muchcommon.model.type.ArticleState;
 import com.how.muchcommon.repository.elasticrepository.ArticleEsRepository;
@@ -18,7 +20,6 @@ import org.springframework.stereotype.Service;
 import retrofit2.Response;
 
 import java.io.IOException;
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -32,19 +33,22 @@ public class ProviderArticleService {
     private final JoonggonaraApiClient joonggonaraApiClient;
     private final RedisTemplate redisTemplate;
     private final ProviderEsService providerEsService;
+    private final ValidationFactory validationFactory;
 
     public ProviderArticleService(ArticleEsRepository articleEsRepository,
                                   BunjangApiClient bunjangApiClient,
                                   DanggnMarketParser danggnMarketParser,
                                   JoonggonaraApiClient joonggonaraApiClient,
                                   RedisTemplate redisTemplate,
-                                  ProviderEsService providerEsService) {
+                                  ProviderEsService providerEsService,
+                                  ValidationFactory validationFactory) {
         this.articleEsRepository = articleEsRepository;
         this.bunjangApiClient = bunjangApiClient;
         this.danggnMarketParser = danggnMarketParser;
         this.joonggonaraApiClient = joonggonaraApiClient;
         this.redisTemplate = redisTemplate;
         this.providerEsService = providerEsService;
+        this.validationFactory = validationFactory;
     }
 
     @Async
@@ -58,18 +62,19 @@ public class ProviderArticleService {
         List<ArticleEsEntity> articleList = Lists.newArrayList();
         articleDataList.forEach(articleData -> {
 
-            ArticleState state = ArticleState.S;
-            switch (articleData.getSite()) {
-                case "joonggonara":
-                    state = validationJoonggonara(articleData.getArticleId());
-                    break;
-                case "danggn":
-                    state = validationDanggn(articleData.getArticleId());
-                    break;
-                case "bunjang":
-                    state = validationBunjang(articleData.getArticleId());
-                    break;
-            }
+            ValidationMarket validationMarket = validationFactory.getInstanseBySite(articleData.getSite());
+            ArticleState state = validationMarket.validationMarket(articleData.getArticleId());
+//            switch (articleData.getSite()) {
+//                case "joonggonara":
+//                    state = validationJoonggonara(articleData.getArticleId());
+//                    break;
+//                case "danggn":
+//                    state = validationDanggn(articleData.getArticleId());
+//                    break;
+//                case "bunjang":
+//                    state = validationBunjang(articleData.getArticleId());
+//                    break;
+//            }
 
             if(state.equals(ArticleState.D) || state.equals(ArticleState.C)) {
                 articleList.add(
