@@ -85,17 +85,24 @@ public class ProviderEsService {
             throw new ProviderResponseException(ProviderApiErrorCode.DATA_NOT_FOUND, "키워드에 적합한 결과가 없습니다.");
         }
 
-        final Comparator<ArticleData> comp = (a1, a2) -> Long.compare(a1.getPrice(), a2.getPrice());
+        final Comparator<ArticleData> comp = Comparator.comparingLong(ArticleData::getPrice);
         // 하루 전 데이터부터 지금까지 (24시간 데이터)
         Long yesterday = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).minusDays(1).toInstant().getEpochSecond();
-
-        // 24시간 기준 최고가, 최저가
-        ArticleData todayHightestArticle = articleDatas.stream().filter(articleData -> articleData.getPostingDtime() >= yesterday).max(comp).get();
-        ArticleData todayLowestArticle = articleDatas.stream().filter(articleData -> articleData.getPostingDtime() >= yesterday).min(comp).get();
 
         // 1주일 기준 최고가, 최저가 (List에는 1주일동안의 데이터만 존재함)
         ArticleData thisWeekHighestArticle = articleDatas.stream().max(comp).get();
         ArticleData thisWeekLowestArticle = articleDatas.stream().min(comp).get();
+
+        // 24시간 기준 최고가, 최저가
+        ArticleData todayHightestArticle = articleDatas.stream()
+                .filter(articleData -> articleData.getPostingDtime() >= yesterday)
+                .max(comp)
+                .orElse(thisWeekHighestArticle);
+
+        ArticleData todayLowestArticle = articleDatas.stream()
+                .filter(articleData -> articleData.getPostingDtime() >= yesterday)
+                .min(comp)
+                .orElse(thisWeekLowestArticle);
 
         double thisWeekAvgPrice = articleDatas.stream()
                 .mapToDouble(ArticleData::getPrice)
