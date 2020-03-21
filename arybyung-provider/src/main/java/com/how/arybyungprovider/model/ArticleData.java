@@ -2,11 +2,14 @@ package com.how.arybyungprovider.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.how.muchcommon.model.type.ArticleState;
+import com.how.muchcommon.model.type.MarketName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.time.ZonedDateTime;
 
 @Data
@@ -28,7 +31,8 @@ public class ArticleData {
 
     private String url;
 
-    private String site;
+    @Enumerated(EnumType.STRING)
+    private MarketName site;
 
     private String image;
 
