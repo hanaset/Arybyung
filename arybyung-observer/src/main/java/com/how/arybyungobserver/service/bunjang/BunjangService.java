@@ -1,5 +1,6 @@
 package com.how.arybyungobserver.service.bunjang;
 
+import com.how.arybyungobserver.service.CrawlerConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ public class BunjangService {
 
     private final BunjangCrawlingService bunjangCrawlingService;
     private Long nowArticleId = 0L;
+    private Long gap = 500L;
 
     public BunjangService(BunjangCrawlingService bunjangCrawlingService) {
         this.bunjangCrawlingService = bunjangCrawlingService;
@@ -24,10 +26,10 @@ public class BunjangService {
             log.info("Bunjang Not found Article : recent = {} / top = {}", recentArticleId, topArticleId);
             return;
         } else if (gap > 0 && gap <= 100000) {
-            recentArticleId = topArticleId + 150;
+            recentArticleId = topArticleId + CrawlerConstant.GAP;
         } else {
             topArticleId = recentArticleId - 100000;
-            recentArticleId = topArticleId + 150;
+            recentArticleId = topArticleId + CrawlerConstant.GAP;
         }
 
         if(topArticleId < nowArticleId) {

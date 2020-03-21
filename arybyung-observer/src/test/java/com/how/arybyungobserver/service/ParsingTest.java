@@ -1,5 +1,7 @@
 package com.how.arybyungobserver.service;
 
+import com.how.arybyungcommon.service.FilteringWordService;
+import com.how.muchcommon.repository.jparepository.FilterRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ import java.util.regex.Pattern;
 class ParsingTest {
 
     @Autowired
+    private FilterRepository filterRepository;
+
+    @Autowired
     private FilteringWordService filteringWordService;
 
     @Test
@@ -25,12 +30,10 @@ class ParsingTest {
 
         Pattern pattern = filteringWordService.getPattern();
 
-        String test = "아이폰8 삽니다.";
-        String test1 = "아이폰";
+        String test = "라이카 summaron 35mm f2.8삽니다(summaron 35mm f2.8)";
+
 
         Matcher matcher = pattern.matcher(test);
-        System.out.println(matcher.find());
-        matcher = pattern.matcher(test1);
         System.out.println(matcher.find());
     }
 }

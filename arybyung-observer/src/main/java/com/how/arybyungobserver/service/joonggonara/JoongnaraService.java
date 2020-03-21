@@ -1,5 +1,6 @@
 package com.how.arybyungobserver.service.joonggonara;
 
+import com.how.arybyungobserver.service.CrawlerConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +26,10 @@ public class JoongnaraService {
             log.info("JoonggoNARA Not found Article");
             return;
         } else if (gap > 0 && gap <= 100000) {
-            recentArticleId = topArticleId + 150;
+            recentArticleId = topArticleId + CrawlerConstant.GAP;
         } else {
             topArticleId = recentArticleId - 100000;
-            recentArticleId = topArticleId + 150;
+            recentArticleId = topArticleId + CrawlerConstant.GAP;
         }
 
         if(topArticleId < nowArticleId) {

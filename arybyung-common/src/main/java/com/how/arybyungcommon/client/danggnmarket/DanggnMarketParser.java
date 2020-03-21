@@ -61,7 +61,7 @@ public class DanggnMarketParser {
                     .header(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
                     .header(HttpHeaders.ACCEPT, "text/html,application/xhtml+xml,application/xml;q=0.9,imgwebp,*/*;q=0.8")
                     .header(HttpHeaders.ACCEPT_CHARSET, "utf-8")
-                    .get();;
+                    .get();
 
             Element subjectElement = document.getElementById("article-title");
 

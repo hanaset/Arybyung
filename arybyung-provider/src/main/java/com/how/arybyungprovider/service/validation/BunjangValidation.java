@@ -13,7 +13,7 @@ import java.io.IOException;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class BunzangValidation implements ValidationMarket {
+public class BunjangValidation implements ValidationMarket {
 
     private final BunjangApiClient bunjangApiClient;
 

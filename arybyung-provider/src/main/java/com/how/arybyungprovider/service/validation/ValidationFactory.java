@@ -9,15 +9,15 @@ import org.springframework.stereotype.Component;
 public class ValidationFactory {
     private final DanggnValidation danggnValidation;
     private final JoonggonaraValidation joonggonaraValidation;
-    private final BunzangValidation bunzangValidation;
+    private final BunjangValidation bunjangValidation;
 
     public ValidationMarket getInstanseBySite(MarketName marketName) {
         if(marketName.getName().equals(MarketName.joonggonara)) {
             return joonggonaraValidation;
         }
 
-        if(marketName.getName().equals(MarketName.bunzang)) {
-            return bunzangValidation;
+        if(marketName.getName().equals(MarketName.bunjang)) {
+            return bunjangValidation;
         }
 
         if(marketName.getName().equals(MarketName.danggn)) {

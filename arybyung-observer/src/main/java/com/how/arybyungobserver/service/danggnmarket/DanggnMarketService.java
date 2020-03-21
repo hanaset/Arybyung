@@ -1,6 +1,7 @@
 package com.how.arybyungobserver.service.danggnmarket;
 
 import com.how.arybyungcommon.client.danggnmarket.DanggnMarketParser;
+import com.how.arybyungobserver.service.CrawlerConstant;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ public class DanggnMarketService {
     private final DanggnMarketParser danggnMarketParser;
     private final ArticleRepository articleRepository;
     private Long nowArticleId = 0L;
+
 
     public DanggnMarketService(DanggnMarketParser danggnMarketParser,
                                ArticleRepository articleRepository) {
@@ -37,10 +39,10 @@ public class DanggnMarketService {
             log.info("DanggnMarket Not found Article");
             return;
         } else if (gap > 0 && gap <= 100000) {
-            recentArticleId = topArticleId + 150;
+            recentArticleId = topArticleId + CrawlerConstant.GAP;
         } else {
             topArticleId = recentArticleId - 100000;
-            recentArticleId = topArticleId + 150;
+            recentArticleId = topArticleId + CrawlerConstant.GAP;
         }
 
         if(topArticleId < nowArticleId) {
