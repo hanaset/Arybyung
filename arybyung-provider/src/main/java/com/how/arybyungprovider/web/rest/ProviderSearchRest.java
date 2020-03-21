@@ -20,25 +20,6 @@ public class ProviderSearchRest extends ProviderRestSupport {
     private final ProviderSearchService providerSearchService;
     private final PopularRankingService popularRankingService;
 
-//    @ApiOperation(
-//            value = "HowMuch 중고 제품 조회(오픈빌더)"
-//    )
-//    @PostMapping("/search")
-//    public <T> KakaoResponse<?> keywordSearch(@RequestBody KakaoRequest request) {
-//        Map<String, String> keywordMap = request.getAction().getParams();
-//
-//        if (keywordMap.containsKey("keyword")) {
-//            log.info(keywordMap.get("keyword"));
-//            return providerSearchService.kakaoSearchKeyword(keywordMap.get("keyword"));
-//        } else {
-//            return KakaoResponse.builder()
-//                    .version("1.0")
-//                    .template(null)
-//                    .build();
-//        }
-//
-//    }
-
     @ApiOperation(
             value = "HowMuch 중고 제품 조회"
     )

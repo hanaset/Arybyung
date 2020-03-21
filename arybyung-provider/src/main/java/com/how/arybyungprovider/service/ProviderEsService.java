@@ -93,8 +93,8 @@ public class ProviderEsService {
         ArticleData thisWeekHighestArticle = articleDatas.stream().max(comp).get();
         ArticleData thisWeekLowestArticle = articleDatas.stream().min(comp).get();
 
-        // 24시간 기준 최고가, 최저가
-        ArticleData todayHightestArticle = articleDatas.stream()
+        // 24시간 기준 최고가, 최저가 (24시간기준 최고, 최저 구할 수 없으면 1주일 데이터로 대치)
+        ArticleData todayHighestArticle = articleDatas.stream()
                 .filter(articleData -> articleData.getPostingDtime() >= yesterday)
                 .max(comp)
                 .orElse(thisWeekHighestArticle);
@@ -117,7 +117,7 @@ public class ProviderEsService {
 
         KeywordResultData keywordResultData = KeywordResultData.builder()
                 .articleList(articleDatas)
-                .todayHighestPrice(todayHightestArticle)
+                .todayHighestPrice(todayHighestArticle)
                 .todayLowestPrice(todayLowestArticle)
                 .todayAvgPrice(Math.floor(todayAvgPrice))
                 .thisWeekHighestPrice(thisWeekHighestArticle)
