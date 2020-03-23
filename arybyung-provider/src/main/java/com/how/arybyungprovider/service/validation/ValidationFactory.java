@@ -11,16 +11,16 @@ public class ValidationFactory {
     private final JoonggonaraValidation joonggonaraValidation;
     private final BunjangValidation bunjangValidation;
 
-    public ValidationMarket getInstanseBySite(MarketName marketName) {
-        if(marketName.getName().equals(MarketName.joonggonara)) {
+    public ValidationMarket getInstanceBySite(MarketName marketName) {
+        if(marketName.equals(MarketName.joonggonara)) {
             return joonggonaraValidation;
         }
 
-        if(marketName.getName().equals(MarketName.bunjang)) {
+        if(marketName.equals(MarketName.bunjang)) {
             return bunjangValidation;
         }
 
-        if(marketName.getName().equals(MarketName.danggn)) {
+        if(marketName.equals(MarketName.danggn)) {
             return danggnValidation;
         }
 

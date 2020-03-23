@@ -46,7 +46,7 @@ public class ProviderArticleService {
         List<ArticleEsEntity> articleList = Lists.newArrayList();
         articleDataList.forEach(articleData -> {
 
-            ValidationMarket validationMarket = validationFactory.getInstanseBySite(articleData.getSite());
+            ValidationMarket validationMarket = validationFactory.getInstanceBySite(articleData.getSite());
             ArticleState state = validationMarket.validationMarket(articleData.getArticleId());
 
             if(state.equals(ArticleState.D) || state.equals(ArticleState.C)) {
