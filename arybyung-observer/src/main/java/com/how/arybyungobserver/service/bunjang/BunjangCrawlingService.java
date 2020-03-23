@@ -7,11 +7,11 @@ import com.how.arybyungcommon.properties.UrlProperties;
 import com.how.arybyungcommon.service.FilteringWordService;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
+import com.how.muchcommon.model.type.MarketName;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import retrofit2.Response;
 
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class BunjangCrawlingService {
     }
 
     public Long getTopArticleId() {
-        ArticleEntity articleEntity = articleRepository.findTopBySiteOrderByArticleIdDesc("bunjang").orElse(ArticleEntity.builder()
+        ArticleEntity articleEntity = articleRepository.findTopBySiteOrderByArticleIdDesc(MarketName.bunjang.getName()).orElse(ArticleEntity.builder()
                 .articleId(0L).build());
         return articleEntity.getArticleId();
     }
@@ -65,8 +65,13 @@ public class BunjangCrawlingService {
         }
     }
 
-    @Async(value = "bunjangTaskExecutor")
-    @Transactional
+    @Async("bunjangTaskExecutor")
+    public void separationGetArticles(Long start, Long unit) {
+        for (Long articleId = start; articleId < start + unit; articleId++) {
+            getArticle(articleId);
+        }
+    }
+
     public void getArticle(Long articleId) {
         try {
             Response<BunjangItemResponse> response = bunjangApiClient.getArticle(articleId).execute();
@@ -86,7 +91,7 @@ public class BunjangCrawlingService {
                 ArticleEntity articleEntity = ArticleEntity.builder()
                         .articleId(articleId)
                         .state(ArticleState.S)
-                        .site("bunjang")
+                        .site(MarketName.bunjang.getName())
                         .price(Long.parseLong(response.body().getItemInfo().getPrice()))
                         .url(urlProperties.getBunjangArticleUrl() + articleId)
                         .subject(response.body().getItemInfo().getName())
@@ -97,7 +102,7 @@ public class BunjangCrawlingService {
 
                 articleRepository.save(articleEntity);
             } else {
-                log.error("Bunjang getArticle Failed :{}", response.errorBody().byteStream().toString());
+//                log.error("Bunjang getArticle Failed :{}", response.errorBody().byteStream().toString());
             }
 
         } catch (IOException | NullPointerException e) {

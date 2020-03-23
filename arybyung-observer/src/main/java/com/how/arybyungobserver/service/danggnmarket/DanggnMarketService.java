@@ -3,6 +3,7 @@ package com.how.arybyungobserver.service.danggnmarket;
 import com.how.arybyungcommon.client.danggnmarket.DanggnMarketParser;
 import com.how.arybyungobserver.service.CrawlerConstant;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
+import com.how.muchcommon.model.type.MarketName;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class DanggnMarketService {
     }
 
     private Long getTopArticleId() {
-        ArticleEntity articleEntity = articleRepository.findTopBySiteOrderByArticleIdDesc("danggn").orElse(ArticleEntity.builder()
+        ArticleEntity articleEntity = articleRepository.findTopBySiteOrderByArticleIdDesc(MarketName.danggn.getName()).orElse(ArticleEntity.builder()
                 .articleId(0L).build());
         return articleEntity.getArticleId();
     }
@@ -34,6 +35,8 @@ public class DanggnMarketService {
         Long topArticleId = getTopArticleId();
         Long recentArticleId = danggnMarketParser.getRecentArticleId();
         Long gap = recentArticleId - topArticleId;
+
+        log.info("Danggn Top :{} , Recent : {}", topArticleId, recentArticleId);
 
         if (gap <= 0) {
             log.info("DanggnMarket Not found Article");
@@ -49,8 +52,9 @@ public class DanggnMarketService {
             topArticleId = nowArticleId;
         }
 
-        for (nowArticleId = topArticleId + 1; nowArticleId <= recentArticleId; nowArticleId++) {
-            danggnMarketParser.getArticle(nowArticleId);
+        Long threadUnit = CrawlerConstant.GAP / 10;
+        for (nowArticleId = topArticleId; nowArticleId < recentArticleId; nowArticleId += threadUnit) {
+            danggnMarketParser.separationGetArticles(nowArticleId, threadUnit);
         }
         log.info("DanggnMarket ArticleId {} ~ {}", topArticleId, recentArticleId);
 

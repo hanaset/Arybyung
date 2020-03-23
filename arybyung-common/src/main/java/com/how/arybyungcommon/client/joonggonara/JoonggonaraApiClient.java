@@ -3,6 +3,7 @@ package com.how.arybyungcommon.client.joonggonara;
 import com.how.arybyungcommon.client.joonggonara.model.JoonggonaraArticleDetailResponse;
 import com.how.arybyungcommon.client.joonggonara.model.JoonggonaraListResponse;
 import com.how.arybyungcommon.properties.UrlProperties;
+import com.how.muchcommon.model.type.MarketName;
 import com.how.muchcommon.repository.jparepository.CookieRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -31,8 +32,10 @@ public class JoonggonaraApiClient {
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
-        this.cookie = cookieRepository.findBySite("joonggonara").getValue();
+        this.cookie = cookieRepository.findBySite(MarketName.joonggonara.getName()).getValue();
         this.joonggonaraApiService = retrofit.create(JoonggonaraApiService.class);
+
+        log.info("Joonggonara Cookie : {}", this.cookie);
     }
 
     public Call<JoonggonaraListResponse> getArticleList() {

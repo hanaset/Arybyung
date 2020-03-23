@@ -20,6 +20,8 @@ public class JoongnaraService {
         Long topArticleId = joonggonaraCrawlingService.getTopArticleId();
         Long recentArticleId = joonggonaraCrawlingService.getRecentArticleId();
 
+        log.info("Joonggonara Top :{} , Recent : {}", topArticleId, recentArticleId);
+
         Long gap = recentArticleId - topArticleId;
 
         if (gap <= 0) {
@@ -32,12 +34,13 @@ public class JoongnaraService {
             recentArticleId = topArticleId + CrawlerConstant.GAP;
         }
 
-        if(topArticleId < nowArticleId) {
+        if (topArticleId < nowArticleId) {
             topArticleId = nowArticleId;
         }
 
-        for (nowArticleId = topArticleId + 1; nowArticleId <= recentArticleId; nowArticleId++) {
-            joonggonaraCrawlingService.getArticle(nowArticleId);
+        Long threadUnit = CrawlerConstant.GAP / 10;
+        for (nowArticleId = topArticleId ; nowArticleId < recentArticleId; nowArticleId += threadUnit) {
+            joonggonaraCrawlingService.separationGetArticles(nowArticleId, threadUnit);
         }
 
         log.info("JoonggoNARA ArticleId {} ~ {}", topArticleId, recentArticleId);
