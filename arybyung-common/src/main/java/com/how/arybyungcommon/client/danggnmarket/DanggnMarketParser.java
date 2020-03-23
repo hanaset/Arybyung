@@ -4,6 +4,7 @@ import com.how.arybyungcommon.properties.UrlProperties;
 import com.how.arybyungcommon.service.FilteringWordService;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
+import com.how.muchcommon.model.type.MarketName;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.HttpStatusException;
@@ -73,9 +74,13 @@ public class DanggnMarketParser {
         return false;
     }
 
+    @Async("danggnMarketTaskExecutor")
+    public void separationGetArticles(Long start, Long unit) {
+        for(Long articleId = start ; articleId < start + unit ; articleId++) {
+            getArticle(articleId);
+        }
+    }
 
-    @Async(value = "danggnMarketTaskExecutor")
-    @Transactional
     public void getArticle(Long articleId) {
 
         String url = urlProperties.getDanggnArticleUrl() + "/articles/" + articleId;
@@ -118,7 +123,7 @@ public class DanggnMarketParser {
                     .price(price)
                     .state(state)
                     .image(imageElement.attr("data-lazy"))
-                    .site("danggn")
+                    .site(MarketName.danggn.getName())
                     .postingDtime(LocalDate.parse(dateElement.attr("content"), formatter).atStartOfDay(ZoneId.of("Asia/Seoul")).minusYears(2))
                     .content(content)
                     .build();

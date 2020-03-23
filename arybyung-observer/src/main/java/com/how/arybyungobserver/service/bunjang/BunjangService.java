@@ -10,7 +10,6 @@ public class BunjangService {
 
     private final BunjangCrawlingService bunjangCrawlingService;
     private Long nowArticleId = 0L;
-    private Long gap = 500L;
 
     public BunjangService(BunjangCrawlingService bunjangCrawlingService) {
         this.bunjangCrawlingService = bunjangCrawlingService;
@@ -19,6 +18,8 @@ public class BunjangService {
     public void parsingArticle() {
         Long topArticleId = bunjangCrawlingService.getTopArticleId();
         Long recentArticleId = bunjangCrawlingService.getRecentArticleId();
+
+        log.info("Bunjang Top :{} , Recent : {}", topArticleId, recentArticleId);
 
         Long gap = recentArticleId - topArticleId;
 
@@ -36,10 +37,11 @@ public class BunjangService {
             topArticleId = nowArticleId;
         }
 
-        for (nowArticleId = topArticleId + 1; nowArticleId <= recentArticleId; nowArticleId++) {
-            bunjangCrawlingService.getArticle(nowArticleId);
+        Long threadUnit = CrawlerConstant.GAP / 10;
+        for (nowArticleId = topArticleId ; nowArticleId < recentArticleId; nowArticleId += threadUnit) {
+            bunjangCrawlingService.separationGetArticles(nowArticleId, threadUnit);
         }
 
-        log.info("Bunjang ArticleId {} ~ {}", topArticleId, recentArticleId);
+        log.info("Bunjang ArticleId {} ~ {}", topArticleId , recentArticleId);
     }
 }

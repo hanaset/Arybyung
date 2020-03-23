@@ -11,35 +11,35 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @EnableAsync
 public class AsyncConfig implements AsyncConfigurer {
 
-    @Bean
+    @Bean(name = "joonggonaraTaskExecutor")
     public ThreadPoolTaskExecutor joonggonaraTaskExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setThreadNamePrefix("joonggonaraTaskExecutor-");
-        taskExecutor.setQueueCapacity(200);
-        taskExecutor.setCorePoolSize(50);
-        taskExecutor.setMaxPoolSize(50);
+        taskExecutor.setQueueCapacity(20);
+        taskExecutor.setCorePoolSize(10);
+        taskExecutor.setMaxPoolSize(10);
 
         return taskExecutor;
     }
 
-    @Bean
+    @Bean(name = "danggnMarketTaskExecutor")
     public ThreadPoolTaskExecutor danggnMarketTaskExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
         taskExecutor.setThreadNamePrefix("danggnMarketTaskExecutor-");
-        taskExecutor.setQueueCapacity(200);
-        taskExecutor.setCorePoolSize(50);
-        taskExecutor.setMaxPoolSize(50);
+        taskExecutor.setQueueCapacity(20);
+        taskExecutor.setCorePoolSize(10);
+        taskExecutor.setMaxPoolSize(10);
 
         return taskExecutor;
     }
 
-    @Bean
+    @Bean(name = "bunjangTaskExecutor")
     public ThreadPoolTaskExecutor bunjangTaskExecutor() {
         ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
-        taskExecutor.setThreadNamePrefix("bunjangMarketTaskExecutor-");
-        taskExecutor.setQueueCapacity(200);
-        taskExecutor.setCorePoolSize(50);
-        taskExecutor.setMaxPoolSize(50);
+        taskExecutor.setThreadNamePrefix("bunjangTaskExecutor-");
+        taskExecutor.setQueueCapacity(20);
+        taskExecutor.setCorePoolSize(10);
+        taskExecutor.setMaxPoolSize(10);
 
         return taskExecutor;
     }

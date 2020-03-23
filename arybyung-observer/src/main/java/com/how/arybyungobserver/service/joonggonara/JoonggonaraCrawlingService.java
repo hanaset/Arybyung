@@ -7,14 +7,13 @@ import com.how.arybyungcommon.properties.UrlProperties;
 import com.how.arybyungcommon.service.FilteringWordService;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
+import com.how.muchcommon.model.type.MarketName;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.exception.DataException;
 import org.jsoup.Jsoup;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import retrofit2.Response;
 
 import java.io.IOException;
@@ -42,7 +41,7 @@ public class JoonggonaraCrawlingService {
     }
 
     public Long getTopArticleId() {
-        ArticleEntity articleEntity = articleRepository.findTopBySiteOrderByArticleIdDesc("joonggonar").orElse(ArticleEntity.builder()
+        ArticleEntity articleEntity = articleRepository.findTopBySiteOrderByArticleIdDesc(MarketName.joonggonara.getName()).orElse(ArticleEntity.builder()
                 .articleId(0L).build());
         return articleEntity.getArticleId();
     }
@@ -69,7 +68,12 @@ public class JoonggonaraCrawlingService {
     }
 
     @Async(value = "joonggonaraTaskExecutor")
-    @Transactional
+    public void separationGetArticles(Long start, Long unit) {
+        for (Long articleId = start; articleId < start + unit; articleId++) {
+            getArticle(articleId);
+        }
+    }
+
     public void getArticle(Long articleId) {
         try {
             Response<JoonggonaraArticleDetailResponse> response = joonggonaraApiClient.getArticleDetail(articleId).execute();
@@ -104,7 +108,7 @@ public class JoonggonaraCrawlingService {
                 ArticleEntity articleEntity = ArticleEntity.builder()
                         .articleId(articleId)
                         .state(state)
-                        .site("joonggonara")
+                        .site(MarketName.joonggonara.getName())
                         .price(response.body().getSaleInfo().getPrice())
                         .url(urlProperties.getJoonggoArtlcleUrl() + articleId)
                         .subject(response.body().getArticle().getSubject())
@@ -115,7 +119,7 @@ public class JoonggonaraCrawlingService {
 
                 articleRepository.save(articleEntity);
             } else {
-//                log.error("JoonggoNARA getArticle Failed articleID: {} => {}",articleId, response.errorBody().byteStream().toString());
+//                log.error("JoonggoNARA getArticle Failed articleID: {} => {}", articleId, response.errorBody().byteStream().toString());
             }
 
         } catch (IOException | NullPointerException | DataIntegrityViolationException e) {
