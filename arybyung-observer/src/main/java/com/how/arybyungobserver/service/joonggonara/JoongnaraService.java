@@ -5,6 +5,8 @@ import com.how.muchcommon.entity.jpaentity.TopArticleEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
+
 @Slf4j
 @Service
 public class JoongnaraService {
@@ -29,10 +31,10 @@ public class JoongnaraService {
         if (gap <= 0) {
             log.info("JoonggoNARA Not found Article");
             return;
-        } else if (gap > 0 && gap <= 100000) {
+        } else if (gap > 0 && gap <= CrawlerConstant.RANGE) {
             recentArticleId = topArticleId + CrawlerConstant.GAP;
         } else {
-            topArticleId = recentArticleId - 100000;
+            topArticleId = recentArticleId - CrawlerConstant.RANGE;
             recentArticleId = topArticleId + CrawlerConstant.GAP;
         }
 
@@ -47,6 +49,7 @@ public class JoongnaraService {
 
         log.info("JoonggoNARA ArticleId {} ~ {}", topArticleId, recentArticleId);
         topArticleEntity.setArticleId(recentArticleId);
+        topArticleEntity.setUpdDtime(ZonedDateTime.now());
         joonggonaraCrawlingService.setTopArticleEntity(topArticleEntity);
     }
 

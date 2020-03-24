@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.ZonedDateTime;
 
 @Slf4j
 @Service
@@ -49,10 +50,10 @@ public class DanggnMarketService {
         if (gap <= 0) {
             log.info("DanggnMarket Not found Article");
             return;
-        } else if (gap > 0 && gap <= 100000) {
+        } else if (gap > 0 && gap <= CrawlerConstant.RANGE) {
             recentArticleId = topArticleId + CrawlerConstant.GAP;
         } else {
-            topArticleId = recentArticleId - 100000;
+            topArticleId = recentArticleId - CrawlerConstant.RANGE;
             recentArticleId = topArticleId + CrawlerConstant.GAP;
         }
 
@@ -66,6 +67,7 @@ public class DanggnMarketService {
         }
         log.info("DanggnMarket ArticleId {} ~ {}", topArticleId, recentArticleId);
         topArticleEntity.setArticleId(recentArticleId);
+        topArticleEntity.setUpdDtime(ZonedDateTime.now());
         setTopArticleEntity(topArticleEntity);
 
     }
