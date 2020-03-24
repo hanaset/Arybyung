@@ -4,6 +4,7 @@ import com.how.arybyungobserver.service.ObserverControlService;
 import com.how.arybyungobserver.service.danggnmarket.DanggnMarketService;
 import com.how.muchcommon.model.type.MarketName;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +23,7 @@ public class DanggnMarketScheduler {
         this.observerControlService = observerControlService;
     }
 
-    @Scheduled(fixedRate = 1000 * 10)
+    @Scheduled(fixedRate = 1000 * 60)
     public void parsing() throws IOException {
 
         if(!observerControlService.checkSite(MarketName.danggn.getName()))

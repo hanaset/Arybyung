@@ -1,6 +1,7 @@
 package com.how.arybyungobserver.service.joonggonara;
 
 import com.how.arybyungobserver.service.CrawlerConstant;
+import com.how.muchcommon.entity.jpaentity.TopArticleEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,8 @@ public class JoongnaraService {
 
     public void parsingArticle() {
 
-        Long topArticleId = joonggonaraCrawlingService.getTopArticleId();
+        TopArticleEntity topArticleEntity = joonggonaraCrawlingService.getTopArticleEntity();
+        Long topArticleId = topArticleEntity.getArticleId();
         Long recentArticleId = joonggonaraCrawlingService.getRecentArticleId();
 
         log.info("Joonggonara Top :{} , Recent : {}", topArticleId, recentArticleId);
@@ -44,6 +46,8 @@ public class JoongnaraService {
         }
 
         log.info("JoonggoNARA ArticleId {} ~ {}", topArticleId, recentArticleId);
+        topArticleEntity.setArticleId(recentArticleId);
+        joonggonaraCrawlingService.setTopArticleEntity(topArticleEntity);
     }
 
 }

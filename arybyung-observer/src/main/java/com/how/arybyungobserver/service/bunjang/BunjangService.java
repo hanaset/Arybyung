@@ -1,6 +1,7 @@
 package com.how.arybyungobserver.service.bunjang;
 
 import com.how.arybyungobserver.service.CrawlerConstant;
+import com.how.muchcommon.entity.jpaentity.TopArticleEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,8 @@ public class BunjangService {
     }
 
     public void parsingArticle() {
-        Long topArticleId = bunjangCrawlingService.getTopArticleId();
+        TopArticleEntity topArticleEntity = bunjangCrawlingService.getTopArticleEntity();
+        Long topArticleId = topArticleEntity.getArticleId();
         Long recentArticleId = bunjangCrawlingService.getRecentArticleId();
 
         log.info("Bunjang Top :{} , Recent : {}", topArticleId, recentArticleId);
@@ -43,5 +45,7 @@ public class BunjangService {
         }
 
         log.info("Bunjang ArticleId {} ~ {}", topArticleId , recentArticleId);
+        topArticleEntity.setArticleId(recentArticleId);
+        bunjangCrawlingService.setTopArticleEntity(topArticleEntity);
     }
 }

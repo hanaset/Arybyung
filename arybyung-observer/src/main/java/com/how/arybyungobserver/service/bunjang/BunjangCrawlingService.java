@@ -6,9 +6,11 @@ import com.how.arybyungcommon.client.bunjang.model.BunjangItemResponse;
 import com.how.arybyungcommon.properties.UrlProperties;
 import com.how.arybyungcommon.service.FilteringWordService;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
+import com.how.muchcommon.entity.jpaentity.TopArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
 import com.how.muchcommon.model.type.MarketName;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
+import com.how.muchcommon.repository.jparepository.TopArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -24,24 +26,29 @@ import java.time.ZonedDateTime;
 public class BunjangCrawlingService {
 
     private final BunjangApiClient bunjangApiClient;
+    private final TopArticleRepository topArticleRepository;
     private final ArticleRepository articleRepository;
     private final UrlProperties urlProperties;
     private final FilteringWordService filteringWordService;
 
     public BunjangCrawlingService(BunjangApiClient bunjangApiClient,
+                                  TopArticleRepository topArticleRepository,
                                   ArticleRepository articleRepository,
                                   UrlProperties urlProperties,
                                   FilteringWordService filteringWordService) {
         this.bunjangApiClient = bunjangApiClient;
+        this.topArticleRepository = topArticleRepository;
         this.articleRepository = articleRepository;
         this.urlProperties = urlProperties;
         this.filteringWordService = filteringWordService;
     }
 
-    public Long getTopArticleId() {
-        ArticleEntity articleEntity = articleRepository.findTopBySiteOrderByArticleIdDesc(MarketName.bunjang.getName()).orElse(ArticleEntity.builder()
-                .articleId(0L).build());
-        return articleEntity.getArticleId();
+    public TopArticleEntity getTopArticleEntity() {
+        return topArticleRepository.findBySite(MarketName.bunjang.getName()).orElse(TopArticleEntity.builder().articleId(0L).build());
+    }
+
+    public void setTopArticleEntity(TopArticleEntity topArticleEntity) {
+        topArticleRepository.save(topArticleEntity);
     }
 
     public Long getRecentArticleId() {

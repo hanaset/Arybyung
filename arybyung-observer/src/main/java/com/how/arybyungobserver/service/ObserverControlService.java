@@ -31,6 +31,8 @@ public class ObserverControlService {
         siteEntities.stream().forEach(siteEntity -> {
             siteController.put(siteEntity.getCode(), siteEntity.getIsCheck());
         });
+
+        log.info("Site OnOff Status => {}", siteController);
     }
 
     public Boolean checkSite(String site) {

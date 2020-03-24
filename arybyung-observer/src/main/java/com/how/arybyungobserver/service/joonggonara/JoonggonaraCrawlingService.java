@@ -6,9 +6,11 @@ import com.how.arybyungcommon.client.joonggonara.model.JoonggonaraListResponse;
 import com.how.arybyungcommon.properties.UrlProperties;
 import com.how.arybyungcommon.service.FilteringWordService;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
+import com.how.muchcommon.entity.jpaentity.TopArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
 import com.how.muchcommon.model.type.MarketName;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
+import com.how.muchcommon.repository.jparepository.TopArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -26,24 +28,29 @@ import java.time.ZonedDateTime;
 public class JoonggonaraCrawlingService {
 
     private final JoonggonaraApiClient joonggonaraApiClient;
+    private final TopArticleRepository topArticleRepository;
     private final ArticleRepository articleRepository;
     private final UrlProperties urlProperties;
     private final FilteringWordService filteringWordService;
 
     public JoonggonaraCrawlingService(JoonggonaraApiClient joonggonaraApiClient,
+                                      TopArticleRepository topArticleRepository,
                                       ArticleRepository articleRepository,
                                       UrlProperties urlProperties,
                                       FilteringWordService filteringWordService) {
         this.joonggonaraApiClient = joonggonaraApiClient;
+        this.topArticleRepository = topArticleRepository;
         this.articleRepository = articleRepository;
         this.urlProperties = urlProperties;
         this.filteringWordService = filteringWordService;
     }
 
-    public Long getTopArticleId() {
-        ArticleEntity articleEntity = articleRepository.findTopBySiteOrderByArticleIdDesc(MarketName.joonggonara.getName()).orElse(ArticleEntity.builder()
-                .articleId(0L).build());
-        return articleEntity.getArticleId();
+    public TopArticleEntity getTopArticleEntity() {
+        return topArticleRepository.findBySite(MarketName.joonggonara.getName()).orElse(TopArticleEntity.builder().articleId(0L).build());
+    }
+
+    public void setTopArticleEntity(TopArticleEntity topArticleEntity) {
+        topArticleRepository.save(topArticleEntity);
     }
 
     public Long getRecentArticleId() {
@@ -123,7 +130,7 @@ public class JoonggonaraCrawlingService {
             }
 
         } catch (IOException | NullPointerException | DataIntegrityViolationException e) {
-            log.error("JoonggoNARA getArticle articleId : {} => Exception : {}", articleId, e.getMessage());
+//            log.error("JoonggoNARA getArticle articleId : {} => Exception : {}", articleId, e.getMessage());
         }
     }
 }
