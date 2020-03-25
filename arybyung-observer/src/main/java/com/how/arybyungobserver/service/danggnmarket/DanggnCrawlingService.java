@@ -59,13 +59,13 @@ public class DanggnCrawlingService {
     }
 
     public void saveCount() {
-        crawlingStatService.save(MarketName.bunjang, successCount.get(), failCount.get(), filteringCount.get());
+        crawlingStatService.save(MarketName.danggn, successCount.get(), failCount.get(), filteringCount.get());
         init();
     }
 
     @PostConstruct
     public void init() {
-        CrawlingStatEntity entity = crawlingStatService.init(MarketName.bunjang);
+        CrawlingStatEntity entity = crawlingStatService.init(MarketName.danggn);
         successCount.set(entity.getSuccessCount());
         failCount.set(entity.getFailCount());
         filteringCount.set(entity.getFilteringCount());
