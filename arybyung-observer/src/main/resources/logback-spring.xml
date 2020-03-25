@@ -93,7 +93,7 @@
         <root level="DEBUG">
             <appender-ref ref="STDOUT"/>
             <appender-ref ref="info_log"/>
-            <appender-ref ref="error_log"/>
+<!--            <appender-ref ref="error_log"/>-->
 <!--            <appender-ref ref="cloudWatch_info_log"/>-->
 <!--            <appender-ref ref="cloudWatch_error_log"/>-->
         </root>
@@ -112,15 +112,15 @@
             <appender-ref ref="slow_query_log"/>
         </logger>
 
-        <logger name="joonggonara_log" level="INFO">
+        <logger name="joonggonara_log" level="INFO" additivity="false">
             <appender-ref ref="joonggonara-crawling"/>
         </logger>
 
-        <logger name="danggn_log" level="INFO">
+        <logger name="danggn_log" level="INFO" additivity="false">
             <appender-ref ref="danggn-crawling"/>
         </logger>
 
-        <logger name="bunjang_log" level="INFO">
+        <logger name="bunjang_log" level="INFO" additivity="false">
             <appender-ref ref="bunjang-crawling"/>
         </logger>
 
