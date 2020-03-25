@@ -12,19 +12,16 @@ public class ValidationFactory {
     private final BunjangValidation bunjangValidation;
 
     public ValidationMarket getInstanceBySite(MarketName marketName) {
-        if(marketName.equals(MarketName.joonggonara)) {
-            return joonggonaraValidation;
-        }
 
-        if(marketName.equals(MarketName.bunjang)) {
-            return bunjangValidation;
-        }
-
-        if(marketName.equals(MarketName.danggn)) {
-            return danggnValidation;
+        switch (marketName) {
+            case joonggonara:
+                return joonggonaraValidation;
+            case bunjang:
+                return bunjangValidation;
+            case danggn:
+                return danggnValidation;
         }
 
         throw new IllegalArgumentException("MarketName enum error!");
-
     }
 }
