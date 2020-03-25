@@ -6,9 +6,11 @@ import com.how.arybyungcommon.service.FilteringWordService;
 import com.how.arybyungobserver.service.CrawlingStatService;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
 import com.how.muchcommon.entity.jpaentity.CrawlingStatEntity;
+import com.how.muchcommon.entity.jpaentity.TopArticleEntity;
 import com.how.muchcommon.model.type.ArticleState;
 import com.how.muchcommon.model.type.MarketName;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
+import com.how.muchcommon.repository.jparepository.TopArticleRepository;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -35,6 +37,7 @@ public class DanggnCrawlingService {
     private final CrawlingStatService crawlingStatService;
     private final DanggnMarketClient danggnMarketClient;
     private final FilteringWordService filteringWordService;
+    private final TopArticleRepository topArticleRepository;
     private final UrlProperties urlProperties;
 
     private AtomicLong successCount = new AtomicLong(0);
@@ -45,11 +48,13 @@ public class DanggnCrawlingService {
                               FilteringWordService filteringWordService,
                               DanggnMarketClient danggnMarketClient,
                               CrawlingStatService crawlingStatService,
+                              TopArticleRepository topArticleRepository,
                               UrlProperties urlProperties) {
         this.articleRepository = articleRepository;
         this.crawlingStatService = crawlingStatService;
         this.filteringWordService = filteringWordService;
         this.danggnMarketClient = danggnMarketClient;
+        this.topArticleRepository = topArticleRepository;
         this.urlProperties = urlProperties;
     }
 
@@ -66,6 +71,13 @@ public class DanggnCrawlingService {
         filteringCount.set(entity.getFilteringCount());
     }
 
+    public TopArticleEntity getTopArticleEntity() {
+        return topArticleRepository.findBySite(MarketName.danggn.getName()).orElse(TopArticleEntity.builder().articleId(0L).build());
+    }
+
+    public void setTopArticleEntity(TopArticleEntity topArticleEntity) {
+        topArticleRepository.save(topArticleEntity);
+    }
 
     public Long getRecentArticleId() throws IOException {
         Document document = danggnMarketClient.getRecentArticle();

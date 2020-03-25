@@ -1,10 +1,7 @@
 package com.how.arybyungobserver.service.danggnmarket;
 
-import com.how.arybyungcommon.client.danggnmarket.DanggnMarketClient;
 import com.how.arybyungobserver.service.CrawlerConstant;
 import com.how.muchcommon.entity.jpaentity.TopArticleEntity;
-import com.how.muchcommon.model.type.MarketName;
-import com.how.muchcommon.repository.jparepository.TopArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -16,29 +13,19 @@ import java.time.ZonedDateTime;
 public class DanggnMarketService {
 
     private final DanggnCrawlingService danggnCrawlingService;
-    private final TopArticleRepository topArticleRepository;
     private Long nowArticleId = 0L;
 
 
-    public DanggnMarketService(DanggnCrawlingService danggnCrawlingService,
-                               TopArticleRepository topArticleRepository) {
+    public DanggnMarketService(DanggnCrawlingService danggnCrawlingService) {
         this.danggnCrawlingService = danggnCrawlingService;
-        this.topArticleRepository = topArticleRepository;
     }
 
     public void saveCount() {
         danggnCrawlingService.saveCount();
     }
-    public TopArticleEntity getTopArticleEntity() {
-        return topArticleRepository.findBySite(MarketName.danggn.getName()).orElse(TopArticleEntity.builder().articleId(0L).build());
-    }
-
-    public void setTopArticleEntity(TopArticleEntity topArticleEntity) {
-        topArticleRepository.save(topArticleEntity);
-    }
 
     public void parsingArticle() throws IOException {
-        TopArticleEntity topArticleEntity = getTopArticleEntity();
+        TopArticleEntity topArticleEntity = danggnCrawlingService.getTopArticleEntity();
         Long topArticleId = topArticleEntity.getArticleId();
         Long recentArticleId = danggnCrawlingService.getRecentArticleId();
         Long gap = recentArticleId - topArticleId;
@@ -69,7 +56,7 @@ public class DanggnMarketService {
         log.info("DanggnMarket ArticleId {} ~ {}", topArticleId, recentArticleId);
         topArticleEntity.setArticleId(recentArticleId);
         topArticleEntity.setUpdDtime(ZonedDateTime.now());
-        setTopArticleEntity(topArticleEntity);
+        danggnCrawlingService.setTopArticleEntity(topArticleEntity);
 
     }
 }
