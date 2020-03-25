@@ -116,27 +116,23 @@ public class ProviderEsService {
                 .average()
                 .orElse(0);
 
-        double sdPrice = todayArticleDatas.stream() // 표준편차 구하기
+        double dispersion = todayArticleDatas.stream() // 표준편차 구하기
                 .mapToDouble(articleData -> {
                     double price = todayAvgPrice - articleData.getPrice();
-                    return price < 0 ? price * -1 : price;
+                    return Math.pow(price, 2);
                 })
                 .average()
                 .orElse(0);
 
         double realAvgPrice = todayArticleDatas.stream()
                 .filter(articleData -> {
-                    Double ds = (articleData.getPrice() - todayAvgPrice) / sdPrice; // 확률 밀도 계산
-                    if(ds < 0)
-                        ds *= -1;
-
-                    return ds <= 0.5; // 정규분포 1.65(약 상위 5프로, 하위 5프로 제외)
+                    Double ds = (articleData.getPrice() - todayAvgPrice) / Math.sqrt(dispersion); // 확률 밀도 계산
+//                    log.info("Price : {} => {}", articleData.getPrice(), ds);
+                    return Math.abs(ds) <= 1.28; // 정규분포 1.28(약 상위 10프로, 하위 10프로 제외)
                 })
                 .mapToDouble(ArticleData::getPrice)
                 .average()
                 .orElse(0);
-
-        System.out.println(realAvgPrice);
 
         KeywordResultData keywordResultData = KeywordResultData.builder()
                 .articleList(articleDatas)
