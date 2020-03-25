@@ -31,4 +31,9 @@ public class DanggnMarketScheduler {
 
         danggnMarketService.parsingArticle();
     }
+
+    @Scheduled(cron = "0 0 * * * *", zone = "Asia/Seoul")
+    public void saveCount() {
+        danggnMarketService.saveCount();
+    }
 }

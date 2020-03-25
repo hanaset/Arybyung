@@ -26,6 +26,18 @@
         <logger name="org.hibernate.SQL" level="DEBUG">
             <appender-ref ref="query_log"/>
         </logger>
+
+        <logger name="joonggonara_log" level="INFO">
+            <appender-ref ref="joonggonara-crawling"/>
+        </logger>
+
+        <logger name="danggn_log" level="INFO">
+            <appender-ref ref="danggn-crawling"/>
+        </logger>
+
+        <logger name="bunjang_log" level="INFO">
+            <appender-ref ref="bunjang-crawling"/>
+        </logger>
     </springProfile>
 
     <springProfile name="development">
@@ -61,6 +73,18 @@
         <logger name="org.hibernate.SQL" level="DEBUG">
             <appender-ref ref="query_log"/>
         </logger>
+
+        <logger name="joonggonara_log" level="INFO">
+            <appender-ref ref="joonggonara-crawling"/>
+        </logger>
+
+        <logger name="danggn_log" level="INFO">
+            <appender-ref ref="danggn-crawling"/>
+        </logger>
+
+        <logger name="bunjang_log" level="INFO">
+            <appender-ref ref="bunjang-crawling"/>
+        </logger>
     </springProfile>
 
 
@@ -86,6 +110,18 @@
 
         <logger name="slow_query_log" level="INFO" additivity="false">
             <appender-ref ref="slow_query_log"/>
+        </logger>
+
+        <logger name="joonggonara_log" level="INFO">
+            <appender-ref ref="joonggonara-crawling"/>
+        </logger>
+
+        <logger name="danggn_log" level="INFO">
+            <appender-ref ref="danggn-crawling"/>
+        </logger>
+
+        <logger name="bunjang_log" level="INFO">
+            <appender-ref ref="bunjang-crawling"/>
         </logger>
 
         <!--<logger name="org.hibernate.SQL" level="DEBUG">-->

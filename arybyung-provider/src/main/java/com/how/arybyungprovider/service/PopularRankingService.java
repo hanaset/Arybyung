@@ -2,10 +2,8 @@ package com.how.arybyungprovider.service;
 
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
-import com.how.arybyungprovider.constant.ProviderApiErrorCode;
-import com.how.arybyungprovider.exception.ProviderResponseException;
 import com.how.muchcommon.entity.jpaentity.PopularRankEntity;
-import com.how.muchcommon.entity.jpaentity.PopularRankId;
+import com.how.muchcommon.entity.jpaentity.id.PopularRankId;
 import com.how.muchcommon.model.popular.PopularRankItem;
 import com.how.muchcommon.model.popular.PopularRankResponse;
 import com.how.muchcommon.repository.jparepository.PopularRankRepository;

@@ -1,49 +1,74 @@
-package com.how.arybyungcommon.client.danggnmarket;
+package com.how.arybyungobserver.service.danggnmarket;
 
+import com.how.arybyungcommon.client.danggnmarket.DanggnMarketClient;
 import com.how.arybyungcommon.properties.UrlProperties;
 import com.how.arybyungcommon.service.FilteringWordService;
+import com.how.arybyungobserver.service.CrawlingStatService;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
+import com.how.muchcommon.entity.jpaentity.CrawlingStatEntity;
 import com.how.muchcommon.model.type.ArticleState;
 import com.how.muchcommon.model.type.MarketName;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
-import lombok.extern.slf4j.Slf4j;
-import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
-@Slf4j
 @Component
-public class DanggnMarketParser {
+public class DanggnCrawlingService {
+
+    private Logger log = LoggerFactory.getLogger("danggn_log");
 
     private final ArticleRepository articleRepository;
+    private final CrawlingStatService crawlingStatService;
+    private final DanggnMarketClient danggnMarketClient;
     private final FilteringWordService filteringWordService;
     private final UrlProperties urlProperties;
 
-    public DanggnMarketParser(ArticleRepository articleRepository,
+    private AtomicLong successCount = new AtomicLong(0);
+    private AtomicLong failCount = new AtomicLong(0);
+    private AtomicLong filteringCount = new AtomicLong(0);
+
+    public DanggnCrawlingService(ArticleRepository articleRepository,
                               FilteringWordService filteringWordService,
+                              DanggnMarketClient danggnMarketClient,
+                              CrawlingStatService crawlingStatService,
                               UrlProperties urlProperties) {
         this.articleRepository = articleRepository;
+        this.crawlingStatService = crawlingStatService;
         this.filteringWordService = filteringWordService;
+        this.danggnMarketClient = danggnMarketClient;
         this.urlProperties = urlProperties;
     }
 
+    public void saveCount() {
+        crawlingStatService.save(MarketName.bunjang, successCount.get(), failCount.get(), filteringCount.get());
+        init();
+    }
+
+    @PostConstruct
+    public void init() {
+        CrawlingStatEntity entity = crawlingStatService.init(MarketName.bunjang);
+        successCount.set(entity.getSuccessCount());
+        failCount.set(entity.getFailCount());
+        filteringCount.set(entity.getFilteringCount());
+    }
+
+
     public Long getRecentArticleId() throws IOException {
-        Document document = Jsoup.connect(urlProperties.getDanggnArticleUrl())
-                .header(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
-                .header(HttpHeaders.ACCEPT, "text/html,application/xhtml+xml,application/xml;q=0.9,imgwebp,*/*;q=0.8")
-                .header(HttpHeaders.ACCEPT_CHARSET, "utf-8")
-                .get();
+        Document document = danggnMarketClient.getRecentArticle();
 
         List<Element> elements = document.select("[data-event-label]");
         Long maxArticleId = elements.stream().map(element -> Long.parseLong(element.attr("data-event-label"))).max(Long::compareTo).orElse(0L);
@@ -51,32 +76,9 @@ public class DanggnMarketParser {
         return maxArticleId;
     }
 
-
-    public Boolean validationArticle(Long articleId) {
-        String url = urlProperties.getDanggnArticleUrl() + "/articles/" + articleId;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-        try {
-
-            Document document = Jsoup.connect(url)
-                    .header(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
-                    .header(HttpHeaders.ACCEPT, "text/html,application/xhtml+xml,application/xml;q=0.9,imgwebp,*/*;q=0.8")
-                    .header(HttpHeaders.ACCEPT_CHARSET, "utf-8")
-                    .get();
-
-            Element subjectElement = document.getElementById("article-title");
-
-            return subjectElement == null ? false : true;
-        } catch (IOException e) {
-            log.error("validation Danggn {} => IOException : {}", articleId, e.getMessage());
-        }
-
-        return false;
-    }
-
     @Async("danggnMarketTaskExecutor")
     public void separationGetArticles(Long start, Long unit) {
-        for(Long articleId = start ; articleId < start + unit ; articleId++) {
+        for (Long articleId = start; articleId < start + unit; articleId++) {
             getArticle(articleId);
         }
     }
@@ -88,16 +90,9 @@ public class DanggnMarketParser {
 
         try {
 
-            Document document = Jsoup.connect(url)
-                    .header(HttpHeaders.USER_AGENT, "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36")
-                    .header(HttpHeaders.ACCEPT, "text/html,application/xhtml+xml,application/xml;q=0.9,imgwebp,*/*;q=0.8")
-                    .header(HttpHeaders.ACCEPT_CHARSET, "utf-8")
-                    .get();
+            Document document = danggnMarketClient.getArticle(articleId);
 
             Element subjectElement = document.getElementById("article-title");
-            if(filteringWordService.stringFilter(subjectElement.text())){
-                return;
-            }
 
             Element priceElement = document.getElementById("article-price") == null ? document.getElementById("article-price-nanum") : document.getElementById("article-price");
             String stringPrice = priceElement.text().replaceAll("[^0-9]", "");
@@ -112,7 +107,9 @@ public class DanggnMarketParser {
 
             String content = contentElement.text() + "\n" + regionElement.text();
 
-            if(content.length() > 2000 || filteringWordService.stringFilter(content)) {
+            if (filteringWordService.stringFilter(subjectElement.text()) || filteringWordService.stringFilter(content)) {
+                log.info("danggn filtering Check Failed : {}", articleId);
+                filteringCount.incrementAndGet();
                 return;
             }
 
@@ -129,12 +126,10 @@ public class DanggnMarketParser {
                     .build();
 
             articleRepository.save(articleEntity);
-        } catch (HttpStatusException e) {
-//            log.error("{} : Not found", url);
-        } catch (NullPointerException e) {
-//            log.error("{} : Secret Article", url);
-        } catch (IOException e) {
-//            log.error("{} : Connect Time", url);
+            successCount.incrementAndGet();
+        } catch (NullPointerException | IOException e) {
+            failCount.incrementAndGet();
+            log.error("danggn Not found Article : {}", articleId);
         }
     }
 }

@@ -117,65 +117,48 @@
         </encoder>
     </appender>
 
-<!--    <appender name="cloudWatch_error_log" class="ca.pjer.logback.AwsLogsAppender">-->
-<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
-<!--            <level>ERROR</level>-->
-<!--        </filter>-->
-<!--        <layout>-->
-<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %p [%15.15t] [%c{1}] %M \(%L\): %m%n</pattern>-->
-<!--        </layout>-->
-<!--        <logGroupName>sky_logs</logGroupName>-->
-<!--        <logStreamName>${hostname}-observer-error_log</logStreamName>-->
-<!--        <logRegion>ap-northeast-2</logRegion>-->
-<!--        <maxBatchLogEvents>50</maxBatchLogEvents>-->
-<!--        <maxFlushTimeMillis>30000</maxFlushTimeMillis>-->
-<!--        <maxBlockTimeMillis>5000</maxBlockTimeMillis>-->
-<!--    </appender>-->
+    <appender name="joonggonara-crawling" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <file>logs/joonggonara-crawling.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %p [%15.15t] [%c{1}] %M \(%L\): %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/crawling-archived/joonggonara-crawling.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+    </appender>
 
-<!--    <appender name="cloudWatch_application_log" class="ca.pjer.logback.AwsLogsAppender">-->
-<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
-<!--            <level>INFO</level>-->
-<!--        </filter>-->
-<!--        <layout>-->
-<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %p [%15.15t] [%c{1}] %M \(%L\): %m%n</pattern>-->
-<!--        </layout>-->
-<!--        <logGroupName>sky_logs</logGroupName>-->
-<!--        <logStreamName>${hostname}-observer-application_log</logStreamName>-->
-<!--        <logRegion>ap-northeast-2</logRegion>-->
-<!--        <maxBatchLogEvents>50</maxBatchLogEvents>-->
-<!--        <maxFlushTimeMillis>30000</maxFlushTimeMillis>-->
-<!--        <maxBlockTimeMillis>5000</maxBlockTimeMillis>-->
-<!--    </appender>-->
+    <appender name="danggn-crawling" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <file>logs/danggn-crawling.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %p [%15.15t] [%c{1}] %M \(%L\): %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/crawling-archived/danggn-crawling.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+    </appender>
 
-<!--    <appender name="cloudWatch_reqRes_log" class="ca.pjer.logback.AwsLogsAppender">-->
-<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
-<!--            <level>INFO</level>-->
-<!--        </filter>-->
-<!--        <layout>-->
-<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %p [%15.15t] [%c{1}] %M \(%L\): %m%n</pattern>-->
-<!--        </layout>-->
-<!--        <logGroupName>sky_logs</logGroupName>-->
-<!--        <logStreamName>${hostname}-observer-reqRes_log</logStreamName>-->
-<!--        <logRegion>ap-northeast-2</logRegion>-->
-<!--        <maxBatchLogEvents>50</maxBatchLogEvents>-->
-<!--        <maxFlushTimeMillis>30000</maxFlushTimeMillis>-->
-<!--        <maxBlockTimeMillis>5000</maxBlockTimeMillis>-->
-<!--    </appender>-->
+    <appender name="bunjang-crawling" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <file>logs/bunjang-crawling.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %p [%15.15t] [%c{1}] %M \(%L\): %m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/crawling-archived/bunjang-crawling.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>7</maxHistory>
+        </rollingPolicy>
+    </appender>
 
-<!--    <appender name="cloudWatch_info_log" class="ca.pjer.logback.AwsLogsAppender">-->
-<!--        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
-<!--            <level>INFO</level>-->
-<!--        </filter>-->
-<!--        <layout>-->
-<!--            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %p [%15.15t] [%c{1}] %M \(%L\): %m%n</pattern>-->
-<!--        </layout>-->
-<!--        <logGroupName>sky_logs</logGroupName>-->
-<!--        <logStreamName>${hostname}-observer-info_log</logStreamName>-->
-<!--        <logRegion>ap-northeast-2</logRegion>-->
-<!--        <maxBatchLogEvents>50</maxBatchLogEvents>-->
-<!--        <maxFlushTimeMillis>30000</maxFlushTimeMillis>-->
-<!--        <maxBlockTimeMillis>5000</maxBlockTimeMillis>-->
-<!--    </appender>-->
 
     <appender name="test_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">

@@ -5,45 +5,79 @@ import com.how.arybyungcommon.client.joonggonara.model.JoonggonaraArticleDetailR
 import com.how.arybyungcommon.client.joonggonara.model.JoonggonaraListResponse;
 import com.how.arybyungcommon.properties.UrlProperties;
 import com.how.arybyungcommon.service.FilteringWordService;
+import com.how.arybyungobserver.service.CrawlingStatService;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
+import com.how.muchcommon.entity.jpaentity.CrawlingStatEntity;
 import com.how.muchcommon.entity.jpaentity.TopArticleEntity;
+import com.how.muchcommon.entity.jpaentity.id.CrawlingStatId;
 import com.how.muchcommon.model.type.ArticleState;
 import com.how.muchcommon.model.type.MarketName;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
+import com.how.muchcommon.repository.jparepository.CrawlingStatRepository;
 import com.how.muchcommon.repository.jparepository.TopArticleRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import retrofit2.Response;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.sql.Date;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.concurrent.atomic.AtomicLong;
 
-@Slf4j
 @Service
 public class JoonggonaraCrawlingService {
 
+    private Logger log = LoggerFactory.getLogger("joonggonara_log");
+
     private final JoonggonaraApiClient joonggonaraApiClient;
     private final TopArticleRepository topArticleRepository;
+    private final CrawlingStatRepository crawlingStatRepository;
     private final ArticleRepository articleRepository;
     private final UrlProperties urlProperties;
     private final FilteringWordService filteringWordService;
+    private final CrawlingStatService crawlingStatService;
+
+    private AtomicLong successCount = new AtomicLong(0);
+    private AtomicLong failCount = new AtomicLong(0);
+    private AtomicLong filteringCount = new AtomicLong(0);
 
     public JoonggonaraCrawlingService(JoonggonaraApiClient joonggonaraApiClient,
                                       TopArticleRepository topArticleRepository,
+                                      CrawlingStatRepository crawlingStatRepository,
                                       ArticleRepository articleRepository,
                                       UrlProperties urlProperties,
-                                      FilteringWordService filteringWordService) {
+                                      FilteringWordService filteringWordService,
+                                      CrawlingStatService crawlingStatService) {
         this.joonggonaraApiClient = joonggonaraApiClient;
         this.topArticleRepository = topArticleRepository;
+        this.crawlingStatRepository = crawlingStatRepository;
         this.articleRepository = articleRepository;
         this.urlProperties = urlProperties;
         this.filteringWordService = filteringWordService;
+        this.crawlingStatService = crawlingStatService;
     }
+
+    public void saveCount() {
+        crawlingStatService.save(MarketName.joonggonara, successCount.get(), failCount.get(), filteringCount.get());
+        init();
+    }
+
+    @PostConstruct
+    public void init() {
+        CrawlingStatEntity entity = crawlingStatService.init(MarketName.joonggonara);
+        successCount.set(entity.getSuccessCount());
+        failCount.set(entity.getFailCount());
+        filteringCount.set(entity.getFilteringCount());
+    }
+
 
     public TopArticleEntity getTopArticleEntity() {
         return topArticleRepository.findBySite(MarketName.joonggonara.getName()).orElse(TopArticleEntity.builder().articleId(0L).build());
@@ -87,11 +121,15 @@ public class JoonggonaraCrawlingService {
             if (response.isSuccessful()) {
 
                 if (response.body().getArticle() == null) {
+                    log.info("JoonggoNara Delete Article : {}", articleId);
+                    failCount.incrementAndGet();
                     return;
                 }
 
                 String content = Jsoup.parse(response.body().getArticle().getContent()).getAllElements().text();
                 if (filteringWordService.stringFilter(content)) {
+                    log.info("JoonggoNara filtering Check Failed : {}", articleId);
+                    filteringCount.incrementAndGet();
                     return;
                 }
 
@@ -124,13 +162,16 @@ public class JoonggonaraCrawlingService {
                         .postingDtime(postDtime)
                         .build();
 
+                successCount.incrementAndGet();
                 articleRepository.save(articleEntity);
             } else {
-//                log.error("JoonggoNARA getArticle Failed articleID: {} => {}", articleId, response.errorBody().byteStream().toString());
+                log.error("JoonggoNARA getArticle Failed articleID: {} => {}", articleId, response.errorBody().byteStream().toString());
+                failCount.incrementAndGet();
             }
 
         } catch (IOException | NullPointerException | DataIntegrityViolationException e) {
-//            log.error("JoonggoNARA getArticle articleId : {} => Exception : {}", articleId, e.getMessage());
+            log.error("JoonggoNARA getArticle articleId : {} => Exception : {}", articleId, e.getMessage());
+            failCount.incrementAndGet();
         }
     }
 }

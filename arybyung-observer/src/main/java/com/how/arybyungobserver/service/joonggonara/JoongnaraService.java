@@ -18,6 +18,9 @@ public class JoongnaraService {
         this.joonggonaraCrawlingService = joonggonaraCrawlingService;
     }
 
+    public void saveCount() {
+        joonggonaraCrawlingService.saveCount();
+    }
     public void parsingArticle() {
 
         TopArticleEntity topArticleEntity = joonggonaraCrawlingService.getTopArticleEntity();
@@ -32,7 +35,11 @@ public class JoongnaraService {
             log.info("JoonggoNARA Not found Article");
             return;
         } else if (gap > 0 && gap <= CrawlerConstant.RANGE) {
-            recentArticleId = topArticleId + CrawlerConstant.GAP;
+
+            if(gap > CrawlerConstant.GAP) {
+                recentArticleId = topArticleId + CrawlerConstant.GAP;
+            }
+
         } else {
             topArticleId = recentArticleId - CrawlerConstant.RANGE;
             recentArticleId = topArticleId + CrawlerConstant.GAP;
