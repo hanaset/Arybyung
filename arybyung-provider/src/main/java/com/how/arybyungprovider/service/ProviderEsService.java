@@ -94,13 +94,15 @@ public class ProviderEsService {
         ArticleData thisWeekLowestArticle = articleDatas.stream().min(comp).get();
 
         // 24시간 기준 최고가, 최저가 (24시간기준 최고, 최저 구할 수 없으면 1주일 데이터로 대치)
-        ArticleData todayHighestArticle = articleDatas.stream()
+        List<ArticleData> todayArticleDatas = articleDatas.stream()
                 .filter(articleData -> articleData.getPostingDtime() >= yesterday)
+                .collect(Collectors.toList());;
+
+        ArticleData todayHighestArticle = todayArticleDatas.stream()
                 .max(comp)
                 .orElse(thisWeekHighestArticle);
 
-        ArticleData todayLowestArticle = articleDatas.stream()
-                .filter(articleData -> articleData.getPostingDtime() >= yesterday)
+        ArticleData todayLowestArticle = todayArticleDatas.stream()
                 .min(comp)
                 .orElse(thisWeekLowestArticle);
 
@@ -109,17 +111,38 @@ public class ProviderEsService {
                 .average()
                 .orElse(0);
 
-        double todayAvgPrice = articleDatas.stream()
-                .filter(articleData -> articleData.getPostingDtime() >= yesterday)
+        double todayAvgPrice = todayArticleDatas.stream() // 평균 구하기
                 .mapToDouble(ArticleData::getPrice)
                 .average()
                 .orElse(0);
+
+        double sdPrice = todayArticleDatas.stream() // 표준편차 구하기
+                .mapToDouble(articleData -> {
+                    double price = todayAvgPrice - articleData.getPrice();
+                    return price < 0 ? price * -1 : price;
+                })
+                .average()
+                .orElse(0);
+
+        double realAvgPrice = todayArticleDatas.stream()
+                .filter(articleData -> {
+                    Double ds = (articleData.getPrice() - todayAvgPrice) / sdPrice; // 확률 밀도 계산
+                    if(ds < 0)
+                        ds *= -1;
+
+                    return ds <= 0.5; // 정규분포 1.65(약 상위 5프로, 하위 5프로 제외)
+                })
+                .mapToDouble(ArticleData::getPrice)
+                .average()
+                .orElse(0);
+
+        System.out.println(realAvgPrice);
 
         KeywordResultData keywordResultData = KeywordResultData.builder()
                 .articleList(articleDatas)
                 .todayHighestPrice(todayHighestArticle)
                 .todayLowestPrice(todayLowestArticle)
-                .todayAvgPrice(Math.floor(todayAvgPrice))
+                .todayAvgPrice(Math.floor(realAvgPrice))
                 .thisWeekHighestPrice(thisWeekHighestArticle)
                 .thisWeekLowestPrice(thisWeekLowestArticle)
                 .thisWeekAvgPrice(Math.floor(thisWeekAvgPrice))
