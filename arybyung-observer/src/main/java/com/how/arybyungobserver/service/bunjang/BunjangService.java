@@ -18,6 +18,10 @@ public class BunjangService {
         this.bunjangCrawlingService = bunjangCrawlingService;
     }
 
+    public void saveCount() {
+        bunjangCrawlingService.saveCount();
+    }
+
     public void parsingArticle() {
         TopArticleEntity topArticleEntity = bunjangCrawlingService.getTopArticleEntity();
         Long topArticleId = topArticleEntity.getArticleId();
@@ -31,7 +35,10 @@ public class BunjangService {
             log.info("Bunjang Not found Article : recent = {} / top = {}", recentArticleId, topArticleId);
             return;
         } else if (gap > 0 && gap <= CrawlerConstant.RANGE) {
-            recentArticleId = topArticleId + CrawlerConstant.GAP;
+
+            if(gap > CrawlerConstant.GAP) {
+                recentArticleId = topArticleId + CrawlerConstant.GAP;
+            }
         } else {
             topArticleId = recentArticleId - CrawlerConstant.RANGE;
             recentArticleId = topArticleId + CrawlerConstant.GAP;
