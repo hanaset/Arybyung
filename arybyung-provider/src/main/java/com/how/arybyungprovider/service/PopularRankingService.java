@@ -40,8 +40,8 @@ public class PopularRankingService {
     @PostConstruct
     public PopularRankResponse updatePopularChart() {
 
-        ZonedDateTime updateDateTime = DateTimeHelper.currentTime("Asia/Seoul");
-        ZonedDateTime startDateTime = DateTimeHelper.currentTime("Asia/Seoul").minusDays(1);
+        ZonedDateTime updateDateTime = DateTimeHelper.currentTime();
+        ZonedDateTime startDateTime = DateTimeHelper.currentTime().minusDays(1);
 
         PopularRankResponse prevRank = getPopularChart();
 
