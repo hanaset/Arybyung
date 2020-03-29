@@ -55,8 +55,8 @@ public class PopularRankingService {
 
         // TODO 다음엔 queryDSL 사용해보자
         // 최근 24시간 동안의 top 10
-//        List<PopularRankEntity> currentPopularRanking = popularRankRepository.findAllByPopularRank(startDateTime, updateDateTime);
-        List<PopularRankEntity> currentPopularRanking = popularRankRepository.findTop10ByIdSearchDateBetweenOrderByCountDesc(startDateTime, updateDateTime);
+        List<PopularRankEntity> currentPopularRanking = popularRankRepository.findAllByPopularRank(startDateTime, updateDateTime);
+//        List<PopularRankEntity> currentPopularRanking = popularRankRepository.findTop10ByIdSearchDateBetweenOrderByCountDesc(startDateTime, updateDateTime);
 
         System.out.println(currentPopularRanking);
         if (currentPopularRanking.size() < 1) {
