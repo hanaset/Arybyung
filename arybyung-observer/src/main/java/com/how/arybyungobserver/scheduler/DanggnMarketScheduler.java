@@ -1,6 +1,7 @@
 package com.how.arybyungobserver.scheduler;
 
 import com.how.arybyungobserver.service.ObserverControlService;
+import com.how.arybyungobserver.service.danggnmarket.DanggnCrawlingService;
 import com.how.arybyungobserver.service.danggnmarket.DanggnMarketService;
 import com.how.muchcommon.model.type.MarketName;
 import lombok.extern.slf4j.Slf4j;
@@ -15,11 +16,14 @@ import java.io.IOException;
 public class DanggnMarketScheduler {
 
     private final DanggnMarketService danggnMarketService;
+    private final DanggnCrawlingService danggnCrawlingService;
     private final ObserverControlService observerControlService;
 
     public DanggnMarketScheduler(DanggnMarketService danggnMarketService,
+                                 DanggnCrawlingService danggnCrawlingService,
                                  ObserverControlService observerControlService) {
         this.danggnMarketService = danggnMarketService;
+        this.danggnCrawlingService = danggnCrawlingService;
         this.observerControlService = observerControlService;
     }
 
@@ -36,4 +40,7 @@ public class DanggnMarketScheduler {
     public void saveCount() {
         danggnMarketService.saveCount();
     }
+
+    @Scheduled(cron = "1 0 0 * * *", zone = "Asia/Seoul")
+    public void initCount() { danggnCrawlingService.init();}
 }

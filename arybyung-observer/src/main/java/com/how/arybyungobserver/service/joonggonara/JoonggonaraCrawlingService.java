@@ -9,7 +9,6 @@ import com.how.arybyungobserver.service.CrawlingStatService;
 import com.how.muchcommon.entity.jpaentity.ArticleEntity;
 import com.how.muchcommon.entity.jpaentity.CrawlingStatEntity;
 import com.how.muchcommon.entity.jpaentity.TopArticleEntity;
-import com.how.muchcommon.entity.jpaentity.id.CrawlingStatId;
 import com.how.muchcommon.model.type.ArticleState;
 import com.how.muchcommon.model.type.MarketName;
 import com.how.muchcommon.repository.jparepository.ArticleRepository;
@@ -25,9 +24,7 @@ import retrofit2.Response;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.sql.Date;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.concurrent.atomic.AtomicLong;

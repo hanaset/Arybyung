@@ -22,7 +22,7 @@ public class BunjangValidation implements ValidationMarket {
         try {
             Response<BunjangItemResponse> response = bunjangApiClient.getArticle(articleId).execute();
 
-            if(response.body().getSellerInfo() == null) {
+            if(response.body().getSellerInfo() == null || !response.body().getItemInfo().getStatus().equals("0")) {
                 return ArticleState.D;
             }
         } catch (IOException e) {

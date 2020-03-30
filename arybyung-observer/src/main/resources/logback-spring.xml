@@ -93,7 +93,7 @@
         <root level="DEBUG">
             <appender-ref ref="STDOUT"/>
             <appender-ref ref="info_log"/>
-<!--            <appender-ref ref="error_log"/>-->
+            <appender-ref ref="error_log"/>
 <!--            <appender-ref ref="cloudWatch_info_log"/>-->
 <!--            <appender-ref ref="cloudWatch_error_log"/>-->
         </root>

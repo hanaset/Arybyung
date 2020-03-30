@@ -15,11 +15,14 @@ public class BunjangScheduler {
 
     private final BunjangService bunjangService;
     private final ObserverControlService observerControlService;
+    private final BunjangCrawlingService bunjangCrawlingService;
 
     public BunjangScheduler(BunjangService bunjangService,
+                            BunjangCrawlingService bunjangCrawlingService,
                             ObserverControlService observerControlService) {
         this.bunjangService = bunjangService;
         this.observerControlService = observerControlService;
+        this.bunjangCrawlingService = bunjangCrawlingService;
     }
 
     @Scheduled(fixedRate = 1000 * 60)
@@ -35,4 +38,7 @@ public class BunjangScheduler {
     public void saveCount() {
         bunjangService.saveCount();
     }
+
+    @Scheduled(cron = "1 0 0 * * *", zone = "Asia/Seoul")
+    public void initCount() {bunjangCrawlingService.init();}
 }

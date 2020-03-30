@@ -1,6 +1,7 @@
 package com.how.arybyungobserver.scheduler;
 
 import com.how.arybyungobserver.service.ObserverControlService;
+import com.how.arybyungobserver.service.joonggonara.JoonggonaraCrawlingService;
 import com.how.arybyungobserver.service.joonggonara.JoongnaraService;
 import com.how.muchcommon.model.type.MarketName;
 import lombok.extern.slf4j.Slf4j;
@@ -13,11 +14,14 @@ import org.springframework.stereotype.Component;
 public class JoonggonaraScheduler {
 
     private final JoongnaraService joongnaraService;
+    private final JoonggonaraCrawlingService joonggonaraCrawlingService;
     private final ObserverControlService observerControlService;
 
     public JoonggonaraScheduler(JoongnaraService joongnaraService,
+                                JoonggonaraCrawlingService joonggonaraCrawlingService,
                                 ObserverControlService observerControlService) {
         this.joongnaraService = joongnaraService;
+        this.joonggonaraCrawlingService = joonggonaraCrawlingService;
         this.observerControlService = observerControlService;
     }
 
@@ -30,8 +34,11 @@ public class JoonggonaraScheduler {
         joongnaraService.parsingArticle();
     }
 
-    @Scheduled(cron = "0 0 * * * *", zone = "Asia/Seoul")
+    @Scheduled(cron = "59 59 * * * *", zone = "Asia/Seoul")
     public void saveCount() {
         joongnaraService.saveCount();
     }
+
+    @Scheduled(cron = "1 0 0 * * *", zone = "Asia/Seoul")
+    public void initCount() { joonggonaraCrawlingService.init();}
 }
