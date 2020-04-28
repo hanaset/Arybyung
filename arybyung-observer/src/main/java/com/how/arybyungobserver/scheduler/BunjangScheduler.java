@@ -34,7 +34,7 @@ public class BunjangScheduler {
         bunjangService.parsingArticle();
     }
 
-    @Scheduled(cron = "0 0 * * * *", zone = "Asia/Seoul")
+    @Scheduled(cron = "59 59 * * * *", zone = "Asia/Seoul")
     public void saveCount() {
         bunjangService.saveCount();
     }

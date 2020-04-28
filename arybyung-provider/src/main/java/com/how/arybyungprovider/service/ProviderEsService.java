@@ -96,7 +96,7 @@ public class ProviderEsService {
         // 24시간 기준 최고가, 최저가 (24시간기준 최고, 최저 구할 수 없으면 1주일 데이터로 대치)
         List<ArticleData> todayArticleDatas = articleDatas.stream()
                 .filter(articleData -> articleData.getPostingDtime() >= yesterday)
-                .collect(Collectors.toList());;
+                .collect(Collectors.toList());
 
         ArticleData todayHighestArticle = todayArticleDatas.stream()
                 .max(comp)
